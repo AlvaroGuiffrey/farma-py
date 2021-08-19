@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Required meta tags -->
+<!-- <meta charset="utf-8"> -->
+<meta name="author" content="Alvaro Alejandro Guiffrey">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!--  CSS -->
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<!-- Font Awesone Iconos CSS -->
+<link href="/farma-py/libs/fontawesome-5.10.1/css/all.min.css"
+	rel="stylesheet" media="screen">
+<!-- PÃ¡gina CSS -->
+<link href="/farma-py/includes/vista/pagina.css" rel="stylesheet"
+	media="screen">
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery, Popper.js, Bootstrap JS -->
+<!--  
+    <script src="/farma_py/libs/jquery-3.3.1/jquery.js"></script>
+    -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+
+<!-- JS de la aplicación -->
+<script src="includes/vista/pagina.js"></script>
+
+<!--  Título de la página -->
+<title>$tituloPagina</title>
+
+<!-- Otros CSS -->
+<style type="text/css">
+</style>
+</head>
+
+<body>
+	<!-- JavaScript - Funciones varias -->
+	<script>
+
+</script>
+
+	<!--  Container -->
+	<div class="container-fluid">
+
+		<!-- Panel de trabajo -->
+		<!-- FLEX BOX -->
+		<!-- Cabecera del Panel -->
+		<div class="container bg-light border rounded-top mt-1 p-2">
+			<span class="font-italic" style="font-size: 1em">$tituloPanel</span>
+			<button type="button"
+				class="btn btn-light btn-sm float-sm-right rounded-circle"
+				data-toggle="modal" data-target="#infoModal" data-placement="bottom"
+				title="Información">
+				<i class="fas fa-info-circle"></i>
+			</button>
+		</div>
+
+		<!-- Cuerpo del Panel -->
+		<div class="container border rounded-0">
+
+			<!-- Formulario -->
+			<div id="formulario">
+				<form class="form-horizontal" role="form" action="" method="get">
+
+					<!-- Alertas del Panel-->
+					<div class="d-flex flex-sm-column p-1 bd-highlight">$ALERTAS
+					</div>
+
+					<!-- Botones de Acciones del Panel-->
+					<div class="d-flex flex-sm-row p-1">$BOTONES_AC</div>
+
+					<!-- Contenido del Panel -->
+					<div class="d-flex flex-sm-column p-1 bd-highlight">
+						<span style="font-size: 0.8em"> $OPCIONES $COMPONENTES
+							$CONTENIDOS $TABLAS </span>
+					</div>
+
+					<!-- Botones de Eventos -->
+					<div class="d-flex flex-sm-row p-1 mb-1">$BOTONES_EV</div>
+
+					<!-- Fin del Formulario -->
+				</form>
+			</div>
+		</div>
+
+		<!-- Pié de Página del Panel -->
+		<div class="container bg-light border rounded-bottom mb-1">
+			<div class="d-flex flex-sm-row p-1 justify-content-center">
+				<span class="font-italic" style="color: gray; font-size: 0.6em"
+					data-toggle="tooltip" title="alvaroguiffrey@gmail.com">Alvaro
+					A. Guiffrey <i class="far fa-copyright"></i> Copyrigth 2019
+				</span>
+			</div>
+		</div>
+
+		<!-- Fin Container -->
+	</div>
+
+	<!-- Modal Info -->
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+		aria-labelledby="infoModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-light">
+					<h5 class="modal-title mt-2" id="infoModalLabel">Información</h5>
+					<button type="button" class="btn btn-light rounded-circle mb-1"
+						data-dismiss="modal" aria-label="Close" data-toggle="tooltip"
+						title="Cerrar">
+						<span aria-hidden="true"><i class="fas fa-times"></i></span>
+					</button>
+				</div>
+				<div class="modal-body">$info</div>
+				<div class="modal-footer bg-light">
+					<button type="button" class="btn btn-outline-secondary btn-sm ml-1"
+						data-dismiss="modal" data-toggle="tooltip"
+						title="Salir de información">Cerrar</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

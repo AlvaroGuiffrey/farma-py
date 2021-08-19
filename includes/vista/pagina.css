@@ -1,0 +1,48 @@
+/* --------------------
+CSS de la pagina .html
+-------------------- */
+@charset "UTF-8";
+
+/* CSS del menú */
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #FAFAFA; /* Color de las letras del menú */
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 0px; /* Distancia del tope de la pantalla */
+}
+
+.sidenav a {
+	padding: 4px 4px 4px 32px;
+	text-decoration: none;
+	font-size: 1rem; /* Tamaño letra del menú */
+	color: #2E2E2E; /* Color del fondo del menú */
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav a:hover {
+	color: #A4A4A4;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 15px;
+	margin-left: 50px;
+}
+
+@media screen and (max-height: 250px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 1rem;
+	}
+}

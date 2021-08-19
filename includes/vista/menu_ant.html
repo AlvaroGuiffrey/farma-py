@@ -1,0 +1,39 @@
+<!-- Menú de la aplicación farma-py -->
+<div id="mySidenav" class="sidenav shadow">
+	<button type="button"
+		class="btn btn-light float-md-right rounded-circle"
+		onclick="closeNav()" data-toggle="tooltip" data-placement="bottom"
+		title="Cerrar el Menú">
+		<i class="fas fa-arrow-left"></i>
+	</button>
+	<br> <a href="http://$ip/farma-py/app.py"><i
+		class="fas fa-home"></i> Inicio</a> <a
+		href="http://www.adazaret.com/front"><i
+		class="fas fa-money-check-alt"></i> Contabilidad</a> <a
+		class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><i
+		class="fas fa-box"></i> AFIP</a>
+	<div class="dropdown-menu">
+		<div class="dropdown-header">Tablas</div>
+
+		<a class="dropdown-item" href="http://$ip/farma-py/appAfipRecibido.py">Compr.
+			Recibidos</a> <a class="dropdown-item" href="#"></a>
+		<div class="dropdown-divider"></div>
+		<div class="dropdown-header">Operaciones</div>
+		<a class="dropdown-item" href="#"></a>
+	</div>
+
+	<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><i
+		class="fas fa-box"></i> Compras</a>
+	<div class="dropdown-menu">
+		<div class="dropdown-header">Tablas</div>
+
+		<a class="dropdown-item" href="http://$ip/farma-py/appRecibido.py">Compr.
+			Recibidos</a> <a class="dropdown-item" href="#"></a>
+		<div class="dropdown-divider"></div>
+		<div class="dropdown-header">Operaciones</div>
+		<a class="dropdown-item" href="#"></a>
+	</div>
+
+	<a href="#"><i class="fas fa-users"></i> Clientes</a> <a href="#"><i
+		class="fas fa-envelope-open-text"></i> Contacto</a>
+</div>

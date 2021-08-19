@@ -1,0 +1,67 @@
+<!-- Opciones para buscar -->
+<div class="jumbotron jumbotron-fluit p-2 mb-1">
+	<h6>Opciones para buscar</h6>
+	<hr />
+
+	<div class="row">
+		<!--  Rango de fechas -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Seleccione el rango de fechas">Fechas:</div>
+				</div>
+				<input type="text" id="date_range" name="fechas"
+					placeholder="seleccione rango" autocomplete="off" required>
+				<div class="input-group-append">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Dato obligatorio">
+						<b style="color: blue">*</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  Período del IVA -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el período del IVA compras">Per.:</div>
+				</div>
+				<input type="number" id="periodo" name="periodo" min="201001"
+					max="205012" maxlength="6" size="6" placeholder="del IVA"
+					autocomplete="off">
+				<div class="input-group-append">
+					<div class="input-group-text"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<!-- Tipo de comprobantes -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">$select_tipo</div>
+		</div>
+		<!--  Número de comprobante -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el número de comprobante">Nro.:</div>
+				</div>
+				<input type="number" id="numero" name="numero" min="0"
+					max="99999999" maxlength="8" size="8" placeholder="de comprob."
+					autocomplete="off">
+				<div class="input-group-append">
+					<div class="input-group-text"></div>
+				</div>
+			</div>
+		</div>
+		<!-- Proveedor -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">$select_prov</div>
+		</div>
+	</div>
+
+	<!-- Fin del jumbotron de opciones -->
+</div>

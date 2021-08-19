@@ -1,0 +1,1 @@
+Error inesperado. Los contenidos del archivo no pudieron ser restaurados del historial local durante el deshacer/rehacer.

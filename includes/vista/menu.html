@@ -1,0 +1,67 @@
+<!-- Men� de la aplicaci�n farma-py -->
+<!-- w3schools.com (How TO - Side Navigation) -->
+<div id="mySidenav" class="sidenav">
+	<button type="button"
+		class="btn btn-light float-md-right rounded-circle"
+		onclick="closeNav()" data-toggle="tooltip" data-placement="bottom"
+		title="Cerrar el Men�">
+		<i class="fas fa-arrow-left"></i>
+	</button>
+	<br>
+	<ul class="nav flex-column">
+		<li class="nav-item"><a href="http://$ip/farma-py/app.py"><i
+				class="fas fa-home"></i> Inicio</a></li>
+		<li class="nav-item"><a href="http://www.adazaret.com/front"><i
+				class="fas fa-money-check-alt"></i> Contabilidad</a></li>
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toogle"
+			data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+			aria-expanded="false"> AFIP <i class="fas fa-angle-down"></i>
+		</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item"
+					href="http://$ip/farma-py/appAfipRecibido.py"> <i
+					class="far fa-file"></i> Compr. Recibidos AFIP
+				</a>
+				<div class="dropdown-divider"></div>
+			</div></li>
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toogle"
+			data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+			aria-expanded="false"> <i class="fas fa-box"></i> Compras <i
+				class="fas fa-angle-down"></i>
+		</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="http://$ip/farma-py/appRecibido.py">
+					<i class="far fa-file"></i> Compr. Recibidos PLEX
+				</a>
+				<div class="dropdown-divider"></div>
+			</div></li>
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toogle"
+			data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+			aria-expanded="false"> <i class="fas fa-industry"></i>
+				Proveedores <i class="fas fa-angle-down"></i>
+		</a>
+			<div class="dropdown-menu">
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="http://$ip/farma-py/appCargaLI.py"
+					title="Carga comprobantes del proveedor"> <i
+					class="fas fa-file-upload"></i> Carga CoFarLit
+				</a> <a class="dropdown-item" href="http://$ip/farma-py/appCargaDS.py"
+					title="Carga comprobantes del proveedor"> <i
+					class="fas fa-file-upload"></i> Carga DROG. DEL SUD SA
+				</a> <a class="dropdown-item" href="http://$ip/farma-py/appCargaKE.py"
+					title="Carga comprobantes del proveedor"> <i
+					class="fas fa-file-upload"></i> Carga DROG. KELLERHOFF SA
+				</a> <a class="dropdown-item" href="http://$ip/farma-py/appCargaOS.py"
+					title="Carga obras sociales en comprobantes del proveedor"> <i
+					class="fas fa-file-upload"></i> Carga Obras Sociales DS
+				</a> <a class="dropdown-item" href="http://$ip/farma-py/app/pruebaA.py"
+					title="Prueba de leer en otro directorio"> <i
+					class="fas fa-file-upload"></i> Prueba A
+				</a>
+			</div></li>
+		<li class="nav-item"><a href="#"><i class="fas fa-users"></i>
+				Clientes</a></li>
+		<li class="nav-item"><a href="#"><i
+				class="fas fa-envelope-open-text"></i> Contacto</a></li>
+	</ul>
+</div>

@@ -1,0 +1,91 @@
+<!-- Ver Dato de un registro de la tabla -->
+<div>
+	<table class="table table-borderless table-sm">
+		<tbody>
+			<tr>
+				<th style="width: 20px">Id</th>
+				<td style="width: 20px">:</td>
+				<td>$id</td>
+			</tr>
+			<tr>
+				<th>Fecha</th>
+				<td>:</td>
+				<td>$fecha</td>
+			</tr>
+			<tr>
+				<th>Comprobante</th>
+				<td>:</td>
+				<td>$comprobante</td>
+			</tr>
+			<tr>
+				<th>Documento</th>
+				<td>:</td>
+				<td>$documento</td>
+			</tr>
+			<tr>
+				<th>Proveedor</th>
+				<td>:</td>
+				<td>$nombre</td>
+			</tr>
+			<tr>
+				<th>Imp. Gravado</th>
+				<td>:</td>
+				<td>$importeGravado</td>
+			</tr>
+			<tr>
+				<th>Imp. No Grav.</th>
+				<td>:</td>
+				<td>$importeNoGRav</td>
+			</tr>
+			<tr>
+				<th>Imp. Exento</th>
+				<td>:</td>
+				<td>$importeExento</td>
+			</tr>
+			<tr>
+				<th>Imp. Iva</th>
+				<td>:</td>
+				<td>$importeIva</td>
+			</tr>
+			<tr>
+				<th>Imp. Total</th>
+				<td>:</td>
+				<td>$importeTotal</td>
+			</tr>
+			<tr>
+				<th>CAI</th>
+				<td>:</td>
+				<td>$cai</td>
+			</tr>
+			<tr>
+				<th>Comentario</th>
+				<td>:</td>
+				<td>$comentario</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<table class="table table-borderless table-sm">
+		<tbody>
+			<tr>
+				<th style="width: 150px">Conciliación</th>
+				<td style="width: 20px"></td>
+				<td></td>
+				<th>Comentarios</th>
+			</tr>
+			<tr>
+				<th>Recibido Libro IVA</th>
+				<td>:</td>
+				<td>$recObs</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>Recibido Proveedor</th>
+				<td>:</td>
+				<td>$provObs</td>
+				<td>$provCom</td>
+			</tr>
+		</tbody>
+	</table>
+	<input type="hidden" name="id" value="$id">
+</div>
