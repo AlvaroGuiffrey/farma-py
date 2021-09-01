@@ -57,7 +57,7 @@ for liq in encontrados:
             total = total_arancel = total_iva_arancel = int(0)
 
         if linea[0] == "2":
-            print(linea[0], "Liquidación N° ", linea[54:61], "<br>")
+            print(linea[0], "Liquidación N° ", int(linea[54:61]), "<br>")
 
         if linea[0] == "3":
             # Obtiene el importe total
@@ -79,11 +79,11 @@ for liq in encontrados:
             total = round(total + importe_total, 2)
             total_arancel = round(total_arancel + importe_arancel, 2)
             total_iva_arancel = round(total_iva_arancel + iva_arancel, 2)
-            print(linea[0], linea[15], linea[61:69], "Lote: ", linea[91:94],
-                  "Cupón: ", linea[94:99], "$ ", importe_total, "Arancel $ ",
+            print(linea[0], linea[15], linea[61:69], "Lote: ", int(linea[91:94]),
+                  "Cupón: ", int(linea[94:99]), "$ ", importe_total, "Arancel $ ",
                   importe_arancel, "Iva Ar. $ ", iva_arancel, "Liq.: ",
-                  linea[54:61], "Tarj.: ", linea[152:171], "Aut.: ",
-                  linea[273:281], "<br>")
+                  int(linea[54:61]), "Tarj.: ", linea[152:171], "Aut.: ",
+                  int(linea[273:281]), "<br>")
 
         if linea[0] == "7":
             total_7 = round(int(linea[61:74])/100, 2)

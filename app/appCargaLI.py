@@ -9,6 +9,11 @@
 #
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
 #
+# Módulos de la librería estandar:
+import sys
+
+# Agrega path:
+sys.path.append("..")
 
 # Módulos de la aplicación:
 from modulos.provRecibido.control.cargaLIControl import CargaLIControl
