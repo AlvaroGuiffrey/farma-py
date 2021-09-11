@@ -1,0 +1,105 @@
+<!-- Agregar Dato de un registro de la tabla -->
+<div>
+	<table class="table table-borderless table-sm">
+		<tbody>
+			<tr>
+				<th style="width: 20px">Id</th>
+				<td style="width: 20px">:</td>
+				<td>...</td>
+			</tr>
+			<tr>
+				<th>Cupón Nro</th>
+				<td>:</td>
+				<td>$cupon</td>
+			</tr>
+			<tr>
+				<th>Fecha</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="date"
+                    id="fecha" name="fecha" required></td>
+			</tr>
+			<tr>
+				<th>Nro Tarj.</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="numero" name="numero" min="1" max="9999" size="4"
+                    maxlength="4" required></td>
+			</tr>
+			<tr>
+				<th>Tarjeta</th>
+				<td>:</td>
+				<td>$select_producto</td>
+			</tr>
+			<tr>
+				<th>Importe</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="importe" name="importe" step="0.01" value="0.00"
+                    size="10" maxlength="10" required></td>
+			</tr>
+			<tr>
+				<th>Descuento</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="descuento" name="descuento" step="0.01" value="0.00"
+                    size="10" maxlength="10"></td>
+			<tr>
+				<th>Imp. Neto</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="neto" name="neto" step="0.01" value="0.00"
+                    size="10" maxlength="10"></td>
+			</tr>
+			<tr>
+				<th>Cuotas</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="cuota" name="cuota" min="0" max="36" size="2"
+                    value="0" maxlength="2" required></td>
+			</tr>
+			<tr>
+				<th>Autorización</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="autorizacion" name="autorizacion" min="0" size="8"
+                    maxlength="8" value="0" required></td>
+			</tr>
+			<tr>
+				<th>Marcas</th>
+				<td>:</td>
+				<td><select name="error" id="error">
+  						<option value="0" selected>Aceptada</option>
+  						<option value="1">Rechazada</option>
+  						<option value="2">Anula/da</option>
+  					</select></td>
+			</tr>
+            <tr>
+				<th>Comentario</th>
+                <td>:</td>
+				<td><input class="form-control form-control-sm" type="text"
+					name="comentario" value="" maxlength="20"></td>
+			</tr>
+			<tr>
+				<th>Fecha Pres.</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="date"
+                    id="fecha_pre" name="fecha_pre" ></td>
+			</tr>
+			<tr>
+				<th>Lote Nro</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="lote" name="lote" min="0" max="999" size="3"
+					value="0" required></td>
+			</tr>
+            <tr>
+				<th>Liquidación</th>
+				<td>:</td>
+				<td><input class="form-control form-control-sm" type="number"
+                    id="liquidacion" name="liquidacion" min="0" max="9999999"
+                    size="7" value="0"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<input type='hidden' name='cupon' value='$cupon'>

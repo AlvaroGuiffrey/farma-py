@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# 
+#
 # recibidoControl.py
 #
 # Creado: 19/09/2019
 # Versión: 001
-# Última modificación: 
-# 
+# Última modificación:
+#
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 # Módulos de la librería estandar:
 import socket
@@ -18,13 +18,13 @@ from datetime import datetime
 from builtins import int
 
 # Módulos de la aplicación:
-from includes.control.motorVista import MotorVista 
+from includes.control.motorVista import MotorVista
 from modulos.recibido.modelo.recibidoModelo import RecibidoModelo
 from modulos.recibido.includes.recibidoTabla import RecibidoTabla
 from modulos.recibidoIva.modelo.recibidoIvaModelo import RecibidoIvaModelo
 from modulos.afipRecibido.modelo.afipRecibidoModelo import AfipRecibidoModelo
 from modulos.provRecibido.modelo.provRecibidoModelo import ProvRecibidoModelo
-from modulos.afipRecibido.includes.afipRecibidoPDF import AfipRecibidoPDF 
+from modulos.afipRecibido.includes.afipRecibidoPDF import AfipRecibidoPDF
 from modulos.afip.modelo.afipDocumentoModelo import AfipDocumentoModelo
 from modulos.afip.modelo.afipComprobanteModelo import AfipComprobanteModelo
 from includes.includes.select import Select
@@ -33,12 +33,12 @@ from includes.includes.select import Select
 class RecibidoControl():
     """
     Clase control del módulo recibido.
-    
-    Realiza operaciones con Comprobantes Recibidos por 
-    compras realizadas, utilizando el patron MVC.  
+
+    Realiza operaciones con Comprobantes Recibidos por
+    compras realizadas, utilizando el patron MVC.
     """
 
-    
+
     # Atributos de la instancia:
     def __init__(self):
         """
@@ -74,7 +74,7 @@ class RecibidoControl():
         self.cant_actualizados = int(0)
         self.cant_cargados = int(0)
         self.cant_repetidos = int(0)
-        self.cant_conc_afip = int(0) 
+        self.cant_conc_afip = int(0)
         self.cant_conc_prov = int(0)
         self.cant_conc_otro = int(0)
         self.cant_afip = int(0)
@@ -90,7 +90,7 @@ class RecibidoControl():
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
         self.documentos_dicc = {reng[1]: (reng[0], reng[1]) for reng in
                                self.documentos}
-        self.comprobantes_dicc = {reng[2]: reng[0] for reng in 
+        self.comprobantes_dicc = {reng[2]: reng[0] for reng in
                                   self.comprobantes}
         self.comprobantes_nro_dicc = {reng[0]: reng[2] for reng in
                                       self.comprobantes}
@@ -98,25 +98,25 @@ class RecibidoControl():
                                  self.proveedores}
     # Métodos:
     def inicio(self, accion):
-        """ 
+        """
         Inicio de la clase control.
-        
+
         Verifica el login del usuario y nos envía al método que ejecuta las
         acciones del módulo.
         """
         self.accion = accion
         self.accion_control()
-        
+
     def accion_control(self):
         """
-        Ejecuta las acciones del módulo. 
-        
+        Ejecuta las acciones del módulo.
+
         Ejecuta las acciones de acuerdo a las opciones seleccionadas con los
         botones de la vista.
         """
         # Recibe los datos enviados del formulario por metodo POST:
         self.form = cgi.FieldStorage()
-        # Vacía diccionario y listas que escriben datos en la vista: 
+        # Vacía diccionario y listas que escriben datos en la vista:
         self.datos_pg.clear()
         self.alertas.clear()
         self.opciones.clear()
@@ -135,13 +135,13 @@ class RecibidoControl():
         self.recibido.count()
         self.datos_pg['cantidad'] = self.recibido.get_cantidad()
         # Agrega los botones de la aplicación:
-        self.botones_ac = ["botonBadge", "botonCargar", "botonListar", 
+        self.botones_ac = ["botonBadge", "botonCargar", "botonListar",
                           "botonBuscar", "botonConciliar"]
         # Selecciona las acciones:
         if "bt_agregar" in self.form: self.accion = "Agregar"
         elif "bt_conf_agregar" in self.form: self.accion = "ConfAgregar"
         elif "bt_cargar" in self.form: self.accion = "Cargar"
-        elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar" 
+        elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar"
         elif "bt_listar" in self.form: self.accion = "Listar"
         elif "bt_conf_listar" in self.form: self.accion = "ConfListar"
         elif "bt_buscar" in self.form: self.accion = "Buscar"
@@ -154,12 +154,12 @@ class RecibidoControl():
         else: self.accion = "Iniciar"
         # Pone en 0 los acumuladores:
         self.cant_agregados = self.cant_cargados = self.cant_repetidos = 0
-       
+
         # Acción para iniciar:
         if self.accion == "Iniciar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Tabla de Comprobantes Recibidos")
-            self.datos_pg['info'] = ("Permite realizar acciones en la tabla" 
+            self.datos_pg['info'] = ("Permite realizar acciones en la tabla"
                         " seleccionando con los botones.")
             # Agrega las alertas:
             self.alertas.append("alertaInfo")
@@ -185,7 +185,7 @@ class RecibidoControl():
             self.botones_ev = ["botonConfCargar",]
             # Carga el CSV:
             csvfile = open(self.archivo, newline="")
-            arch = csv.reader(csvfile, delimiter=",") 
+            arch = csv.reader(csvfile, delimiter=",")
             next(arch)
             cant_csv = sum(1 for dato in arch)
             csvfile.close()
@@ -202,9 +202,9 @@ class RecibidoControl():
                 # Agrega las alertas:
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("El archivo CSV esta "
-                    "vacio. <b>VERIFICAR !!!</b>.")    
+                    "vacio. <b>VERIFICAR !!!</b>.")
             # Muestra la vista:
-            self.muestra_vista()            
+            self.muestra_vista()
         # Acción para confirmar cargar:
         if self.accion == "ConfCargar":
             # Recibe datos por POST:
@@ -227,22 +227,22 @@ class RecibidoControl():
                 for dato in arch:
                     fecha_csv = self.fecha_db(dato[0])
                     if fecha_csv < fecha_menor: fecha_menor = fecha_csv
-                                            
+
                 self.recibido.set_fecha(fecha_menor)
                 recibidos = self.recibido.find_all_fecha_dic()
-            
+
             # Posiciona en primer registro de datos el CSV:
             csvfile.seek(0)
             arch = csv.reader(csvfile, delimiter=",")
             next(arch)
-            
+
             # Si no hay registros en MySQL con fecha igual o menor a la primera
             # del archivo CSV agrega a todos:
             if self.recibido.get_cantidad() == 0:
                 for dato in arch:
                     # Agrega los datos a tabla DB:
                     self.agrega_datos(dato)
-                    
+
             # Hay registros iguales en MySQL y CSV, verifico para agregar:
             else:
                 # Arma una lista con datos unidos str() de los registros MySQL:
@@ -264,7 +264,7 @@ class RecibidoControl():
                 self.alertas.append("alertaSuceso")
                 self.datos_pg["alertaSuceso"] = ("Se cargaron registros a la "
                     "tabla con <b>EXITO !!!</b>.")
-            
+
             if self.cant_repetidos > 0:
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("El archivo CSV contiene "
@@ -275,16 +275,15 @@ class RecibidoControl():
             self.datos_pg["cantCargados"] = self.cant_cargados
             self.datos_pg["cantRepetidos"] = self.cant_repetidos
             self.datos_pg["cantAgregados"] = self.cant_agregados
-            
             # Cierra el archivo CSV:  
             csvfile.close()
             # Muestra la vista:
-            self.muestra_vista() 
-        # Acción para listar:    
+            self.muestra_vista()
+        # Acción para listar:
         if self.accion == "Listar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Listado de Comprobantes Recibidos")
-            self.datos_pg['info'] = ("Realiza un listado con datos de la " 
+            self.datos_pg['info'] = ("Realiza un listado con datos de la "
                         "tabla.<br>Seleccione en <b>Opciones del listado</b> "
                          "un rango de fechas.")
             # Agrega los botones para la acción:
@@ -325,7 +324,7 @@ class RecibidoControl():
         if self.accion == "Buscar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Buscar Comprobantes Recibidos")
-            self.datos_pg['info'] = ("Realiza una busqueda de Comprobantes " 
+            self.datos_pg['info'] = ("Realiza una busqueda de Comprobantes "
                         "Recibidos de proveedores.<br>Seleccione en <b>"
                         "Opciones del listado</b> los parámetros para la"
                         " acción.")
@@ -349,7 +348,7 @@ class RecibidoControl():
             select_tipo.arma_select(datos, cantidad, nombre)
             self.componentes += ["select_prov",]
             # Muestra la vista:
-            self.muestra_vista() 
+            self.muestra_vista()
         # Acción para confirmar buscar:
         if self.accion == "ConfBuscar":
             # Recibe datos por POST:
@@ -387,7 +386,7 @@ class RecibidoControl():
             self.tablas = ["tabla",]
             # Muestra la vista:
             self.muestra_vista()
-            
+
         # Acción para descargar:
         if self.accion == "DescargarPDF":
             # Recibe datos por POST:
@@ -408,7 +407,7 @@ class RecibidoControl():
                     numero = opciones['numero']
                     numero = numero.zfill(8)
                     detalle_pdf += ("- Nro: "+str(numero)+" ")
-            if self.form.getvalue("prov"):            
+            if self.form.getvalue("prov"):
                 opciones['prov'] = self.form.getvalue("prov")
                 if int(opciones['prov']) > 0:
                     opciones['nombre_prov'] = self.proveedores_dicc[
@@ -420,7 +419,7 @@ class RecibidoControl():
             # Escribe y guarda el archivo PDF:
             pdf = AfipRecibidoPDF()
             pdf.escribir_pdf(datos, detalle_pdf, self.comprobantes_dicc)
-            
+
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Descarga Listado en PDF")
             self.datos_pg['info'] = ("Realiza la descarga del listado de"
@@ -436,12 +435,12 @@ class RecibidoControl():
             self.botones_ev = ["botonAbrirRecibidosPDF",]
             # Muestra la vista:
             self.muestra_vista()
-        # Acción para conciliar:    
+        # Acción para conciliar:
         if self.accion == "Conciliar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Conciliación de Comprobantes"
                                             " Recibidos")
-            self.datos_pg['info'] = ("Realiza una conciliación de datos de " 
+            self.datos_pg['info'] = ("Realiza una conciliación de datos de "
                         "la tabla con los comprobantes recibidos de AFIP y "
                         "de los proveedores.<br>Seleccione en <b>Opciones "
                         "de fechas</b> el rango a conciliar.")
@@ -463,7 +462,7 @@ class RecibidoControl():
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Conciliación de Comprobantes"
                                             " Recibidos")
-            self.datos_pg['info'] = ("Realiza una conciliación de datos de " 
+            self.datos_pg['info'] = ("Realiza una conciliación de datos de "
                         "la tabla con los comprobantes recibidos de AFIP y "
                         "de los proveedores.<br>Seleccione en <b>Opciones "
                         "de fechas</b> el rango a conciliar.")
@@ -482,7 +481,7 @@ class RecibidoControl():
             self.cant_prov = self.prov_recibido.get_cantidad()
             prov_rec_dicc = {str(reng[1])+str(reng[2]).zfill(4)
                              +str(reng[3]).zfill(8)+str(reng[4]): (reng[0],
-                             reng[5], reng[6], reng[7], reng[8]) 
+                             reng[5], reng[6], reng[7], reng[8])
                              for reng in datos_prov}
             # Concilia los datos con otras tablas:
             self.cant_conc_afip = self.cant_conc_prov = self.cant_actualizados\
@@ -491,14 +490,14 @@ class RecibidoControl():
             for dato in datos:
                 clave_dicc = str(dato[1])+str(dato[2]).zfill(4)\
                              +str(dato[3]).zfill(8)+str(dato[4])
-                # Setea valores a indicadores y RecibidoVO:             
+                # Setea valores a indicadores y RecibidoVO:
                 flag_afip = flag_prov = 'no'
                 self.recibido.set_afip_rec(dato[7])
-                self.recibido.set_prov_rec(dato[8]) 
+                self.recibido.set_prov_rec(dato[8])
                 # Conculta diccionario AFIP y verifica consistencia datos:
                 if clave_dicc in afip_rec_dicc:
                     flag_afip = 'si'
-                    self.recibido.set_afip_rec(int(1)) 
+                    self.recibido.set_afip_rec(int(1))
                     self.afip_recibido.set_rec(int(1))
                     self.afip_recibido.set_prov_rec(afip_rec_dicc[clave_dicc][4])
                     # Cambio signo a las notas de crédito de afip_recibidos:
@@ -543,7 +542,7 @@ class RecibidoControl():
                 id_usuario = 1 # Va el id del USUARIO logueado
                 ahora = datetime.now()
                 fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
-                
+
                 if flag_afip == 'si' or flag_prov == 'si':
                     self.recibido.set_id(dato[0])
                     self.recibido.set_id_usuario_act(id_usuario)
@@ -553,7 +552,7 @@ class RecibidoControl():
                 if flag_afip == 'si':
                     self.afip_recibido.set_id(afip_rec_dicc[clave_dicc][0])
                     self.afip_recibido.set_id_usuario_act(id_usuario)
-                    self.afip_recibido.set_fecha_act(fecha_act)    
+                    self.afip_recibido.set_fecha_act(fecha_act)
                     self.afip_recibido.update_conciliar()
                     self.cant_conc_afip += self.afip_recibido.get_cantidad()
                 if flag_prov == 'si':
@@ -573,7 +572,7 @@ class RecibidoControl():
             datos_prov = self.prov_recibido.find_conciliar(opciones)
             prov_rec_dicc = {str(reng[1])+str(reng[2]).zfill(4)
                              +str(reng[3]).zfill(8)+str(reng[4]): (reng[0],
-                             reng[5], reng[6], reng[7], reng[8]) 
+                             reng[5], reng[6], reng[7], reng[8])
                              for reng in datos_prov}
             # Concilia las tablas:
             afip_dicc = afip_rec_dicc.items()
@@ -584,7 +583,7 @@ class RecibidoControl():
                         # Cambio signo a las notas de crédito de afip_recibidos:
                         iva_afip = valor[1]
                         total_afip = valor[2]
-                        tipo = int(clave[:-23])     
+                        tipo = int(clave[:-23])
                         if tipo == 3 or tipo == 13 or dato[1] == 53:
                             iva_afip = iva_afip * -1
                             total_afip = total_afip * -1
@@ -602,7 +601,7 @@ class RecibidoControl():
                         # Persiste sobre las tablas:
                         id_usuario = 1 # Va el id del USUARIO logueado
                         ahora = datetime.now()
-                        fecha_act = datetime.strftime(ahora, 
+                        fecha_act = datetime.strftime(ahora,
                                                       '%Y-%m-%d %H:%M:%S')
                         # Tabla afip_recibidos:
                         self.afip_recibido.set_id(valor[0])
@@ -627,14 +626,14 @@ class RecibidoControl():
             self.datos_pg["cantConcAfip"] = self.cant_conc_afip
             self.datos_pg["cantConcProv"] = self.cant_conc_prov
             self.datos_pg["cantConcOtro"] = self.cant_conc_otro
-            
+
             # Muestra la vista:
             self.muestra_vista()
-                                        
+
     def agrega_datos(self, dato):
         """
         Agrega datos a las tablas.
-        
+
         Con los datos del archivo IVACompras.csv carga los atributos de las
         clases VO y los agrega en las tablas.
         """
@@ -645,26 +644,26 @@ class RecibidoControl():
         # Agrega a la tabla recibidos_iva:
         if float(self.importe_db(dato[13])) > 0:
             id_condicion = 4 # id tabla afip_condición_iva 10,5%
-            self.carga_datos_iva(dato[13], id_condicion) 
+            self.carga_datos_iva(dato[13], id_condicion)
             self.recibido_iva.insert()
             self.cant_agregados += self.recibido_iva.get_cantidad()
         if float(self.importe_db(dato[14])) > 0:
             id_condicion = 5 # id tabla afip_condición_iva 21%
-            self.carga_datos_iva(dato[14], id_condicion) 
+            self.carga_datos_iva(dato[14], id_condicion)
             self.recibido_iva.insert()
             self.cant_agregados += self.recibido_iva.get_cantidad()
         if float(self.importe_db(dato[15])) > 0:
             id_condicion = 6 # id tabla afip_condición_iva 27%
-            self.carga_datos_iva(dato[15], id_condicion) 
+            self.carga_datos_iva(dato[15], id_condicion)
             self.recibido_iva.insert()
             self.cant_agregados += self.recibido_iva.get_cantidad()
-            
-    
+
+
     def carga_datos(self, dato):
         """
         Carga datos al Value Object de la tabla.
-        
-        Con los datos del archivo IVACompras.csv carga los atributos de 
+
+        Con los datos del archivo IVACompras.csv carga los atributos de
         RecibidosVO para persistir en el modelo.
         """
         # Carga el VO con los datos del CSV:
@@ -706,16 +705,16 @@ class RecibidoControl():
         self.recibido.set_id_usuario_act(id_usuario)
         ahora = datetime.now()
         fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
-        self.recibido.set_fecha_act(fecha_act) 
-        
+        self.recibido.set_fecha_act(fecha_act)
+
     def carga_datos_iva(self, dato, id_condicion):
         """
         Carga datos al Value Object de la tabla.
-        
-        Con algunos datos del archivo IVACompras.csv carga los atributos de 
+
+        Con algunos datos del archivo IVACompras.csv carga los atributos de
         RecibidosIvaVO para persistir en el modelo.
         """
-        # Carga el VO con los datos del CSV: 
+        # Carga el VO con los datos del CSV:
         self.recibido_iva.set_id_recibido(self.recibido.get_id_insert())
         self.recibido_iva.set_condicion(id_condicion)
         self.recibido_iva.set_neto(self.importe_db('0'))
@@ -726,35 +725,35 @@ class RecibidoControl():
         ahora = datetime.now()
         fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
         self.recibido_iva.set_fecha_act(fecha_act)
-                        
+
     def fecha_db(self, fecha_csv):
         """
         Convierte la fecha para la tabla de la DB.
-        
+
         Convierte la fecha de IVA Compras PLEX al formato necesario para
         persistir en la tabla de la DB.
         """
         fecha = fecha_csv.split("/")
         fecha_op = date(int(fecha[2]), int(fecha[1]), int(fecha[0]))
         return date.strftime(fecha_op, '%Y-%m-%d')
-                       
+
     def importe_db(self, importe_csv):
         """
         Convierte los importes para la tabla de la DB.
-        
+
         Convierte los importes de IVA Compras PLEX al formato necesario para
         persistir en la tabla de la DB.
         """
         imp = importe_csv.replace(',', '.')
         return "{0:.2f}".format(float(imp))
-        
+
     def datos_csv(self,dato):
         """
         Convierte datos del archivo csv.
-        
+
         Convierte datos del archivo csv para comparar con datos de la tabla
         para persistir en la DB.
-        """  
+        """
         compro = dato[1].split('-')
         compro_ot = compro[1].split(' ')
         if compro[0] in self.comprobantes_dicc:
@@ -765,18 +764,17 @@ class RecibidoControl():
         datos_csv = str(tipo)+str(compro_ot[0])+str(compro_ot[1])+\
             str(nro_doc)
         return datos_csv
-               
+
     def muestra_vista(self):
         """
         Muestra la vista de la aplicación.
-        
+
         Muestra pagina.html luego de renderizar los datos.
         """
         # Instancia la clase MotorVista y escribe el html:
-        print(MotorVista().arma_vista(self.tipo, self.botones_ac,  
-                                      self.botones_ev, self.botones_aux,  
-                                      self.alertas, self.opciones,  
-                                      self.contenidos, self.tablas,  
-                                      self.componentes, self.datos_pg, 
+        print(MotorVista().arma_vista(self.tipo, self.botones_ac,
+                                      self.botones_ev, self.botones_aux,
+                                      self.alertas, self.opciones,
+                                      self.contenidos, self.tablas,
+                                      self.componentes, self.datos_pg,
                                       self.modulo))
-        

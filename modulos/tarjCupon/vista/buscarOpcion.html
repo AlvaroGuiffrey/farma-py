@@ -1,0 +1,114 @@
+<!-- Opciones para buscar -->
+<div class="jumbotron jumbotron-fluit p-2 mb-1">
+	<h6>Opciones para buscar</h6>
+	<hr/>
+	<!-- Primer Renglón -->
+	<div class="row">
+		<!--  Rango de fechas -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Seleccione el rango de fechas">Fechas:</div>
+				</div>
+				<input type="text" id="date_range" name="fechas"
+					placeholder="seleccione rango" autocomplete="off" required>
+				<div class="input-group-append">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Dato obligatorio">
+						<b style="color: blue">*</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  Tipo de fechas -->
+        <div class="col-md-auto">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" data-toggle="tooltip"
+                            title="Seleccione el tipo de fechas">de:</div>
+                </div>
+                <select class='custom-select'  id='tipo' name='tipo'>
+                    <option value='1' selected>Operación</option>
+                    <option value='2'>Presentación</option>
+                </select>
+                <div class="input-group-append">
+                    <div class="input-group-text" data-toggle="tooltip"
+                        title="Dato obligatorio">
+                        <b style="color: blue">*</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- Producto -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">$select_producto</div>
+		</div>
+	</div>
+	<!-- Segundo Renglón -->
+	<div class="row">
+		<!--  Número de cupón -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el número de cupón">Cupón:</div>
+				</div>
+				<input type="number" id="cupon" name="cupon" min="0"
+					max="99999" maxlength="5" size="5"
+					value=0 autocomplete="off">
+				<div class="input-group-append">
+					<div class="input-group-text"></div>
+				</div>
+			</div>
+		</div>
+		<!--  Número de Lote -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el número de lote">Lote:</div>
+				</div>
+				<input type="number" id="lote" name="lote" min="0"
+					max="999" maxlength="3" size="3"
+					value=0>
+				<div class="input-group-append">
+					<div class="input-group-text"></div>
+				</div>
+			</div>
+		</div>
+		<!-- Selección de MArca de Error -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class='input-group-prepend'>
+	            <div class='input-group-text' data-toggle='tooltip'
+	            	title='Seleccione opción de marcas de error'>Marcas:</div>
+				</div>
+				<select class='custom-select' id='error' name='error' >
+					<option value='9' selected> Todas ...</option>
+					<option value='0'>Aceptado</option>
+					<option value='1'>Rechazado</option>
+					<option value='2'>Anula/do</option>
+				</select>
+				<div class='input-group-append'>
+				<div class='input-group-text'></div></div>
+			</div>
+		</div>
+		<!--  Número de Liquidación -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el número de liquidación">Liquidación:</div>
+				</div>
+				<input type="number" id="liquidacion" name="liquidacion" min="0"
+					max="9999999" maxlength="7" size="7"
+					value=0>
+				<div class="input-group-append">
+					<div class="input-group-text"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Fin del jumbotron de opciones -->
+</div>

@@ -1,14 +1,14 @@
 #!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: utf-8 -*-
-# 
+#
 # recibidoTabla.py
 #
 # Creado: 21/09/2019
 # Versión: 001
-# Última modificación: 
-# 
+# Última modificación:
+#
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 # Módulos que se importan de la librería estandar
 from datetime import date
@@ -18,7 +18,7 @@ import locale
 class RecibidoTabla():
     '''
     Clase para armar una tabla html para la vista.
-    
+
     Permite armar una tabla, con etiquetas html para la vista, con los datos
     obtenidos del modelo.
     '''
@@ -29,16 +29,16 @@ class RecibidoTabla():
         """
         # Instancia el seteo a local:
         locale.setlocale(locale.LC_ALL, 'es_AR.utf8')
-        
+
     def arma_tabla(self, datos, opciones, comprobantes_dicc):
         """
         Método que arma la tabla html para la vista.
-        
-        @param datos: 
+
+        @param datos:
         @return: tabla.html
         """
         # Crea el archivo para la tabla:
-        tabla = open("tabla.html", "w") 
+        tabla = open("tabla.html", "w")
         # Arma los hidden y escribe la cabecera de la tabla html:
         cabecera_html = (
             "<!-- Datos de la cabecera de la tabla -->"
@@ -103,11 +103,11 @@ class RecibidoTabla():
             "</tr></thead><tbody>"
             "<!-- Datos de los renglones -->")
         tabla.write(cabecera_html)
-        
+
         # Crea diccionario para totales:
         totales = {}
         # Arma y escribe los renglones de la tabla html con los datos:
-        cont = 0 
+        cont = 0
         total = 0
         for dato in datos:
             # Da formato a los datos del renglón:
@@ -119,16 +119,16 @@ class RecibidoTabla():
             # Importe total:
             importe = dato[7]
             # Suma a totales:
-            if dato[3] in totales: 
+            if dato[3] in totales:
                 totales[dato[3]][0] += 1
                 totales[dato[3]][1] += importe
-            else: 
+            else:
                 totales[dato[3]] = [1, importe]
             total += importe
             # Cambia formato del importe a moneda local:
             importe = locale.format("%.2f", (importe), True)
             # Observaciones sobre conciliación con otras tablas:
-            if dato[8] == 1: 
+            if dato[8] == 1:
                 afip_obs = ("<i class='fas fa-check' style='color:green' "
                           "title='Conciliado con AFIP'></i>")
             elif dato[8] == 2:
@@ -137,8 +137,8 @@ class RecibidoTabla():
                           "title='Diferencia en importes con AFIP'></i>")
             else:
                 afip_obs = ("<i class='fas fa-ban' style='color:red' "
-                          "title='No registrado en AFIP'></i>") 
-            if dato[9] == 1: 
+                          "title='No registrado en AFIP'></i>")
+            if dato[9] == 1:
                 prov_obs = ("<i class='fas fa-check' style='color:green' "
                           "title='Conciliado con Proveedores'></i>")
             elif dato[9] == 2:
@@ -170,10 +170,10 @@ class RecibidoTabla():
                 "<i class='fas fa-search'></i></button>"
                 "</td></tr>"
                 )
-             
+
             tabla.write(renglon_html)
             cont += 1
-                            
+
         # Escribe los datos que envia por hidden:
         tabla.write(hidden_html)
         # Arma y escribe el pie de la tabla html:
@@ -186,13 +186,13 @@ class RecibidoTabla():
             lista = sorted(totales.items())
             for item in lista:
                 tipo = comprobantes_dicc[item[0]]
-                importe = locale.format("%.2f", (item[1][1]), True) 
+                importe = locale.format("%.2f", (item[1][1]), True)
                 pie_html += (
                     "# "+str(item[1][0])+" "+str(tipo)+" por "
                     "$ "+importe+"<br>"
-                    ) 
-                   
+                    )
+
         pie_html += ("</caption></tbody></table></div>")
         tabla.write(pie_html)
         # Cierra el archivo
-        tabla.close()  
+        tabla.close()

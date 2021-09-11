@@ -16,10 +16,16 @@ import os
 
 from builtins import int
 
+from modulos.tarjeta.modelo.tarjProductoModelo import TarjProductoModelo
+tarj_producto = TarjProductoModelo()
+productos = tarj_producto.find_all()
+cant_producto = tarj_producto.get_cantidad()
 print("Content-Type: text/html")
 print("""
     <TITLE>Prueba OS</TITLE>
     """)
+
+print("Cantidad de tarjetas: ", cant_producto, "<br>")
 #print(os.ctermid(), "<br")
 print("Directorio actual: ", os.getcwd(), "<br>")
 path = os.getcwd() + "/archivos/tarjetas"

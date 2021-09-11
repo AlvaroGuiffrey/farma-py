@@ -1,10 +1,10 @@
-<!-- Men� de la aplicaci�n farma-py -->
+<!-- Menú de la aplicación farma-py -->
 <!-- w3schools.com (How TO - Side Navigation) -->
 <div id="mySidenav" class="sidenav">
 	<button type="button"
 		class="btn btn-light float-md-right rounded-circle"
 		onclick="closeNav()" data-toggle="tooltip" data-placement="bottom"
-		title="Cerrar el Men�">
+		title="Cerrar el Menú">
 		<i class="fas fa-arrow-left"></i>
 	</button>
 	<br>
@@ -16,7 +16,7 @@
 		<li class="nav-item dropdown"><a class="nav-link dropdown-toogle"
 			data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
 			aria-expanded="false"> AFIP <i class="fas fa-angle-down"></i>
-		</a>
+			</a>
 			<div class="dropdown-menu">
 				<a class="dropdown-item"
 					href="http://$ip/farma-py/appAfipRecibido.py"> <i
@@ -59,6 +59,18 @@
 					class="fas fa-file-upload"></i> Prueba A
 				</a>
 			</div></li>
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toogle"
+			data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+			aria-expanded="false"><i class="fas fa-credit-card"></i> Tarjetas
+			<i class="fas fa-angle-down"></i>
+			</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item"
+					href="http://$ip/farma-py/appTarjCupon.py">
+					<i class="far fa-file"></i> Cupones
+				</a>
+				<div class="dropdown-divider"></div>
+				</div></li>
 		<li class="nav-item"><a href="#"><i class="fas fa-users"></i>
 				Clientes</a></li>
 		<li class="nav-item"><a href="#"><i
