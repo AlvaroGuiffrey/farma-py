@@ -293,8 +293,7 @@ class TarjCuponControl():
                     " !!!</b>.")
             # Arma la tabla para listar:
             tabla = TarjCuponTabla()
-            tabla.arma_tabla(datos, opciones,
-                        self.tarj_productos_listar_dicc)
+            tabla.arma_tabla(datos, opciones, self.tarj_productos_listar_dicc)
             self.tablas = ["tabla",]
             # Muestra la vista:
             self.muestra_vista()
@@ -317,6 +316,36 @@ class TarjCuponControl():
             select_tipo = Select()
             select_tipo.arma_select(datos, cantidad, nombre)
             self.componentes += ["select_producto",]
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar buscar
+        if self.accion == "ConfBuscar":
+            # Recibe datos por POST:
+            fechas = self.form.getvalue("fechas")
+            fechas = fechas.split(" - ")
+            # Arma las opciones de búsqueda:
+            opciones = {}
+            opciones['fecha_d'] = fechas[0]
+            opciones['fecha_h'] = fechas[1]
+            opciones['tipo'] = int(self.form.getvalue("tipo"))
+            opciones['id_producto'] = int(self.form.getvalue("producto"))
+            opciones['cupon'] = int(self.form.getvalue("cupon"))
+            opciones['lote'] = int(self.form.getvalue("lote"))
+            opciones['error'] = int(self.form.getvalue("error"))
+            opciones['liquidacion'] = int(self.form.getvalue("liquidacion"))
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Buscar Cupones")
+            self.datos_pg['info'] = ("Cupones encontrados segun las opciones "
+                                     "de busqueda seleccionadas.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonDescargarPDF",]
+            # Encuentra los datos de la busqueda para listar:
+            datos = self.tarj_cupon.find_all_buscar(opciones)
+            self.datos_pg["cantidad"] = self.tarj_cupon.get_cantidad()
+            # Arma la tabla para listar:
+            tabla = TarjCuponTabla()
+            tabla.arma_tabla(datos, opciones, self.tarj_productos_listar_dicc)
+            self.tablas = ["tabla",]
             # Muestra la vista:
             self.muestra_vista()
         # Acción para Controlar Correlativos:

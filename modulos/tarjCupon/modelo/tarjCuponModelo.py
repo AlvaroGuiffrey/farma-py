@@ -204,6 +204,59 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         ccnx.close()
         return datos
 
+    def find_all_buscar(self, opciones):
+        """
+        Obtiene los registros de la busqueda para listar.
+
+        Obtiene los registros buscados de la tabla para listar en la vista
+        según el rango y tipo de fechas seleccionado (obligatorios) y otros (no
+        obligatorios), ordenados por cupón y fecha.
+        @param fecha_d: fecha desde donde comienza la consulta (oblig.).
+        @param fecha_h: fecha máxima de la consulta (oblig.).
+        @param tipo: tipo de fecha (operación o presentación) (oblig.).
+        @param cupon: número de cupón que se busca, valor 0 = todos.
+        @param id_producto: id de producto que se busca, valor 0 = todos.
+        @param lote: número de lote que se busca, valor 0 = todos.
+        @param error: número de error que se busca, valor 9 = todos.
+        @param liquidacion: número de liquidación que se busca, valor 0 = todos.
+        @return: datos
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        valores = []
+        valores.append(opciones['fecha_d'])
+        valores.append(opciones['fecha_h'])
+        consulta = ("SELECT id, cupon, fecha, numero, id_producto, moneda,"
+                    "importe, error, fecha_pre, lote, liquidacion, comentario "
+                    "FROM tarj_cupones WHERE ")
+        if int(opciones['tipo'])==1:
+            consulta += ("fecha >= %s AND fecha <= %s ")
+        if int(opciones['tipo'])==2:
+            consulta += ("fecha_pre >= %s AND fecha_pre <= %s ")
+        if int(opciones['cupon']) > 0:
+            consulta += (" AND cupon = %s")
+            valores.append(int(opciones['cupon']))
+        if int(opciones['id_producto']) > 0:
+            consulta += (" AND id_producto = %s")
+            valores.append(opciones['id_producto'])
+        if int(opciones['lote']) > 0:
+            consulta += (" AND lote = %s")
+            valores.append(opciones['lote'])
+        if int(opciones['error']) != 9:
+            consulta += (" AND error = %s")
+            valores.append(opciones['error'])
+        if int(opciones['liquidacion']) > 0:
+            consulta += (" AND liquidacion = %s")
+            valores.append(opciones['liquidacion'])
+        consulta += (" AND estado=1 ORDER BY cupon, fecha")
+        valor = tuple(valores)
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
     def update_comentario(self):
         """
         Modifica los datos del registro.
