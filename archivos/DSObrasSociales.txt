@@ -1,14 +1,40 @@
-0000023040	VILLA ELISA                                                           	OBS_NC	25/09/2020	FARMALINK                               	MUTUAL FEDERADA                         	                        103193	202006M	   0108A01284978	          968,43	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMLNK-NC N                            	PAMI AMB ADEL                           	                    0182647579	2020091	   0108A01281205	       258704,45	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMLNK-NC N                            	PAMIINSCFCIAS                           	                    0182685468	2020091	   0108A01280713	         3753,48	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMLNK-NC N                            	PAMI I ADEL                             	                    0182679337	2020091	   0108A01281528	         2084,52	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMLNK-NC N                            	PAMIAMBCV5                              	                    0182658534	2020091	   0108A01281813	       305180,48	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMAPAMI                               	FARMAPAMI                               	                        424582	2020091	   0108A01283380	          659,81	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	PRESERFAR UN                            	PRESERFAR UNIFICADO                     	                  000500125597	202038C	   0108A01282177	        38363,01	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	PRESERFAR UN                            	PRESERFAR UNIFICADO                     	                  010400169087	202038C	   0108A01282178	          889,67	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMAPAMI                               	FARMAPAMI                               	                        424582	2020091	   0108A01283381	          403,96	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMAPAMI                               	FARMAPAMI                               	                        424582	2020091	   0108A01283753	         1305,71	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMAPAMI                               	FARMAPAMI                               	                        424582	2020091	   0108A01283754	         1083,53	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMAPAMI                               	FARMAPAMI                               	                        424582	2020091	   0108A01284370	          544,74	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	23/09/2020	FARMAPAMI                               	FARMAPAMI                               	                        424582	2020091	   0108A01284371	          978,96	39	
-0000023040	VILLA ELISA                                                           	OBS_NC	18/09/2020	FARMALINK                               	SWISS MEDICAL                           	                       1880788	202007M	   0108A01279687	         4823,36	38	
+0000023040	VILLA ELISA                                                           	OBS_NC	12/08/2021	AEPS                                    	OSPRERA                                 	                  202105022044	202105C	   0108A01448802	          896,21	32	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	12/08/2021	AEPS                                    	OSPRERA                                 	                  202105022045	202105C	   0108A01448803	          174,93	32	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	11/08/2021	FARMALINK                               	SWISS MEDICAL                           	                       2012881	202106M	   0108A01448384	         3826,45	32	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	11/08/2021	PRESERFAR UN                            	PRESERFAR UNIFICADO                     	                  010400189756	202132C	   0108A01447885	         1188,61	32	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	11/08/2021	FARMALINK                               	OMINT                                   	                        596543	202106M	   0108A01447787	         1674,61	32	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	11/08/2021	PRESERFAR UN                            	PRESERFAR UNIFICADO                     	                  000500137743	202132C	   0108A01447884	        47279,92	32	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMLNK-NC N                            	PAMI TIRAS ANT                          	                    0184238445	2021072	   0108A01444226	         1556,38	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMLNK-NC N                            	PAMIAMBCV5                              	                    0184205511	2021072	   0108A01443836	       333250,69	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMLNK-NC N                            	PAMITIRASCOMP                           	                    0184245326	2021072	   0108A01444753	         2873,30	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMLNK-NC N                            	PAMIINSCFCIAS                           	                    0184231634	2021072	   0108A01444446	         4046,71	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMLNK-NC N                            	PAMI I ADEL                             	                    0184225831	2021072	   0108A01444982	         1148,47	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMAPAMI                               	FARMAPAMI                               	                        629170	2021072	   0108A01445811	          852,99	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMAPAMI                               	FARMAPAMI                               	                        629170	2021072	   0108A01445812	          393,14	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMAPAMI                               	FARMAPAMI                               	                        629170	2021072	   0108A01447227	          348,29	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMLNK-NC N                            	PAMI AMB ADEL                           	                    0184194423	2021072	   0108A01445092	       170440,84	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMAPAMI                               	FARMAPAMI                               	                        629170	2021072	   0108A01446635	          870,89	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMAPAMI                               	FARMAPAMI                               	                        629170	2021072	   0108A01446634	         1154,24	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	09/08/2021	FARMAPAMI                               	FARMAPAMI                               	                        629170	2021072	   0108A01447228	         1073,66	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	06/08/2021	FARMALINK                               	OSDE NACIONAL                           	                       2492346	2021061	   0108A01443548	         3970,09	31	
+
+0000023040	VILLA ELISA                                                           	OBS_NC	04/08/2021	PRESERFAR UN                            	PRESERFAR UNIFICADO                     	                  000500137385	202131C	   0108A01442334	        14556,02	31	
+

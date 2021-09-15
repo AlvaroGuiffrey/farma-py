@@ -27,9 +27,9 @@ class CargaOSControl():
     """
     Clase control del módulo provRecibido.
 
-    Realiza operaciones con Comprobantes Recibidos descargados de  
-    las aplicaciones de los proveedores, actualizando el comentario 
-    de la tabla prov_recibidos, utilizando el patron MVC.  
+    Realiza operaciones con Comprobantes Recibidos descargados de
+    las aplicaciones de los proveedores, actualizando el comentario
+    de la tabla prov_recibidos, utilizando el patron MVC.
     """
 
     # Atributos de la instancia:
@@ -78,7 +78,7 @@ class CargaOSControl():
 
     # Métodos:
     def inicio(self, accion):
-        """ 
+        """
         Inicio de la clase control.
 
         Verifica el login del usuario y nos envía al método que ejecuta las
@@ -89,7 +89,7 @@ class CargaOSControl():
 
     def accion_control(self):
         """
-        Ejecuta las acciones del módulo. 
+        Ejecuta las acciones del módulo.
 
         Ejecuta las acciones de acuerdo a las opciones seleccionadas con los
         botones de la vista.
@@ -200,14 +200,12 @@ class CargaOSControl():
             arch = txtfile.readlines()
             # Busca la primer fecha del TXT y consulta MySQL:
             if self.prov_recibido.get_cantidad() > 0:
-                fecha_menor = "2000-01-01"
+                fecha_menor = "2100-01-01"
                 for dato in arch:
                     fecha_op = date(int(dato[95:99]), int(dato[92:94]),
                                     int(dato[89:91]))
                     fecha_txt = date.strftime(fecha_op, '%Y-%m-%d')
-                    if fecha_txt < fecha_menor:
-                        fecha_menor = fecha_txt
-
+                    if fecha_txt < fecha_menor: fecha_menor = fecha_txt
                 self.prov_recibido.set_fecha(fecha_menor)
                 prov_recibidos = self.prov_recibido.find_all_fecha_dic()
             # Posiciona en primer registro de datos el TXT:
@@ -265,7 +263,7 @@ class CargaOSControl():
         """
         Modifica datos a las tablas.
 
-        Con los datos del archivo DSObrasSociales.txt carga los atributos de 
+        Con los datos del archivo DSObrasSociales.txt carga los atributos de
         la clase VO y persiste en la tabla.
         """
         # Modifica la tabla prov_recibidos:
@@ -277,7 +275,7 @@ class CargaOSControl():
         """
         Carga datos al Value Object de la tabla.
 
-        Con los datos del archivo DSObrasSociales.txt carga los atributos de  
+        Con los datos del archivo DSObrasSociales.txt carga los atributos de
         ProvRecibidosVO para persistir en el modelo.
         """
         # Carga el VO con los datos del TXT:

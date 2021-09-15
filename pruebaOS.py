@@ -39,7 +39,7 @@ for arch in archivos:
     else:
         print(":-( no existe. <br>")
 
-buscar = ["pruebaPDF.py", "app.py", "elchoto.py",
+buscar = ["pruebaPDF.py", "app.py", "elchoto.py", "Ventas.csv",
           "select_tipo.html", "Liquidación diaria.csv"]
 
 # utilizo not in o in de acuerdo a la finalidad.
@@ -98,12 +98,12 @@ for liq in encontrados:
             total_7_arancel = round(int(linea[103:116])/100, 2)
             if linea[116] == "2":
                 total_7_arancel = total_7_arancel * -1
-            print("Total de la liquidación:$ ", total_7, "Arancel/Financ. $",
+            print("Total de la liquidación Reng.7:$ ", total_7, "Arancel/Financ. $",
                   total_7_arancel, " Iva Arancel $ ", total_iva_arancel, "<br>")
 
         if linea[0] == "8":
             total_8_iva = round(int(linea[63:76])/100, 2)
             if linea[76] == "2":
                 total_8_iva = total_8_iva * -1
-            print("Total suma cupones $ ", total, "Arancel $ ", total_arancel,
+            print("Total suma cupones (1x1) $ ", total, "Arancel $ ", total_arancel,
                   " Iva Arancel $ ", total_8_iva, "<br>")

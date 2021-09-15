@@ -18,9 +18,9 @@ class ArchivoModelo(ArchivoActiveRecord):
     '''
     Clase para realizar operaciones en la tabla archivos.
 
-    Realiza operaciones varias de consultas sobre la  tabla archivos 
-    de la base de datos farma, hereda todos los métodos CRUD de la clase 
-    ArchivoActiveRecord y los atributos y métodos de la clase 
+    Realiza operaciones varias de consultas sobre la  tabla archivos
+    de la base de datos farma, hereda todos los métodos CRUD de la clase
+    ArchivoActiveRecord y los atributos y métodos de la clase
     ArchivoVO.
     '''
 
@@ -34,7 +34,7 @@ class ArchivoModelo(ArchivoActiveRecord):
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
         consulta = ("SELECT id, nombre, estado, id_usuario_act, fecha_act"
-                    "FROM archivoos ORDER BY id")
+                    "FROM archivos ORDER BY id")
         cursor.execute(consulta)
         datos = cursor.fetchall()
         self.cantidad = cursor.rowcount

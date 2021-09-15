@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# tarjCuponActiveRecord.py
+# tarjLiqActiveRecord.py
 #
-# Creado: 01/09/2021
+# Creado: 13/09/2021
 # Versión: 001
 # Última modificación:
 #
@@ -11,16 +11,16 @@
 
 # Modulos de la aplicación:
 from includes.modelo.conexionMySQL import ConexionMySQL
-from modulos.tarjCupon.modelo.tarjCuponVO import TarjCuponVO
+from modulos.tarjLiquidacion.modelo.tarjLiqVO import TarjLiqVO
 
 
-class TarjCuponActiveRecord(TarjCuponVO):
+class TarjLiqActiveRecord(TarjLiqVO):
     '''
-    Clase que implementa el patrón Active Record en la tabla tarj_cupones.
+    Clase que implementa el patrón Active Record en la tabla tarj_liquidaciones.
 
-    Permite realizar operaciones del tipo CRUD sobre la tabla tarj_cupones de
-    la base de datos farma-py en mysql; hereda los atributos y métodos de la
-    clase TarjCuponVO; y La conexión a la base de datos se realiza por una
+    Permite realizar operaciones del tipo CRUD sobre la tabla tarj_liquidaciones
+    de la base de datos farma-py en mysql; hereda los atributos y métodos de
+    la clase TarjLiqVO; y La conexión a la base de datos se realiza por una
     instancia de la clase ConexionMySQL.
     '''
 
@@ -37,14 +37,14 @@ class TarjCuponActiveRecord(TarjCuponVO):
         """
         Obtiene un renglón de la tabla.
 
-        @param id: índice de la tabla desde TarjCuponVO.
-        @return: TarjCuponVO con los datos del renglón.
+        @param id: índice de la tabla desde TarjLiqVO.
+        @return: TarjLiqVO con los datos del renglón.
         @return: por el método get_cantidad() se obtiene la cantidad de filas
                 afectadas.
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT * FROM tarj_cupones WHERE id = %s")
+        consulta = ("SELECT * FROM tarj_liquidaciones WHERE id = %s")
         cursor.execute(consulta, (self.get_id(),))
         dato = cursor.fetchone()
         self.cantidad = cursor.rowcount
@@ -52,33 +52,41 @@ class TarjCuponActiveRecord(TarjCuponVO):
         ccnx.close()
         if self.cantidad == 1:
             self.set_id(dato[0])
-            self.set_cupon(dato[1])
-            self.set_fecha(dato[2])
-            self.set_numero(dato[3])
-            self.set_id_producto(dato[4])
-            self.set_moneda(dato[5])
-            self.set_importe(dato[6])
-            self.set_descuento(dato[7])
-            self.set_neto(dato[8])
-            self.set_cuota(dato[9])
-            self.set_autorizacion(dato[10])
-            self.set_error(dato[11])
-            self.set_comentario(dato[12])
-            self.set_fecha_presentacion(dato[13])
-            self.set_lote(dato[14])
-            self.set_liquidacion(dato[15])
-            self.set_estado(dato[16])
-            self.set_id_usuario_act(dato[17])
-            self.set_fecha_act(dato[18])
+            self.set_liquidacion(dato[1])
+            self.set_fecha_pago(dato[2])
+            self.set_ban_suc(dato[3])
+            self.set_moneda(dato[4])
+            self.set_importe_bruto(dato[5])
+            self.set_importe_desc(dato[6])
+            self.set_importe_neto(dato[7])
+            self.set_cupones(dato[8])
+            self.set_fecha_proceso(dato[9])
+            self.set_marca_banco(dato[10])
+            self.set_fecha_banco(dato[11])
+            self.set_opera_banco(dato[12])
+            self.set_arancel(dato[13])
+            self.set_costo_financiero(dato[14])
+            self.set_iva_arancel(dato[15])
+            self.set_iva_costo_financiero(dato[16])
+            self.set_impuesto_debcred(dato[17])
+            self.set_impuesto_interes(dato[18])
+            self.set_retencion_iva(dato[19])
+            self.set_retencion_imp_gan(dato[20])
+            self.set_retencion_ing_brutos(dato[21])
+            self.set_percepcion_iva(dato[22])
+            self.set_percepcion_ing_brutos(dato[23])
+            self.set_estado(dato[24])
+            self.set_id_usuario_act(dato[25])
+            self.set_fecha_act(dato[26])
             return dato
         else:
             return None
-
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     def insert(self):
         """
         Agrega un registro a la tabla.
 
-        @param TarjCuponVO: con los datos a insertar en el nuevo registro.
+        @param TarjliqVO: con los datos a insertar en el nuevo registro.
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
