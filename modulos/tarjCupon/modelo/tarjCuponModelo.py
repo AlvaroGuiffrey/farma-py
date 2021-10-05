@@ -29,13 +29,14 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         Obtiene un registro activo por el cupon.
 
         @param cupon: TarjCuponVO.
+        @param fecha: TarjCuponVO.
         @param estado: 1 - activo.
         @return: TarjCuponVO y datos.
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT * FROM tarj_productos WHERE cupon = %s "
-                    "AND estado = 1")
+        consulta = ("SELECT * FROM tarj_cupones WHERE cupon = %s "
+                    "AND fecha = %s AND estado = 1")
         valor = (self.get_cupon(), self.get_fecha())
         cursor.execute(consulta, valor)
         dato = cursor.fetchone()
@@ -93,7 +94,7 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT * FROM tarj_cupones WHERE fecha=%s estado = 1")
+        consulta = ("SELECT * FROM tarj_cupones WHERE fecha=%s AND estado = 1")
         valor = (self.get_fecha(),)
         cursor.execute(consulta, valor)
         datos = cursor.fetchall()

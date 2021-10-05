@@ -17,21 +17,32 @@ import os
 from builtins import int
 
 from modulos.tarjeta.modelo.tarjProductoModelo import TarjProductoModelo
+from modulos.tarjLiquidacion.modelo.tarjLiqModelo import TarjLiqModelo
 tarj_producto = TarjProductoModelo()
 productos = tarj_producto.find_all()
+#tarj_producto.set_id(1)
+#tarj_producto.find()
 cant_producto = tarj_producto.get_cantidad()
+tarj_liq = TarjLiqModelo()
+tarj_liq.set_id(1234)
+tarj_liq.set_liquidacion(1234)
+tarj_liq.find_liquidacion()
+cant_liquidaciones = tarj_liq.get_cantidad()
+
 print("Content-Type: text/html")
 print("""
     <TITLE>Prueba OS</TITLE>
     """)
 
 print("Cantidad de tarjetas: ", cant_producto, "<br>")
+print("Cantidad de liquidaciones: ", cant_liquidaciones, "<br>")
 #print(os.ctermid(), "<br")
 print("Directorio actual: ", os.getcwd(), "<br>")
 path = os.getcwd() + "/archivos/tarjetas"
 archivos = os.listdir(path)
 print("Archivos del directorio: ", archivos, "<br>")
-
+cant_archivos = len(archivos)
+print("Cantidad de Archivos: ", cant_archivos, "<br>")
 for arch in archivos:
     print("-> ", arch, "<br>")
     if "Liquidación" in arch:
@@ -59,7 +70,14 @@ for liq in encontrados:
 
     for linea in contenido:
         if linea[0] == "1":
-            print(linea[0], "Proceso del :", linea[24:32], "<br>")
+            fecha_txt = str(linea[24:32])
+            anio = fecha_txt[0:4]
+            mes = fecha_txt[4:6]
+            dia = fecha_txt[6:]
+            fecha_op = date(int(anio), int(mes), int(dia))
+            fecha_proceso = date.strftime(fecha_op, '%Y-%m-%d')
+
+            print(linea[0], "Proceso del :", fecha_proceso, "<br>")
             total = total_arancel = total_iva_arancel = int(0)
 
         if linea[0] == "2":

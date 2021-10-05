@@ -97,7 +97,7 @@ class TarjCorrCuponTabla():
                 "appTarjCuponV.py?accion=Agregar&cupon="+str(dato)+"\", \"Ventana\", "
                 "\"width=600, height=500, top=100, left=100, menubar=0, "
                 "toolbar=0, titlebar=1, location=0, scrollbars=1\"); void 0'>"
-                "<i class='fas fa-plus-circle'></i></button></td></tr>"
+                "<i class='fas fa-plus'></i></button></td></tr>"
                 )
             tabla.write(renglon_html)
             cont += 1

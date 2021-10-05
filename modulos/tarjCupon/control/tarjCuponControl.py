@@ -72,7 +72,7 @@ class TarjCuponControl():
                                self.tarj_productos}
         self.tarj_productos_listar_dicc = {reng[0]: (reng[1], reng[2])
                             for reng in self.tarj_productos}
-        self.proveedores_buscar_dicc = {reng[0]: reng[1] for reng in
+        self.tarj_productos_buscar_dicc = {reng[0]: reng[1] for reng in
                                  self.tarj_productos}
     # Métodos:
     def inicio(self, accion):
@@ -310,7 +310,7 @@ class TarjCuponControl():
             self.opciones.append("buscarOpcion")
             # Carga los select para las opciones:
             # Select del producto:
-            datos = self.proveedores_buscar_dicc
+            datos = self.tarj_productos_buscar_dicc
             cantidad = self.cant_productos
             nombre = 'producto'
             select_tipo = Select()

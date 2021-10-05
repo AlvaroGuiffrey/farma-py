@@ -23,13 +23,15 @@ class TarjLiqVO:
     def __init__(self):
         self.id_db = int(0)
         self.liquidacion = int(0)
+        self.id_producto = int(0)
         self.fecha_pago = date.today()
-        self.ban_suc = str('')
+        self.banco_suc = str('')
         self.moneda = str('')
         self.importe_bruto = float(-0.00)
         self.importe_desc = float(-0.00)
         self.importe_neto = float(-0.00)
         self.cupones = int(0)
+        self.marca_cupones = int(0)
         self.fecha_proceso = date.today()
         self.marca_banco = int(0)
         self.fecha_banco = date.today()
@@ -60,11 +62,14 @@ class TarjLiqVO:
     def get_liquidacion(self):
         return self.liquidacion
 
+    def get_id_producto(self):
+        return self.id_producto
+
     def get_fecha_pago(self):
         return self.fecha_pago
 
-    def get_ban_suc(self):
-        return self.ban_suc
+    def get_banco_suc(self):
+        return self.banco_suc
 
     def get_moneda(self):
         return self.moneda
@@ -80,6 +85,9 @@ class TarjLiqVO:
 
     def get_cupones(self):
         return self.cupones
+
+    def get_marca_cupones(self):
+        return self.marca_cupones
 
     def get_fecha_proceso(self):
         return self.fecha_proceso
@@ -123,8 +131,8 @@ class TarjLiqVO:
     def get_percepcion_iva(self):
         return self.percepcion_iva
 
-    def get_retencion_ing_brutos(self):
-        return self.retencion_ing_brutos
+    def get_percepcion_ing_brutos(self):
+        return self.percepcion_ing_brutos
 
     def get_estado(self):
         return self.estado
@@ -145,11 +153,14 @@ class TarjLiqVO:
     def set_liquidacion(self, liquidacion):
         self.liquidacion = liquidacion
 
+    def set_id_producto(self, id_producto):
+        self.id_producto = id_producto
+
     def set_fecha_pago(self, fecha_pago):
         self.fecha_pago = fecha_pago
 
-    def set_ban_suc(self, ban_suc):
-        self.ban_suc = ban_suc
+    def set_banco_suc(self, banco_suc):
+        self.banco_suc = banco_suc
 
     def set_moneda(self, moneda):
         self.moneda = moneda
@@ -165,6 +176,9 @@ class TarjLiqVO:
 
     def set_cupones(self, cupones):
         self.cupones = cupones
+
+    def set_marca_cupones(self, marca_cupones):
+        self.marca_cupones = marca_cupones
 
     def set_fecha_proceso(self, fecha_proceso):
         self.fecha_proceso = fecha_proceso

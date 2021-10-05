@@ -1,0 +1,217 @@
+<!-- Agregar Dato de un registro de la tabla -->
+<div>
+	<table class="table table-borderless table-sm">
+		<tbody>
+            <h6>Datos para agregar</h6>
+        	<hr/>
+        	<!-- Primer Renglón -->
+        	<div class="row">
+                <!--  Liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese datos de la liquidación"><b>Liquidación:</b></div>
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese el número de la liquidación">Nro.</div>
+	    					<input type="number" id="liquidacion" name="liquidacion" min="0"
+        						max="9999999" maxlength="7" size="7" value=0 required>
+							<div class="input-group-text" data-toggle="tooltip"
+	        					title="Ingrese cantidad de cupones de la liquidación">Cupones</div>
+		    				<input type="number" id="cupones" name="cupones" min="0"
+	        					max="999" maxlength="3" size="3" value=0 required>
+						</div>
+                        <div class="input-group-append">
+                            <div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+                <div class="col-md-auto">
+                    <div class="input-group input-group-sm mb-1">$select_producto</div>
+                </div>
+            </div>
+            <!-- Segundo Renglón -->
+        	<div class="row">
+                <!--  Fechas de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Seleccione las fechas de la liquidación"><b>Fechas:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Fecha de pago de la liquidación">Pago</div>
+        				    <input type="date" id="fecha_pago" name="fecha_pago"
+        					    placeholder="seleccione una fecha" autocomplete="off" required>
+                            <div class="input-group-text" data-toggle="tooltip"
+                                title="Fecha de proceso de la liquidación">Proceso</div>
+                            <input type="date" id="fecha_proceso" name="fecha_proceso"
+            				    placeholder="seleccione una fecha" autocomplete="off" required>
+                        </div>
+        				<div class="input-group-append">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <hr/>
+            <!-- tercer Renglón -->
+        	<div class="row">
+                <!--  Importes de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese importes de la liquidación"><b>Importes:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Importe bruto de la liquidación">Bruto</div>
+        				    <input type="number" id="importe_bruto" name="importe_bruto" step="0.01"
+                                value="0.00" size="14" maxlength="14" required>
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Importe descuentos de la liquidación">Descuentos</div>
+            				<input type="number" id="importe_desc" name="importe_desc" step="0.01"
+                                value="0.00" size="14" maxlength="14" required>
+                            <div class="input-group-text" data-toggle="tooltip"
+                    			title="Importe neto de la liquidación">Neto</div>
+                			<input type="number" id="importe_neto" name="importe_neto" step="0.01"
+                                value="0.00" size="14" maxlength="14" required>
+                        </div>
+        				<div class="input-group-append">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <hr/>
+            <!-- cuarto Renglón -->
+        	<div class="row">
+                <!--  Cargos de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese cargos de la liquidación"><b>Cargos:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Importe arancel de la liquidación">Arancel</div>
+        				    <input type="number" id="arancel" name="arancel" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Importe costo financiero de la liquidación">Costo Financiero</div>
+            				<input type="number" id="costo_financiero" name="costo_financiero" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                        </div>
+        				<div class="input-group-append">
+        					<div class='input-group-text'></div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Quinto Renglón -->
+        	<div class="row">
+                <!--  Iva de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese los IVA de la liquidación"><b>IVA s/  :</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="IVA s/arancel de la liquidación">Arancel</div>
+        				    <input type="number" id="iva_arancel" name="iva_arancel" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="IVA s/costo financiero de la liquidación">Costo Financiero</div>
+            				<input type="number" id="iva_costo_financiero" name="iva_costo_financiero" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                        </div>
+        				<div class="input-group-append">
+        					<div class='input-group-text'></div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Sexto Renglón -->
+        	<div class="row">
+                <!--  Impuestos de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese los IVA de la liquidación"><b>Impuestos :</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Impuesto Déb/Cred. de la liquidación">Deb/Crédito</div>
+        				    <input type="number" id="impuesto_debcred" name="impuesto_debcred" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Impuesto al interés de la liquidación">Interés</div>
+            				<input type="number" id="impuesto_interes" name="impuesto_interes" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                        </div>
+        				<div class="input-group-append">
+                            <div class='input-group-text'></div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Septimo Renglón -->
+        	<div class="row">
+                <!--  Retenciones de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese las retenciones de la liquidación"><b>Retenciones p/ :</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Retención IVA de la liquidación">IVA</div>
+        				    <input type="number" id="retencion_iva" name="retencion_iva" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                            <div class="input-group-text" data-toggle="tooltip"
+                    			title="Retención Imp.a las Ganancias de la liquidación">Imp. Gana.</div>
+                			<input type="number" id="retencion_imp_gan" name="retencion_imp_gan" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Retención Imp.Ing.Brutos de la liquidación">Ing.Brutos</div>
+            				<input type="number" id="retencion_ing_brutos" name="retencion_ing_brutos" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                        </div>
+        				<div class="input-group-append">
+                            <div class='input-group-text'></div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Octavo Renglón -->
+        	<div class="row">
+                <!--  Percepciones de la liquidación -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese las percepciones de la liquidación"><b>Percepciones p/:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Percepción IVA de la liquidación">IVA</div>
+        				    <input type="number" id="percepcion_iva" name="percepcion_iva" step="0.01"
+                                value="0.00" size="10" maxlength="10" required>
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Percepción Imp.Ing.Brutos de la liquidación">Ing.Brutos</div>
+            				<input type="number" id="percepcion_ing_brutos" name="percepcion_ing_brutos" step="0.01"
+                                value="0.00" size="10" maxlength="10">
+                        </div>
+        				<div class="input-group-append">
+                            <div class='input-group-text'></div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+        </tbody>
+	</table>
+</div>
+<!-- Datos que envía -->
+<input type='hidden' name='aa' value='1'>

@@ -53,35 +53,37 @@ class TarjLiqActiveRecord(TarjLiqVO):
         if self.cantidad == 1:
             self.set_id(dato[0])
             self.set_liquidacion(dato[1])
-            self.set_fecha_pago(dato[2])
-            self.set_ban_suc(dato[3])
-            self.set_moneda(dato[4])
-            self.set_importe_bruto(dato[5])
-            self.set_importe_desc(dato[6])
-            self.set_importe_neto(dato[7])
-            self.set_cupones(dato[8])
-            self.set_fecha_proceso(dato[9])
-            self.set_marca_banco(dato[10])
-            self.set_fecha_banco(dato[11])
-            self.set_opera_banco(dato[12])
-            self.set_arancel(dato[13])
-            self.set_costo_financiero(dato[14])
-            self.set_iva_arancel(dato[15])
-            self.set_iva_costo_financiero(dato[16])
-            self.set_impuesto_debcred(dato[17])
-            self.set_impuesto_interes(dato[18])
-            self.set_retencion_iva(dato[19])
-            self.set_retencion_imp_gan(dato[20])
-            self.set_retencion_ing_brutos(dato[21])
-            self.set_percepcion_iva(dato[22])
-            self.set_percepcion_ing_brutos(dato[23])
-            self.set_estado(dato[24])
-            self.set_id_usuario_act(dato[25])
-            self.set_fecha_act(dato[26])
+            self.set_id_producto(dato[2])
+            self.set_fecha_pago(dato[3])
+            self.set_banco_suc(dato[4])
+            self.set_moneda(dato[5])
+            self.set_importe_bruto(dato[6])
+            self.set_importe_desc(dato[7])
+            self.set_importe_neto(dato[8])
+            self.set_cupones(dato[9])
+            self.set_cupones(dato[10])
+            self.set_fecha_proceso(dato[11])
+            self.set_marca_banco(dato[12])
+            self.set_fecha_banco(dato[13])
+            self.set_opera_banco(dato[14])
+            self.set_arancel(dato[15])
+            self.set_costo_financiero(dato[16])
+            self.set_iva_arancel(dato[17])
+            self.set_iva_costo_financiero(dato[18])
+            self.set_impuesto_debcred(dato[19])
+            self.set_impuesto_interes(dato[20])
+            self.set_retencion_iva(dato[21])
+            self.set_retencion_imp_gan(dato[22])
+            self.set_retencion_ing_brutos(dato[23])
+            self.set_percepcion_iva(dato[24])
+            self.set_percepcion_ing_brutos(dato[25])
+            self.set_estado(dato[26])
+            self.set_id_usuario_act(dato[27])
+            self.set_fecha_act(dato[28])
             return dato
         else:
             return None
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     def insert(self):
         """
         Agrega un registro a la tabla.
@@ -90,20 +92,30 @@ class TarjLiqActiveRecord(TarjLiqVO):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        valor = (self.get_cupon(), self.get_fecha(), self.get_numero(),
-                self.get_id_producto(), self.get_moneda(), self.get_importe(),
-                self.get_descuento(), self.get_neto(), self.get_cuota(),
-                self.get_autorizacion(), self.get_error(),
-                self.get_comentario(), self.get_fecha_presentacion(),
-                self.get_lote(), self.get_liquidacion(), self.get_estado(),
-                self.get_id_usuario_act(), self.get_fecha_act())
-        query = ("INSERT INTO tarj_cupones (cupon, fecha, numero, id_producto, "
-                "moneda, importe, descuento, neto, cuota, autorizacion, "
-                "error, comentario, fecha_pre, lote, liquidacion, "
-                "estado, id_usuario_act, fecha_act)"
+        valor = (self.get_liquidacion(), self.get_id_producto(),
+                self.get_fecha_pago(), self.get_banco_suc(), self.get_moneda(),
+                self.get_importe_bruto(), self.get_importe_desc(),
+                self.get_importe_neto(), self.get_cupones(),
+                self.get_marca_cupones(), self.get_fecha_proceso(),
+                self.get_marca_banco(), self.get_fecha_banco(),
+                self.get_opera_banco(), self.get_arancel(),
+                self.get_costo_financiero(), self.get_iva_arancel(),
+                self.get_iva_costo_financiero(), self.get_impuesto_debcred(),
+                self.get_impuesto_interes(), self.get_retencion_iva(),
+                self.get_retencion_imp_gan(), self.get_retencion_ing_brutos(),
+                self.get_percepcion_iva(), self.get_percepcion_ing_brutos(),
+                self.get_estado(), self.get_id_usuario_act(),
+                self.get_fecha_act())
+        query = ("INSERT INTO tarj_liquidaciones (liquidacion, id_producto, "
+                "fecha_pago, banco_suc, moneda, importe_bruto, importe_desc, "
+                "importe_neto, cupones, marca_cupones, fecha_proceso, "
+                "marca_banco, fecha_banco, opera_banco, arancel, "
+                "costo_financiero, iva_arancel, iva_costo_financiero, "
+                "impuesto_debcred, impuesto_interes, retencion_iva, "
+                "retencion_imp_gan, retencion_ing_brutos, percepcion_iva, "
+                "percepcion_ing_brutos, estado, id_usuario_act, fecha_act)"
                 " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,"
-                " %s, %s, %s, %s, %s)")
-
+                " %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
         cursor.execute(query, valor)
         self.ultimo_id = cursor.lastrowid
         ccnx.commit()
@@ -115,23 +127,34 @@ class TarjLiqActiveRecord(TarjLiqVO):
         """
         Modifica los datos del registro.
 
-        @param TarjCuponVO: datos varios.
+        @param TarjLiqVO: datos varios.
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        query = ("UPDATE tarj_cupones SET cupon=%s, fecha=%s, numero=%s,"
-                "id_producto=%s, moneda=%s, importe=%s, descuento=%s, neto=%s,"
-                "cuota=%s, autorizacion=%s, error=%s, comentario=%s,"
-                "fecha_pre=%s, lote=%s, liquidacion=%s, estado=%s,"
-                "id_usuario_act=%s, fecha_act=%s WHERE id=%s")
-        valor = (self.get_cupon(), self.get_fecha(), self.get_numero(),
-                 self.get_id_producto(), self.get_moneda(), self.get_importe(),
-                 self.get_descuento(), self.get_neto(), self.get_cuota(),
-                 self.get_autorizacion(), self.get_error(),
-                 self.get_comentario(), self.get_fecha_presentacion(),
-                 self.get_lote(), self.get_liquidacion(), self.get_estado(),
-                 self.get_id_usuario_act(), self.get_fecha_act(),
-                 self.get_id())
+        query = ("UPDATE tarj_liquidaciones SET liquidacion=%s, id_producto=%s, "
+                "fecha_pago=%s, banco_suc=%s, moneda=%s, importe_bruto=%s, "
+                "importe_desc=%s, importe_neto=%s, cupones=%s, marca_cupones=%s, "
+                "fecha_proceso=%s, marca_banco=%s, fecha_banco=%s, "
+                "opera_banco=%s, arancel=%s, costo_financiero=%s, "
+                "iva_arancel=%s, iva_costo_financiero=%s, "
+                "impuesto_debcred=%s, impuesto_interes=%s, retencion_iva=%s, "
+                "retencion_imp_gan=%s, retencion_ing_brutos=%s, "
+                "percepcion_iva=%s, percepcion_ing_brutos=%s, "
+                "estado=%s, id_usuario_act=%s, fecha_act=%s WHERE id=%s")
+        valor = (self.get_liquidacion(), self.get_id_producto(),
+                self.get_fecha_pago(), self.get_banco_suc(), self.get_moneda(),
+                self.get_importe_bruto(), self.get_importe_desc(),
+                self.get_importe_neto(), self.get_cupones(),
+                self.get_marca_cupones(), self.get_fecha_proceso(),
+                self.get_marca_banco(), self.get_fecha_banco(),
+                self.get_opera_banco(), self.get_arancel(),
+                self.get_costo_financiero(), self.get_iva_arancel(),
+                self.get_iva_costo_financiero(), self.get_impuesto_debcred(),
+                self.get_impuesto_interes(), self.get_retencion_iva(),
+                self.get_retencion_imp_gan(), self.get_retencion_ing_brutos(),
+                self.get_percepcion_iva(), self.get_percepcion_ing_brutos(),
+                self.get_estado(), self.get_id_usuario_act(),
+                self.get_fecha_act(), self.get_id())
         cursor.execute(query, valor)
         self.ultimo_id = cursor.lastrowid
         ccnx.commit()
@@ -148,7 +171,7 @@ class TarjLiqActiveRecord(TarjLiqVO):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT COUNT(*) FROM tarj_cupones")
+        consulta = ("SELECT COUNT(*) FROM tarj_liquidaciones")
         cursor.execute(consulta)
         dato = cursor.fetchone()
         self.cantidad = dato[0]
