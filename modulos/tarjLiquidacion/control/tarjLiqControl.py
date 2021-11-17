@@ -48,7 +48,7 @@ class TarjLiqControl():
         # Busca todos los archivos del directorio tarjetas:
         self.directorio = os.getcwd() + "/archivos/tarjetas/"
         self.archivos = os.listdir(self.directorio)
-        self.archNoActualiza = ["Ventas.csv", ]
+        self.archNoActualiza = ["Ventas.csv", "tarjResImp.pdf", ]
         self.archivos_txt = [item for item in self.archivos
                             if item not in self.archNoActualiza]
         # Inicializa datos que utilizan en el módulo:
@@ -70,6 +70,7 @@ class TarjLiqControl():
         self.texto_alerta_liquidacion = str()
         self.cant_liquidaciones = int(0)
         self.cant_cupones = int(0)
+        self.cant_debitos = int(0)
         self.cant_cupones_liq = int(0)
         self.cant_agregados = int(0)
         self.cant_actualizados = int(0)
@@ -77,6 +78,9 @@ class TarjLiqControl():
         self.cant_repetidos = int(0)
         self.cant_faltantes = int(0)
         self.cant_productos = int(0)
+        self.cant_conciliados = int(0)
+        self.cant_sin_conciliar = int(0)
+        self.cant_con_diferencias = int(0)
         self.linea = []
         # Consulta tablas que se utilizan en el módulo:
         self.tarj_productos = self.tarj_producto.find_all()
@@ -86,7 +90,9 @@ class TarjLiqControl():
                                self.tarj_productos}
         self.tarj_productos_codigo_dicc = {reng[3]: reng[0] for reng in
                                self.tarj_productos}
-        self.tarj_productos_listar_dicc = {reng[0]: (reng[1], reng[2])
+        self.tarj_productos_operador_dicc = {reng[3]: reng[4] for reng in
+                               self.tarj_productos}
+        self.tarj_productos_listar_dicc = {reng[0]: (reng[1], reng[2], reng[4])
                             for reng in self.tarj_productos}
         self.tarj_productos_buscar_dicc = {reng[0]: reng[1] for reng in
                                  self.tarj_productos}
@@ -142,6 +148,8 @@ class TarjLiqControl():
         elif "bt_conf_listar" in self.form: self.accion = "ConfListar"
         elif "bt_buscar" in self.form: self.accion = "Buscar"
         elif "bt_conf_buscar" in self.form: self.accion = "ConfBuscar"
+        elif "bt_conciliar" in self.form: self.accion = "Conciliar"
+        elif "bt_conf_conciliar" in self.form: self.accion = "ConfConciliar"
         elif "bt_descargar_pdf" in self.form: self.accion = "DescargarPDF"
         elif "bt_editar" in self.form: self.accion = "Editar"
         elif "bt_descartar" in self.form: self.accion = "Descartar"
@@ -193,6 +201,7 @@ class TarjLiqControl():
                 self.datos_pg["cantRepetidos"] = 0
                 self.datos_pg["cantAgregados"] = 0
                 self.datos_pg["cantCupones"] = 0
+                self.datos_pg["cantOtrosDeb"] = 0
                 self.datos_pg["cantActualizados"] = 0
                 self.datos_pg["cantFaltantes"] = 0
             else:
@@ -217,6 +226,7 @@ class TarjLiqControl():
                                     " botones.")
             # Pone en blanco textos de mensajes
             self.texto_alerta_cupon = self.texto_alerta_liquidacion = ""
+            self.cant_repetidos = self.cant_faltantes = self.cant_cargados = 0
             # Recorre los archivos que actualizan
             for liq in self.archivos_txt:
                 self.archivo = self.directorio + liq
@@ -242,12 +252,20 @@ class TarjLiqControl():
                             self.cant_repetidos += 1 # Suma Liq. repedidas
                         else:
                             flag = "S"
+                            # Carga el índice del producto
                             if dato[15] in self.tarj_productos_codigo_dicc:
                                 id_producto = \
                                     self.tarj_productos_codigo_dicc[dato[15]]
                             else:
                                 id_producto = 0
+                            # Carga el índice del operador
+                            if dato[15] in self.tarj_productos_operador_dicc:
+                                id_operador = \
+                                    self.tarj_productos_operador_dicc[dato[15]]
+                            else:
+                                id_operador = 0
                             self.tarj_liq.set_id_producto(id_producto)
+                            self.tarj_liq.set_id_operador(id_operador)
                             fecha_pago = self.fecha_db(str(dato[32:40]))
                             self.tarj_liq.set_fecha_pago(self.fecha_db(
                                                         str(dato[32:40])))
@@ -258,10 +276,17 @@ class TarjLiqControl():
                             self.tarj_liq.set_fecha_banco(self.fecha_db(
                                                         str(dato[32:40])))
                             self.tarj_liq.set_opera_banco(int(0))
+                            self.tarj_liq.set_otros_deb(0)
+                            self.tarj_liq.set_iva_otros_deb(0)
                     # Carga datos del archivo TXT si es renglón 3 y flag "S"
                     # liquidación no repetida
-                    if int(dato[0]) == 3: self.cant_cupones += 1
-                    if int(dato[0]) == 3 and flag == "S":
+                    if int(dato[0]) == 3:
+                        codigo = int(dato[69:72])
+                        #print("-> "+str(codigo)+"<br>")
+                    # Cupón por ventas o cobranza
+                    if int(dato[0]) == 3 and int(codigo) == 861:
+                        self.cant_cupones += 1
+                    if int(dato[0]) == 3 and int(codigo) == 861 and flag == "S":
                         flag_cupon = ""
                         # Busca el cupón para verificar y completar datos
                         self.tarj_cupon.set_cupon(int(dato[94:99]))
@@ -310,7 +335,17 @@ class TarjLiqControl():
                             self.texto_alerta_cupon = ("Falta/n cupón/es de "
                                                     " la/s liquidación/es.")
                             self.cant_faltantes += 1
-
+                    # Si es Otro Débito
+                    if int(dato[0]) == 3 and int(codigo) == 892 and flag == "S":
+                        flag_cupon = ""
+                        tipo_op = str(dato[193:195])
+                        if tipo_op == "CC" or tipo_op =="LE":
+                            self.cant_debitos += 1
+                            self.tarj_liq.set_otros_deb(
+                                            self.importe_db(dato[103:116]))
+                        else:
+                            self.tarj_liq.set_iva_otros_deb(
+                                            self.importe_db(dato[103:116]))
                     # Carga datos del archivo TXT si es renglón 7 y flag "S"
                     # liquidación no repetida
                     if int(dato[0]) == 7 and flag == "S":
@@ -318,11 +353,12 @@ class TarjLiqControl():
                                             self.importe_db(dato[61:74]))
                         gastos = float(self.importe_db(dato[103:116]))
                         impuestos = float(self.importe_db(dato[117:130]))
-                        descuento = gastos + impuestos
+                        debitos = float(self.importe_db(dato[131:144]))
+                        descuento = gastos + impuestos + debitos
                         self.tarj_liq.set_importe_desc(descuento)
                         self.tarj_liq.set_importe_neto(
                                             self.importe_db(dato[159:172]))
-                        self.tarj_liq.set_cupones(int(dato[173:180]))
+                        self.tarj_liq.set_cupones(self.cant_cupones_liq)
                     # Carga datos del archivo TXT si es renglón 8 y flag "S"
                     # liquidación no repetida
                     if int(dato[0]) == 8 and flag == "S":
@@ -343,7 +379,7 @@ class TarjLiqControl():
                         self.tarj_liq.set_retencion_imp_gan(
                                             self.importe_db(dato[133:146]))
                         self.tarj_liq.set_retencion_ing_brutos(
-                                            self.importe_db(dato[147:150]))
+                                            self.importe_db(dato[147:160]))
                         self.tarj_liq.set_percepcion_iva(
                                             self.importe_db(dato[119:132]))
                         self.tarj_liq.set_percepcion_ing_brutos(
@@ -379,6 +415,7 @@ class TarjLiqControl():
             self.datos_pg["cantRepetidos"] = self.cant_repetidos
             self.datos_pg["cantAgregados"] = 0
             self.datos_pg["cantCupones"] = self.cant_cupones
+            self.datos_pg["cantOtrosDeb"] = self.cant_debitos
             self.datos_pg["cantActualizados"] = self.cant_actualizados
             self.datos_pg["cantFaltantes"] = self.cant_faltantes
             # Muestra la vista:
@@ -411,15 +448,16 @@ class TarjLiqControl():
             self.tarj_liq.set_id_producto(int(self.form.getvalue("producto")))
             self.tarj_liq.set_fecha_pago(str(self.form.getvalue("fecha_pago")))
             self.tarj_liq.set_fecha_banco(str(self.form.getvalue("fecha_pago")))
-            #print(str(self.tarj_liq.get_fecha_pago())+"<br>")
             self.tarj_liq.set_fecha_proceso(str(self.form.getvalue("fecha_proceso")))
             self.tarj_liq.set_importe_bruto(float(self.form.getvalue("importe_bruto")))
             self.tarj_liq.set_importe_desc(float(self.form.getvalue("importe_desc")))
             self.tarj_liq.set_importe_neto(float(self.form.getvalue("importe_neto")))
             self.tarj_liq.set_arancel(float(self.form.getvalue("arancel")))
             self.tarj_liq.set_costo_financiero(float(self.form.getvalue("costo_financiero")))
+            self.tarj_liq.set_otros_deb(float(self.form.getvalue("otros_deb")))
             self.tarj_liq.set_iva_arancel(float(self.form.getvalue("iva_arancel")))
             self.tarj_liq.set_iva_costo_financiero(float(self.form.getvalue("iva_costo_financiero")))
+            self.tarj_liq.set_iva_otros_deb(float(self.form.getvalue("iva_otros_deb")))
             self.tarj_liq.set_impuesto_debcred(float(self.form.getvalue("impuesto_debcred")))
             self.tarj_liq.set_impuesto_interes(float(self.form.getvalue("impuesto_interes")))
             self.tarj_liq.set_retencion_iva(float(self.form.getvalue("retencion_iva")))
@@ -433,17 +471,67 @@ class TarjLiqControl():
                         "un renglón del listado.")
             # Busca liquidación
             self.tarj_liq.find_liquidacion()
-            # Existe la liquidación, no agrega
+            # Existe la liquidación, arma alerta y modifica el flag de agrega
+            flag = "S"
             if int(self.tarj_liq.get_cantidad()) > 0:
+                flag = "N"
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("Existe el registro de "
                     " liquidación Nro: "+str(self.tarj_liq.get_liquidacion())+". "
                     "<b>VERIFICAR !!!</b>.")
-            # No existe, agrega la liquidación
-            else:
-                # Verifico consistencia de datos
-                
+            # Verifica consistencia de datos si no existe la liquidación
+            if flag == "S":
+                # Verifica si seleccionó un producto
+                if int(self.tarj_liq.get_id_producto()) == 0:
+                    flag = "N"
+                    self.alertas.append("alertaAdvertencia")
+                    self.datos_pg["alertaAdvertencia"] = ("Debe seleccionar un"
+                        " producto (tarjeta) para la liquidación Nro: "
+                        +str(self.tarj_liq.get_liquidacion())+". "
+                        "<b>VERIFICAR !!!</b>.")
+            if flag == "S":
+                # Verifica si seleccionó un producto
+                if int(self.tarj_liq.get_cupones()) == 0:
+                    flag = "N"
+                    self.alertas.append("alertaAdvertencia")
+                    self.datos_pg["alertaAdvertencia"] = ("Debe ingresar la"
+                        " cantidad de cupones de la liquidación Nro: "
+                        +str(self.tarj_liq.get_liquidacion())+". "
+                        "<b>VERIFICAR !!!</b>.")
+            if flag == "S":
+                # Verifica los importes
+                bruto = self.tarj_liq.get_importe_neto()+self.tarj_liq.get_importe_desc()
+                if bruto != self.tarj_liq.get_importe_bruto():
+                    flag = "N"
+                    self.alertas.append("alertaAdvertencia")
+                    self.datos_pg["alertaAdvertencia"] = ("Los importes de la"
+                        " liquidación Nro: "+str(self.tarj_liq.get_liquidacion())+" "
+                        " son inconsistentes. <b>VERIFICAR !!!</b>.")
+            if flag == "S":
+                # Verifica los Descuentos
+                descuentos = self.tarj_liq.get_arancel()+self.tarj_liq.get_costo_financiero()+\
+                    self.tarj_liq.get_otros_deb()+self.tarj_liq.get_iva_arancel()+\
+                    self.tarj_liq.get_iva_costo_financiero()+self.tarj_liq.get_iva_otros_deb()+\
+                    self.tarj_liq.get_impuesto_debcred()+self.tarj_liq.get_impuesto_interes()+\
+                    self.tarj_liq.get_retencion_iva()+self.tarj_liq.get_retencion_imp_gan()+\
+                    self.tarj_liq.get_retencion_ing_brutos()+self.tarj_liq.get_percepcion_iva()+\
+                    self.tarj_liq.get_percepcion_ing_brutos()
+                if descuentos != self.tarj_liq.get_importe_desc():
+                    flag = "N"
+                    self.alertas.append("alertaAdvertencia")
+                    self.datos_pg["alertaAdvertencia"] = ("Los descuentos de la"
+                        " liquidación Nro: "+str(self.tarj_liq.get_liquidacion())+" "
+                        " son inconsistentes. <b>VERIFICAR !!!</b>.")
+            # Agrega si las verificaciones fueron positivas
+            if flag == "S":
                 # Carga datos faltantes para agregar
+                id_producto = int(self.tarj_liq.get_id_producto())
+                if id_producto in self.tarj_productos_listar_dicc:
+                    id_operador = \
+                        self.tarj_productos_listar_dicc[id_producto][2]
+                else:
+                    id_operador = 0
+                self.tarj_liq.set_id_operador(id_operador)
                 self.tarj_liq.set_banco_suc('023035')
                 self.tarj_liq.set_moneda('032')
                 self.tarj_liq.set_marca_cupones(int(0))
@@ -467,7 +555,10 @@ class TarjLiqControl():
                     self.alertas.append("alertaPeligro")
                     self.datos_pg["alertaPeligro"] = ("No se pudo agregar "
                         "el registro de liquidación. <b>VERIFICAR !!!</b>.")
-
+            else:
+                self.alertas.append("alertaPeligro")
+                self.datos_pg["alertaPeligro"] = ("No se agrega "
+                    "el registro de la liquidación.")
             # Muestra la vista:
             self.muestra_vista()
         # Acción para listar:
@@ -564,7 +655,84 @@ class TarjLiqControl():
             self.tablas = ["tabla",]
             # Muestra la vista:
             self.muestra_vista()
+        # Acción para conciliar
+        if self.accion == "Conciliar":
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Conciliar Liquidaciones")
+            self.datos_pg['info'] = ("Concilia los cupones con Liquidaciones. "
+                        "<br>Seleccione en <b>Opciones de fechas</b>"
+                        " los parámetros para la acción.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonBorrar", "botonConfConciliar"]
+            # Arma los datos para la vista:
+            self.opciones.append("fechasOpcion")
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar conciliar
+        if self.accion == "ConfConciliar":
+            # Recibe datos por POST:
+            fechas = self.form.getvalue("fechas")
+            fechas = fechas.split(" - ")
+            # Arma las opciones de búsqueda:
+            opciones = {}
+            opciones['fecha_d'] = self.datos_pg["fecha_d"] = fechas[0]
+            opciones['fecha_h'] = self.datos_pg["fecha_h"] = fechas[1]
+            opciones['tipo'] = int(self.form.getvalue("tipo"))
+            if int(self.form.getvalue("tipo")) == 1:
+                self.datos_pg["tipo"] = "Proceso"
+            else:
+                self.datos_pg["tipo"] = "Pago"
+            # Agrega titulo e  información al panel:
+            self.datos_pg['tituloPanel'] = ("Conciliar Liquidaciones")
+            self.datos_pg['info'] = ("Liquidaciones conciliadas segun las "
+                                     "opciones de busqueda seleccionadas.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonDescargarPDF",]
+            # Encuentra los datos de la busqueda para conciliar:
+            datos = self.tarj_liq.find_all_conciliar(opciones)
+            self.cant_liquidaciones = self.tarj_liq.get_cantidad()
+            # Recorre las liquidaciones y busca los cupones
+            for dato in datos:
+                cantCupones = int(0)
+                self.tarj_cupon.set_liquidacion(int(dato[1]))
+                self.tarj_cupon.set_id_producto(int(dato[4]))
+                self.tarj_cupon.find_all_liquidacion_producto()
+                cantCupones = int(self.tarj_cupon.get_cantidad())
+                if cantCupones == int(dato[8]):
+                    self.tarj_liq.set_id(int(dato[0]))
+                    self.tarj_liq.find()
+                    self.tarj_liq.set_marca_cupones(int(1))
+                    id_usuario = 1 # Va el id del USUARIO logueado
+                    self.tarj_liq.set_id_usuario_act(id_usuario)
+                    ahora = datetime.now()
+                    fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                    self.tarj_liq.set_fecha_act(fecha_act)
+                    #self.tarj_liq.update()
+                    #self.cant_conciliados += self.tarj_liq.get_cantidad()
+                    self.cant_conciliados += 1
+                elif cantCupones != int(dato[8]):
+                    self.tarj_liq.set_id(int(dato[0]))
+                    self.tarj_liq.find()
+                    self.tarj_liq.set_marca_cupones(int(2))
+                    id_usuario = 1 # Va el id del USUARIO logueado
+                    self.tarj_liq.set_id_usuario_act(id_usuario)
+                    ahora = datetime.now()
+                    fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                    self.tarj_liq.set_fecha_act(fecha_act)
+                    #self.tarj_liq.update()
+                    #self.cant_conciliados += self.tarj_liq.get_cantidad()
+                    self.cant_con_diferencias += 1
+                else:
+                    self.cant_sin_conciliar += 1
 
+            # Arma los datos para la vista:
+            self.contenidos.append("conciliarDatos")
+            self.datos_pg["cantLiquidaciones"] = self.cant_liquidaciones
+            self.datos_pg["cantConciliados"] = self.cant_conciliados
+            self.datos_pg["cantConDiferencias"] = self.cant_con_diferencias
+            self.datos_pg["cantSinConciliar"] = self.cant_sin_conciliar
+            # Muestra la vista:
+            self.muestra_vista()
 
     def fecha_db(self, fecha_txt):
         """

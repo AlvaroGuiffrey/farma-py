@@ -22,6 +22,7 @@ from modulos.tarjeta.modelo.tarjProductoModelo import TarjProductoModelo
 from modulos.tarjCupon.modelo.tarjCuponModelo import TarjCuponModelo
 from modulos.tarjCupon.includes.tarjCuponTabla import TarjCuponTabla
 from modulos.tarjCupon.includes.tarjCorrCuponTabla import TarjCorrCuponTabla
+from modulos.tarjLiquidacion.modelo.tarjLiqModelo import TarjLiqModelo
 from includes.includes.select import Select
 
 class TarjCuponControl():
@@ -39,6 +40,7 @@ class TarjCuponControl():
         # Instancia las clases del modelo:
         self.tarj_cupon = TarjCuponModelo()
         self.tarj_producto = TarjProductoModelo()
+        self.tarj_liq = TarjLiqModelo()
         # Busca el ip para el menú:
         self.nombre_equipo = socket.gethostname()
         self.ip = socket.gethostbyname(self.nombre_equipo)
@@ -115,7 +117,7 @@ class TarjCuponControl():
         #print("Cupones :", self.tarj_cupon.get_cantidad(), "<br>")
         # Agrega los botones de la aplicación:
         self.botones_ac = ["botonBadge", "botonCargar", "botonListar",
-                          "botonBuscar", "botonCorrControlar"]
+                          "botonListarInv", "botonBuscar", "botonCorrControlar"]
         # Selecciona las acciones:
         if "bt_agregar" in self.form: self.accion = "Agregar"
         elif "bt_conf_agregar" in self.form: self.accion = "ConfAgregar"
@@ -123,6 +125,8 @@ class TarjCuponControl():
         elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar"
         elif "bt_listar" in self.form: self.accion = "Listar"
         elif "bt_conf_listar" in self.form: self.accion = "ConfListar"
+        elif "bt_listar_inv" in self.form: self.accion = "ListarInv"
+        elif "bt_conf_listar_inv" in self.form: self.accion = "ConfListarInv"
         elif "bt_buscar" in self.form: self.accion = "Buscar"
         elif "bt_conf_buscar" in self.form: self.accion = "ConfBuscar"
         elif "bt_descargar_pdf" in self.form: self.accion = "DescargarPDF"
@@ -293,6 +297,67 @@ class TarjCuponControl():
                     " !!!</b>.")
             # Arma la tabla para listar:
             tabla = TarjCuponTabla()
+            tabla.arma_tabla(datos, opciones, self.tarj_productos_listar_dicc)
+            self.tablas = ["tabla",]
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para listar el inventario:
+        if self.accion == "ListarInv":
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Listado del Inventario de Cupones")
+            self.datos_pg['info'] = ("Realiza un listado del Inventario de "
+                    "Cupones con datos de la tabla. "
+                    "<br>Seleccione en <b>Opciones de fecha</b>.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonConfListarInv",]
+            # Arma los datos para la vista:
+            self.opciones.append("fechaOpcion")
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar el listado del inventario:
+        if self.accion == "ConfListarInv":
+            # Recibe datos por POST:
+            fecha = self.form.getvalue("fecha")
+            # Arma las opciones de listar:
+            opciones = {}
+            opciones['fecha'] = fecha
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Listado del Inventario de Cupones")
+            self.datos_pg['info'] = ("Listado del Inventario de Cupones con "
+                                     "datos de la tabla, desde la fecha  "
+                                     " seleccionada.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonDescargarPDF",]
+            # Encuentra los datos de la tabla para listar:
+            cupones_inv = []
+
+            # 1) BUSCAR LAS LIQUIDACIONES PENDIENTES
+            self.tarj_liq.set_fecha_pago(fecha)
+            liq_pendi = self.tarj_liq.find_all_pendientes()
+            # 2) BUSCAR LOS CUPONES DE LAS LIQUIDACIONES PENDIENTES
+            for reng in liq_pendi:
+                self.tarj_cupon.set_liquidacion(reng[1])
+                self.tarj_cupon.set_id_producto(reng[2])
+                cupones = self.tarj_cupon.find_all_liquidacion_producto()
+                # 3) UNIENDO LOS DATOS CON lista_cupones.extend(lista_consulta)
+                cupones_inv.extend(cupones)
+            # 4) BUSCAR CUPONES SIN LIQUIDAR
+            self.tarj_cupon.set_fecha(fecha)
+            cupones_sin_liq = self.tarj_cupon.find_all_sin_liq()
+            # 5) UNIENDO LOS DATOS CON lista_cupones.extend(lista_consulta)
+            cupones_inv.extend(cupones_sin_liq)
+            # Arma datos para la vista
+            self.datos_pg["cantidad"] = len(cupones_inv)
+            if int(len(cupones_inv)) == 0:
+                self.alertas.append("alertaAdvertencia")
+                self.datos_pg["alertaAdvertencia"] = ("No hay cupones para "
+                    "la fecha seleccionada. <b>VOLVER A INTENTAR"
+                    " !!!</b>.")
+            # 6) ARMAR TABLA INVENTARIO
+            # 7) TOTALIZAR Y PONER SUBTITULOS POR LIQUIDADOS Y SIN LIQUIDAR
+            # Arma la tabla para listar:
+            datos = cupones_inv
+            tabla = TarjCuponInvTabla()
             tabla.arma_tabla(datos, opciones, self.tarj_productos_listar_dicc)
             self.tablas = ["tabla",]
             # Muestra la vista:

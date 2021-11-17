@@ -1,0 +1,30 @@
+<!-- Opciones para el Resumen Impositivo -->
+<div class="jumbotron jumbotron-fluit p-2 mb-1">
+	<h6>Opciones para Resumen</h6>
+	<hr />
+
+	<div class="row">
+		<!--  Período del resumen -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el periodo del Resumen Impositivo">Periodo:</div>
+				</div>
+				<input type="number" id="periodo" name="periodo" min="201001"
+					max="205012" maxlength="6" size="6" placeholder="AAAAMM"
+					autocomplete="off">
+				<div class="input-group-append">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Dato obligatorio">
+						<b style="color: blue">*</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Operador del resumen -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">$select_operador</div>
+		</div>
+	</div>
+</div>

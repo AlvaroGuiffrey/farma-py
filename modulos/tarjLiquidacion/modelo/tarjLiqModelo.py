@@ -47,32 +47,35 @@ class TarjLiqModelo(TarjLiqActiveRecord):
             self.set_id(dato[0])
             self.set_liquidacion(dato[1])
             self.set_id_producto(dato[2])
-            self.set_fecha_pago(dato[3])
-            self.set_banco_suc(dato[4])
-            self.set_moneda(dato[5])
-            self.set_importe_bruto(dato[6])
-            self.set_importe_desc(dato[7])
-            self.set_importe_neto(dato[8])
-            self.set_cupones(dato[9])
-            self.set_marca_cupones(dato[10])
-            self.set_fecha_proceso(dato[11])
-            self.set_marca_banco(dato[12])
-            self.set_fecha_banco(dato[13])
-            self.set_opera_banco(dato[14])
-            self.set_arancel(dato[15])
-            self.set_costo_financiero(dato[16])
-            self.set_iva_arancel(dato[17])
-            self.set_iva_costo_financiero(dato[18])
-            self.set_impuesto_debcred(dato[19])
-            self.set_impuesto_interes(dato[20])
-            self.set_retencion_iva(dato[21])
-            self.set_retencion_imp_gan(dato[22])
-            self.set_retencion_ing_brutos(dato[23])
-            self.set_percepcion_iva(dato[24])
-            self.set_percepcion_ing_brutos(dato[25])
-            self.set_estado(dato[26])
-            self.set_id_usuario_act(dato[27])
-            self.set_fecha_act(dato[28])
+            self.set_id_operador(dato[3])
+            self.set_fecha_pago(dato[4])
+            self.set_banco_suc(dato[5])
+            self.set_moneda(dato[6])
+            self.set_importe_bruto(dato[7])
+            self.set_importe_desc(dato[8])
+            self.set_importe_neto(dato[9])
+            self.set_cupones(dato[10])
+            self.set_cupones(dato[11])
+            self.set_fecha_proceso(dato[12])
+            self.set_marca_banco(dato[13])
+            self.set_fecha_banco(dato[14])
+            self.set_opera_banco(dato[15])
+            self.set_arancel(dato[16])
+            self.set_costo_financiero(dato[17])
+            self.set_otros_deb(dato[18])
+            self.set_iva_arancel(dato[19])
+            self.set_iva_costo_financiero(dato[20])
+            self.set_iva_otros_deb(dato[21])
+            self.set_impuesto_debcred(dato[22])
+            self.set_impuesto_interes(dato[23])
+            self.set_retencion_iva(dato[24])
+            self.set_retencion_imp_gan(dato[25])
+            self.set_retencion_ing_brutos(dato[26])
+            self.set_percepcion_iva(dato[27])
+            self.set_percepcion_ing_brutos(dato[28])
+            self.set_estado(dato[29])
+            self.set_id_usuario_act(dato[30])
+            self.set_fecha_act(dato[31])
             return dato
         else:
             return None
@@ -100,32 +103,35 @@ class TarjLiqModelo(TarjLiqActiveRecord):
             self.set_id(dato[0])
             self.set_liquidacion(dato[1])
             self.set_id_producto(dato[2])
-            self.set_fecha_pago(dato[3])
-            self.set_banco_suc(dato[4])
-            self.set_moneda(dato[5])
-            self.set_importe_bruto(dato[6])
-            self.set_importe_desc(dato[7])
-            self.set_importe_neto(dato[8])
-            self.set_cupones(dato[9])
-            self.set_marca_cupones(dato[10])
-            self.set_fecha_proceso(dato[11])
-            self.set_marca_banco(dato[12])
-            self.set_fecha_banco(dato[13])
-            self.set_opera_banco(dato[14])
-            self.set_arancel(dato[15])
-            self.set_costo_financiero(dato[16])
-            self.set_iva_arancel(dato[17])
-            self.set_iva_costo_financiero(dato[18])
-            self.set_impuesto_debcred(dato[19])
-            self.set_impuesto_interes(dato[20])
-            self.set_retencion_iva(dato[21])
-            self.set_retencion_imp_gan(dato[22])
-            self.set_retencion_ing_brutos(dato[23])
-            self.set_percepcion_iva(dato[24])
-            self.set_percepcion_ing_brutos(dato[25])
-            self.set_estado(dato[26])
-            self.set_id_usuario_act(dato[27])
-            self.set_fecha_act(dato[28])
+            self.set_id_operador(dato[3])
+            self.set_fecha_pago(dato[4])
+            self.set_banco_suc(dato[5])
+            self.set_moneda(dato[6])
+            self.set_importe_bruto(dato[7])
+            self.set_importe_desc(dato[8])
+            self.set_importe_neto(dato[9])
+            self.set_cupones(dato[10])
+            self.set_cupones(dato[11])
+            self.set_fecha_proceso(dato[12])
+            self.set_marca_banco(dato[13])
+            self.set_fecha_banco(dato[14])
+            self.set_opera_banco(dato[15])
+            self.set_arancel(dato[16])
+            self.set_costo_financiero(dato[17])
+            self.set_otros_deb(dato[18])
+            self.set_iva_arancel(dato[19])
+            self.set_iva_costo_financiero(dato[20])
+            self.set_iva_otros_deb(dato[21])
+            self.set_impuesto_debcred(dato[22])
+            self.set_impuesto_interes(dato[23])
+            self.set_retencion_iva(dato[24])
+            self.set_retencion_imp_gan(dato[25])
+            self.set_retencion_ing_brutos(dato[26])
+            self.set_percepcion_iva(dato[27])
+            self.set_percepcion_ing_brutos(dato[28])
+            self.set_estado(dato[29])
+            self.set_id_usuario_act(dato[30])
+            self.set_fecha_act(dato[31])
             return dato
         else:
             return None
@@ -187,6 +193,29 @@ class TarjLiqModelo(TarjLiqActiveRecord):
         ccnx.close()
         return datos
 
+    def find_all_pendientes(self):
+        """
+        Obtiene todos los registros activos pendientes desde una fecha de pago.
+
+        @param fecha_pago: TarjLiqVO.
+        @param estado: 1 = activo.
+        @return: datos que se utilizan para armar el inventario de cupones
+                pendientes de pago, ordenados por fecha y liquidación.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT id, liquidacion, id_producto, fecha_pago "
+                    "FROM tarj_liquidaciones "
+                    "WHERE fecha_pago > %s AND estado=1 "
+                    "ORDER BY fecha_pago, liquidacion")
+        valor = (self.get_fecha_pago(),)
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
     def find_all_listar(self, opciones):
         """
         Obtiene los registros activos para listar.
@@ -205,6 +234,40 @@ class TarjLiqModelo(TarjLiqActiveRecord):
                     "id_producto, importe_bruto, importe_desc, importe_neto, "
                     "cupones, marca_cupones, marca_banco, fecha_banco, "
                     "opera_banco FROM tarj_liquidaciones WHERE ")
+        if int(opciones['tipo'])==1:
+            consulta += ("fecha_proceso >= %s AND fecha_proceso <= %s "
+                        "AND estado=1 ORDER BY liquidacion, fecha_proceso")
+        if int(opciones['tipo'])==2:
+            consulta += ("fecha_pago >= %s AND fecha_pago <= %s "
+                        "AND estado=1 ORDER BY liquidacion, fecha_pago")
+        valor = (opciones['fecha_d'], opciones['fecha_h'])
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+    def find_all_conciliar(self, opciones):
+        """
+        Obtiene los registros activos para conciliar.
+
+        Obtiene los registros activos de la tabla para conciliar con cupones
+        según el rango y tipo de fechas seleccionado, ordenados por liquidación.
+        @param fecha_d: fecha desde donde comienza la consulta.
+        @param fecha_h: fecha máxima de la consulta.
+        @param tipo: si es la fecha de pago o proceso.
+        @param marca_cupones: 0 - sin verif y 2 - con diferencia
+        @return: datos
+        """
+
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT id, liquidacion, fecha_proceso, fecha_pago, "
+                    "id_producto, importe_bruto, importe_desc, importe_neto, "
+                    "cupones, marca_cupones, marca_banco, fecha_banco, "
+                    "opera_banco FROM tarj_liquidaciones WHERE "
+                    "(marca_cupones = 0 OR marca_cupones = 2) AND ")
         if int(opciones['tipo'])==1:
             consulta += ("fecha_proceso >= %s AND fecha_proceso <= %s "
                         "AND estado=1 ORDER BY liquidacion, fecha_proceso")
@@ -265,6 +328,30 @@ class TarjLiqModelo(TarjLiqActiveRecord):
         if int(opciones['tipo'])==2:
             consulta += (" AND estado=1 ORDER BY liquidacion, fecha_pago")
         valor = tuple(valores)
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+    def find_all_resumen(self, opciones):
+        """
+        Obtiene los registros de la busqueda para armar resumen impositivo.
+
+        Obtiene los registros buscados de la tabla para armar resumen impositivo
+        según período y operador (obligatorios) ordenados por producto.
+        @param fecha_d: fecha desde donde comienza la consulta (oblig.).
+        @param fecha_h: fecha máxima de la consulta (oblig.).
+        @param id_operador: id del operador que se busca (oblig.).
+        @return: datos
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT * FROM tarj_liquidaciones WHERE "
+                    "fecha_pago >= %s AND fecha_pago <= %s "
+                    "AND id_operador = %s AND estado = 1 ORDER BY id_producto")
+        valor = (opciones['fecha_d'], opciones['fecha_h'], opciones['id_operador'],)
         cursor.execute(consulta, valor)
         datos = cursor.fetchall()
         self.cantidad = cursor.rowcount

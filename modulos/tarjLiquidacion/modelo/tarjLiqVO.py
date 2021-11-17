@@ -65,6 +65,9 @@ class TarjLiqVO:
     def get_id_producto(self):
         return self.id_producto
 
+    def get_id_operador(self):
+        return self.id_operador
+
     def get_fecha_pago(self):
         return self.fecha_pago
 
@@ -107,11 +110,17 @@ class TarjLiqVO:
     def get_costo_financiero(self):
         return self.costo_financiero
 
+    def get_otros_deb(self):
+        return self.otros_deb
+
     def get_iva_arancel(self):
         return self.iva_arancel
 
     def get_iva_costo_financiero(self):
         return self.iva_costo_financiero
+
+    def get_iva_otros_deb(self):
+        return self.iva_otros_deb
 
     def get_impuesto_debcred(self):
         return self.impuesto_debcred
@@ -156,6 +165,9 @@ class TarjLiqVO:
     def set_id_producto(self, id_producto):
         self.id_producto = id_producto
 
+    def set_id_operador(self, id_operador):
+        self.id_operador = id_operador
+
     def set_fecha_pago(self, fecha_pago):
         self.fecha_pago = fecha_pago
 
@@ -198,11 +210,17 @@ class TarjLiqVO:
     def set_costo_financiero(self, costo_financiero):
         self.costo_financiero = costo_financiero
 
+    def set_otros_deb(self, otros_deb):
+        self.otros_deb = otros_deb
+
     def set_iva_arancel(self, iva_arancel):
         self.iva_arancel = iva_arancel
 
     def set_iva_costo_financiero(self, iva_costo_financiero):
         self.iva_costo_financiero = iva_costo_financiero
+
+    def set_iva_otros_deb(self, iva_otros_deb):
+        self.iva_otros_deb = iva_otros_deb
 
     def set_impuesto_debcred(self, impuesto_debcred):
         self.impuesto_debcred = impuesto_debcred

@@ -131,7 +131,7 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT * FROM tarj_cupones WHERE lote=%s estado = 1")
+        consulta = ("SELECT * FROM tarj_cupones WHERE lote=%s AND estado = 1")
         cursor.execute(consulta, (self.get_lote(),))
         datos = cursor.fetchall()
         self.cantidad = cursor.rowcount
@@ -149,8 +149,30 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT * FROM tarj_cupones WHERE liquidacion=%s estado = 1")
+        consulta = ("SELECT * FROM tarj_cupones WHERE liquidacion=%s AND "
+                    "estado = 1")
         cursor.execute(consulta, (self.get_liquidacion(),))
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+    def find_all_liquidacion_producto(self):
+        """
+        Obtiene todos los registros activos de una liquidacion de un producto.
+
+        @param liquidacion: TarjCuponVO.
+        @param id_producto: TarjCuponVO.
+        @param estado: 1 - activo.
+        @return: datos para construir el diccionario ordenados por cupon.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT * FROM tarj_cupones WHERE liquidacion=%s AND "
+                    "id_producto=%s AND estado = 1 ORDER BY cupon")
+        valor = (self.get_liquidacion(), self.get_id_producto(),)
+        cursor.execute(consulta, valor)
         datos = cursor.fetchall()
         self.cantidad = cursor.rowcount
         cursor.close()
@@ -167,8 +189,29 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        consulta = ("SELECT * FROM tarj_cupones WHERE error=%s estado = 1")
+        consulta = ("SELECT * FROM tarj_cupones WHERE error=%s AND estado = 1")
         cursor.execute(consulta, (self.get_error(),))
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+    def find_all_sin_liq(self):
+        """
+        Obtiene todos los registros activos sin liquidar.
+
+        @param error: TarjCuponVO.
+        @param estado: 1 - activo.
+        @return: datos de cupones pendientes, ordenados
+                por fecha de la operación y cupon.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT * FROM tarj_cupones "
+                    "WHERE liquidacion = 0 AND estado = 1 AND fecha<=%s "
+                    "ORDER BY fecha, cupon")
+        cursor.execute(consulta, (self.get_fecha(),))
         datos = cursor.fetchall()
         self.cantidad = cursor.rowcount
         cursor.close()
@@ -186,7 +229,6 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         @param tipo: si es la fecha de operación o presentación.
         @return: datos
         """
-
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
         consulta = ("SELECT id, cupon, fecha, numero, id_producto, moneda,"
