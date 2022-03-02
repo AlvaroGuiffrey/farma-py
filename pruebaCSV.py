@@ -24,7 +24,9 @@ with open("./archivos/tarjetas/Ventas.csv", newline="") as csvfile:
     for renglon in archivo:
         print(renglon, "<br>")
         numero = renglon[5][1:5]
-        print("Numero ", numero, " -> ")
+        cupon = renglon[3]
+        lote = renglon[13]
+        print("Numero ", numero, " / Cupon ", cupon, " / Lote ", lote, " -> ")
         importe = renglon[8].replace(".", "")
         importe = importe.replace(",", ".")
         #importe "{0:.2f}".format(float(importe))

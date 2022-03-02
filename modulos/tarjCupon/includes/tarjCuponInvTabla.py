@@ -47,7 +47,7 @@ class TarjCuponInvTabla():
             "<!-- Datos de la cabecera de la tabla -->"
             "<div class='table-responsive-sm'>"
             "<h6> Listado del Inventario de Cupones:</h6>"
-            "<p>Cupones pendientes de pago al "+opciones['fecha']+" </p>"
+            "<p>Pendientes de pago al: "+opciones['fecha']+" </p>"
             "<table class='table table-hover table-sm'>"
             "<thead><tr>"
             "<th scope='col'>#id</th>"
@@ -64,15 +64,20 @@ class TarjCuponInvTabla():
             "</tr></thead><tbody>"
             "<!-- Datos de los renglones -->")
         tabla.write(cabecera_html)
+        # Crea diccionario para totales:
+        totales = {}
+        totales_lote = {}
 
         # Arma y escribe los renglones de la tabla html con los datos:
-        cont = total = 0
+        cont = cont_control = cupon_control = total = 0
         for dato in datos:
             # Da formato a los datos del renglón:
             # Cambia formato a la fecha:
             fecha_ope = date.strftime(dato[2], '%d/%m/%Y')
-            fecha_pre = date.strftime(dato[8], '%d/%m/%Y')
+            fecha_pre = date.strftime(dato[13], '%d/%m/%Y')
             # Reemplaza datos del producto:
+            nombre_producto = "VISA"
+            inicial_producto = "VS-CR"
             id_producto = int(dato[4])
             if id_producto in productos_dicc:
                 nombre_producto = productos_dicc[id_producto][0]
@@ -82,18 +87,21 @@ class TarjCuponInvTabla():
                 inicial_producto = "OTRA"
             # Importe:
             importe = dato[6]
-            # Suma total del listado:
+            # Suma a totales:
+            # Suma total del listado
             total += importe
-            # Cambia formato del importe:
+            # Cambia formato del importe a modato[9n][2] = dato[8]eda local:
             importe = locale.format("%.2f", (importe), True)
+            #importe = ({:,.2f}'.format(importe).replace(",", "@")
+            #    .replace(".", ",").replace("@", "."))
             # Errores del cupón:
-            if dato[7] == 0:
+            if dato[11] == 0:
                 tarj_error = ("<i class='fas fa-check' style='color:green' "
                           "title='Aceptado por operador'></i>")
-            elif dato[7] == 1:
+            elif dato[11] == 1:
                 tarj_error = ("<i class='fas fa-ban' style='color:red'"
                           "title='Rechazado por operador'></i>")
-            elif dato[7] == 2:
+            elif dato[11] == 2:
                 tarj_error = ("<i class='fas fa-times' style='color:yellow' "
                           "title='Anulado en operación -POSNET-'></i>")
             else:
@@ -101,9 +109,9 @@ class TarjCuponInvTabla():
                           "style='color:yellow' "
                           "title='Marca no definida -Consultar-'></i>")
             # Comentario del cupón
-            if dato[11] != "":
+            if dato[12] != "":
                 tarj_comentario = ("<i class='far fa-comment-alt' "
-                          "style='color:blue' title='"+dato[11]+"'></i>")
+                          "style='color:blue' title='"+dato[12]+"'></i>")
             else:
                 tarj_comentario = ""
             # Escribe el renglón:
@@ -116,9 +124,9 @@ class TarjCuponInvTabla():
                 "<td>"+str(dato[3]).zfill(4)+"</td>"
                 "<td style='text-align:right;'>"+str(importe)+"</td>"
                 "<td>"+str(fecha_pre)+"</td>"
-                "<td>"+str(dato[9]).zfill(3)+"</td>"
+                "<td>"+str(dato[14]).zfill(3)+"</td>"
                 "<td>"+str(tarj_error)+"    "+str(tarj_comentario)+"</td>"
-                "<td>"+str(dato[10])+"</td>"
+                "<td>"+str(dato[15])+"</td>"
                 "<td><button type='button' class='btn btn-light btn-sm "
                 "float-sm-right rounded-circle' style='font-size: 0.6em' "
                 "title='Botón para ver datos' data-toggle='tooltip' "
@@ -137,8 +145,9 @@ class TarjCuponInvTabla():
         total = locale.format("%.2f", (total), True)
         pie_html = (
             "<!-- Datos del pie de la tabla -->"
-            "<caption> Son: "+str(cont)+" cupon/es pendientes de pago por $ "+str(total)+"<br>"
+            "<caption> Son: "+str(cont)+" cupon/es por $ "+str(total)+"<br>"
             )
+
         pie_html += ("</caption></tbody></table></div>")
         tabla.write(pie_html)
         # Cierra el archivo

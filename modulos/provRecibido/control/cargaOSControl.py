@@ -261,7 +261,7 @@ class CargaOSControl():
 
     def update_datos(self, dato):
         """
-        Modifica datos a las tablas.
+        Modifica datos en las tablas.
 
         Con los datos del archivo DSObrasSociales.txt carga los atributos de
         la clase VO y persiste en la tabla.

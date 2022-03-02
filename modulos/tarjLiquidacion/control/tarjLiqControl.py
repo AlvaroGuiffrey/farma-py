@@ -500,22 +500,24 @@ class TarjLiqControl():
                         "<b>VERIFICAR !!!</b>.")
             if flag == "S":
                 # Verifica los importes
-                bruto = self.tarj_liq.get_importe_neto()+self.tarj_liq.get_importe_desc()
+                bruto = round(self.tarj_liq.get_importe_neto()+self.tarj_liq.get_importe_desc(), 2)
                 if bruto != self.tarj_liq.get_importe_bruto():
                     flag = "N"
                     self.alertas.append("alertaAdvertencia")
                     self.datos_pg["alertaAdvertencia"] = ("Los importes de la"
                         " liquidación Nro: "+str(self.tarj_liq.get_liquidacion())+" "
-                        " son inconsistentes. <b>VERIFICAR !!!</b>.")
+                        " son inconsistentes. <b>VERIFICAR !!!</b>.<br>"
+                        " Importes: "+str(self.tarj_liq.get_importe_bruto())+" suma "
+                        " -> "+str(bruto))
             if flag == "S":
                 # Verifica los Descuentos
-                descuentos = self.tarj_liq.get_arancel()+self.tarj_liq.get_costo_financiero()+\
+                descuentos = round(self.tarj_liq.get_arancel()+self.tarj_liq.get_costo_financiero()+\
                     self.tarj_liq.get_otros_deb()+self.tarj_liq.get_iva_arancel()+\
                     self.tarj_liq.get_iva_costo_financiero()+self.tarj_liq.get_iva_otros_deb()+\
                     self.tarj_liq.get_impuesto_debcred()+self.tarj_liq.get_impuesto_interes()+\
                     self.tarj_liq.get_retencion_iva()+self.tarj_liq.get_retencion_imp_gan()+\
                     self.tarj_liq.get_retencion_ing_brutos()+self.tarj_liq.get_percepcion_iva()+\
-                    self.tarj_liq.get_percepcion_ing_brutos()
+                    self.tarj_liq.get_percepcion_ing_brutos(), 2)
                 if descuentos != self.tarj_liq.get_importe_desc():
                     flag = "N"
                     self.alertas.append("alertaAdvertencia")

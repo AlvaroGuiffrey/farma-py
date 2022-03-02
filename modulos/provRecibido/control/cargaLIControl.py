@@ -1,14 +1,14 @@
 #!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: utf-8 -*-
-# 
+#
 # cargaLIControl.py
 #
 # Creado: 26/09/2019
 # Versión: 001
-# Última modificación: 
-# 
+# Última modificación:
+#
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 # Módulos de la librería estandar:
 import socket
@@ -19,7 +19,7 @@ from datetime import datetime
 from builtins import int
 
 # Módulos de la aplicación:
-from includes.control.motorVista import MotorVista 
+from includes.control.motorVista import MotorVista
 from modulos.provRecibido.modelo.provRecibidoModelo import ProvRecibidoModelo
 from modulos.afip.modelo.afipDocumentoModelo import AfipDocumentoModelo
 from modulos.afip.modelo.afipComprobanteModelo import AfipComprobanteModelo
@@ -29,12 +29,12 @@ from ctypes.wintypes import INT
 class CargaLIControl():
     """
     Clase control del módulo provRecibido.
-    
-    Realiza operaciones con Comprobantes Recibidos descargados de  
-    las aplicaciones de los proveedores, utilizando el patron MVC.  
+
+    Realiza operaciones con Comprobantes Recibidos descargados de
+    las aplicaciones de los proveedores, utilizando el patron MVC.
     """
 
-    
+
     # Atributos de la instancia:
     def __init__(self):
         """
@@ -78,32 +78,32 @@ class CargaLIControl():
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
         self.documentos_dicc = {reng[1]: (reng[0], reng[1]) for reng in
                                self.documentos}
-        self.comprobantes_dicc = {reng[2]: reng[0] for reng in 
+        self.comprobantes_dicc = {reng[2]: reng[0] for reng in
                                   self.comprobantes}
         self.comprobantes_nro_dicc = {reng[0]: reng[2] for reng in
                                       self.comprobantes}
-       
+
     # Métodos:
     def inicio(self, accion):
-        """ 
+        """
         Inicio de la clase control.
-        
+
         Verifica el login del usuario y nos envía al método que ejecuta las
         acciones del módulo.
         """
         self.accion = accion
         self.accion_control()
-        
+
     def accion_control(self):
         """
-        Ejecuta las acciones del módulo. 
-        
+        Ejecuta las acciones del módulo.
+
         Ejecuta las acciones de acuerdo a las opciones seleccionadas con los
         botones de la vista.
         """
         # Recibe los datos enviados del formulario por metodo POST:
         self.form = cgi.FieldStorage()
-        # Vacía diccionario y listas que escriben datos en la vista: 
+        # Vacía diccionario y listas que escriben datos en la vista:
         self.datos_pg.clear()
         self.alertas.clear()
         self.opciones.clear()
@@ -125,17 +125,17 @@ class CargaLIControl():
         self.botones_ac = ["botonBadge", "botonCargar"]
         # Selecciona las acciones:
         if "bt_cargar" in self.form: self.accion = "Cargar"
-        elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar" 
+        elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar"
         else: self.accion = "Iniciar"
         # Pone en 0 los acumuladores:
         self.cant_agregados = self.cant_cargados = self.cant_repetidos = 0
-       
+
         # Acción para iniciar:
         if self.accion == "Iniciar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Carga Comprobantes de Proveedores")
             self.datos_pg['info'] = ("Permite cargar datos desde un archivo, "
-                        "descargado de la app del proveedor, en la tabla " 
+                        "descargado de la app del proveedor, en la tabla "
                         "seleccionando con los botones.")
             # Agrega las alertas:
             self.alertas.append("alertaInfo")
@@ -161,7 +161,7 @@ class CargaLIControl():
             self.botones_ev = ["botonConfCargar",]
             # Carga el CSV:
             csvfile = open(self.archivo, newline="")
-            arch = csv.reader(csvfile, delimiter=";") 
+            arch = csv.reader(csvfile, delimiter=";")
             cant_reg = sum(1 for dato in arch)
             csvfile.close()
             # Verifica si existe el CSV:
@@ -178,9 +178,9 @@ class CargaLIControl():
                 # Agrega las alertas:
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("El archivo "
-                    +self.archivo+" esta vacio. <b>VERIFICAR !!!</b>.") 
+                    +self.archivo+" esta vacio. <b>VERIFICAR !!!</b>.")
             # Muestra la vista:
-            self.muestra_vista()            
+            self.muestra_vista()
         # Acción para confirmar cargar:
         if self.accion == "ConfCargar":
             # Recibe datos por POST:
@@ -194,14 +194,14 @@ class CargaLIControl():
                                      " botones.")
             # Carga el CSV:
             csvfile = open(self.archivo, newline="")
-            arch = csv.reader(csvfile, delimiter=";") 
+            arch = csv.reader(csvfile, delimiter=";")
             # Busca la primer fecha del CSV y consulta MySQL:
             if self.prov_recibido.get_cantidad() > 0:
-                fecha_menor = "2000-01-01"
+                fecha_menor = "2100-01-01"
                 for dato in arch:
                     fecha_csv = self.fecha_db(dato[2])
                     if fecha_csv < fecha_menor: fecha_menor = fecha_csv
-                                            
+
                 self.prov_recibido.set_fecha(fecha_menor)
                 prov_recibidos = self.prov_recibido.find_all_fecha_dic()
             # Posiciona en primer registro de datos el CSV:
@@ -244,18 +244,18 @@ class CargaLIControl():
             self.datos_pg["cantCargados"] = self.cant_cargados
             self.datos_pg["cantRepetidos"] = self.cant_repetidos
             self.datos_pg["cantAgregados"] = self.cant_agregados
-            self.datos_pg["proveedor"] = self.proveedor 
-            
-            # Cierra el archivo CSV:  
+            self.datos_pg["proveedor"] = self.proveedor
+
+            # Cierra el archivo CSV:
             csvfile.close()
             # Muestra la vista:
-            self.muestra_vista() 
-        
-                                        
+            self.muestra_vista()
+
+
     def agrega_datos(self, dato):
         """
         Agrega datos a las tablas.
-        
+
         Con los datos del archivo KEMovimientos.csv carga los atributos de las
         clases VO y los agrega en las tablas.
         """
@@ -263,20 +263,20 @@ class CargaLIControl():
         self.carga_datos(dato)
         self.prov_recibido.insert()
         self.cant_cargados += self.prov_recibido.get_cantidad()
-           
+
     def carga_datos(self, dato):
         """
         Carga datos al Value Object de la tabla.
-        
-        Con los datos del archivo KEMovimientos.csv carga los atributos de 
+
+        Con los datos del archivo KEMovimientos.csv carga los atributos de
         ProvRecibidosVO para persistir en el modelo.
         """
         # Carga el VO con los datos del CSV:
         self.prov_recibido.set_fecha(self.fecha_db(dato[2]))
         if dato[0] == "FAC": tipo = 1
         elif dato[0] == "NDE": tipo = 2
-        elif dato[0] == "NCR": tipo = 3 
-        elif dato[0] == "N/C": tipo = 3   
+        elif dato[0] == "NCR": tipo = 3
+        elif dato[0] == "N/C": tipo = 3
         elif dato[0] == "DEV": tipo = 3
         else: tipo = 999
         self.prov_recibido.set_tipo(tipo)
@@ -304,11 +304,11 @@ class CargaLIControl():
         ahora = datetime.now()
         fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
         self.prov_recibido.set_fecha_act(fecha_act)
-        
+
     def fecha_db(self, fecha_csv):
         """
         Convierte la fecha para la tabla de la DB.
-        
+
         Convierte la fecha del csv al formato necesario para
         persistir en la tabla de la DB.
         """
@@ -316,45 +316,45 @@ class CargaLIControl():
         ano = int(fecha[2]) + 2000
         fecha_op = date(int(ano), int(fecha[1]), int(fecha[0]))
         return date.strftime(fecha_op, '%Y-%m-%d')
-                       
+
     def importe_db(self, importe_csv):
         """
         Convierte los importes para la tabla de la DB.
-        
+
         Convierte los importes de IVA Compras PLEX al formato necesario para
         persistir en la tabla de la DB.
         """
         return "{0:.2f}".format(float(importe_csv))
-        
+
     def datos_csv(self,dato):
         """
         Convierte datos del archivo csv.
-        
+
         Convierte datos del archivo csv para comparar con datos de la tabla
         para persistir en la DB.
-        """  
+        """
         if dato[0] == "FAC": tipo = 1
         elif dato[0] == "NDE": tipo = 2
         elif dato[0] == "NCR": tipo = 3
-        elif dato[0] == "N/C": tipo = 3    
+        elif dato[0] == "N/C": tipo = 3
         elif dato[0] == "DEV": tipo = 3
         else: tipo = 999
         punto_venta = dato[1][1:5]
         numero = dato[1][6:]
-        nro_doc = str(self.nro_doc) 
+        nro_doc = str(self.nro_doc)
         datos_csv = str(tipo)+str(punto_venta)+str(numero)+str(nro_doc)
         return datos_csv
-               
+
     def muestra_vista(self):
         """
         Muestra la vista de la aplicación.
-        
+
         Muestra pagina.html luego de renderizar los datos.
         """
         # Instancia la clase MotorVista y escribe el html:
-        print(MotorVista().arma_vista(self.tipo, self.botones_ac,  
-                                      self.botones_ev, self.botones_aux,  
-                                      self.alertas, self.opciones,  
-                                      self.contenidos, self.tablas,  
-                                      self.componentes, self.datos_pg, 
+        print(MotorVista().arma_vista(self.tipo, self.botones_ac,
+                                      self.botones_ev, self.botones_aux,
+                                      self.alertas, self.opciones,
+                                      self.contenidos, self.tablas,
+                                      self.componentes, self.datos_pg,
                                       self.modulo))

@@ -56,6 +56,7 @@ class TarjCuponControlV():
         self.botones_aux = []
         self.accion = ''
         self.id = 0
+        self.error = 0
         self.cupon = 0
         # Consulta tablas que se utilizan en el módulo:
         self.tarj_productos = self.tarj_producto.find_all()
@@ -233,6 +234,7 @@ class TarjCuponControlV():
             # Recibe datos por POST:
             self.id = self.form.getvalue("id")
             comentario = self.form.getvalue("comentario")
+            self.error = int(self.form.getvalue("error"))
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Cupón de Tarjeta - Ver Edición")
             self.datos_pg['info'] = ("Permite ver los datos editados de "
@@ -241,13 +243,14 @@ class TarjCuponControlV():
             self.botones_ac.append('botonEditar')
             #Actualiza los datos en la tabla:
             self.tarj_cupon.set_id(self.id)
+            self.tarj_cupon.set_error(self.error)
             self.tarj_cupon.set_comentario(comentario)
             id_usuario = 1 # Va el id del USUARIO
             self.tarj_cupon.set_id_usuario_act(id_usuario)
             ahora = datetime.now()
             fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
             self.tarj_cupon.set_fecha_act(fecha_act)
-            self.tarj_cupon.update_comentario()
+            self.tarj_cupon.update_editar()
             self.datos_pg['cantidad'] = self.tarj_cupon.get_cantidad()
             # Agrega las alertas:
             if int(self.tarj_cupon.get_cantidad()) > 0:
@@ -296,15 +299,25 @@ class TarjCuponControlV():
         self.datos_pg['cuota'] = self.tarj_cupon.get_cuota()
         self.datos_pg['autorizacion'] = self.tarj_cupon.get_autorizacion()
         self.datos_pg['error'] = self.tarj_cupon.get_error()
-        # Agrega el detalle del Error
+        # Arma el select del error
+        self.datos_pg['select0'] = self.datos_pg['select1'] = " "
+        self.datos_pg['select2'] = " "
         if int(self.tarj_cupon.get_error()) == 0:
-            self.datos_pg['detalle_error'] = "Aceptado"
+            self.datos_pg['error'] = 0
+            self.datos_pg['detalle_error'] = "Aceptada"
+            self.datos_pg['select0'] = "selected"
         elif int(self.tarj_cupon.get_error()) == 1:
-            self.datos_pg['detalle_error'] = "Rechazado"
+            self.datos_pg['error'] = 1
+            self.datos_pg['detalle_error'] = "Rechazada"
+            self.datos_pg['select1'] = "selected"
         elif int(self.tarj_cupon.get_error()) == 2:
-            self.datos_pg['detalle_error'] = "Anula/do"
+            self.datos_pg['error'] = 2
+            self.datos_pg['detalle_error'] = "Anula/da"
+            self.datos_pg['select2'] = "selected"
         else:
-            self.datos_pg['detalle_error'] = "No identificado"
+            self.datos_pg['error'] = self.tarj_cupon.get_error()
+            self.datos_pg['detalle_error'] = "No Ident."
+        # --- fin arma select ---
         comentario = self.tarj_cupon.get_comentario()
         if comentario == None: comentario = ""
         self.datos_pg['comentario'] = comentario

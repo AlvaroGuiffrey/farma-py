@@ -197,11 +197,39 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         ccnx.close()
         return datos
 
+    def find_all_inventario(self):
+        """
+        Obtiene todos los registros activos de una liquidacion de un producto
+        para armar el inventario de pendientes de pago.
+
+        @param liquidacion: TarjCuponVO.
+        @param id_producto: TarjCuponVO.
+        @param fecha: TarjCuponVO.
+        @param error: 0 - aceptado por operador.
+        @param estado: 1 - activo.
+        @return: datos para construir el diccionario ordenados por cupon.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT * FROM tarj_cupones WHERE liquidacion=%s AND "
+                    "id_producto=%s AND fecha<=%s AND estado = 1 "
+                    " AND error = 0 ORDER BY cupon")
+        valor = (self.get_liquidacion(), self.get_id_producto(), self.get_fecha(),)
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+
     def find_all_sin_liq(self):
         """
         Obtiene todos los registros activos sin liquidar.
 
-        @param error: TarjCuponVO.
+        @param fecha: TarjCuponVO.
+        @param liquidacion: 0 - cupon sin liquidación al momento de la consulta.
+        @param error: 0 - cupón sin error.
         @param estado: 1 - activo.
         @return: datos de cupones pendientes, ordenados
                 por fecha de la operación y cupon.
@@ -210,7 +238,7 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         cursor = ccnx.cursor()
         consulta = ("SELECT * FROM tarj_cupones "
                     "WHERE liquidacion = 0 AND estado = 1 AND fecha<=%s "
-                    "ORDER BY fecha, cupon")
+                    "AND error = 0 ORDER BY fecha, cupon")
         cursor.execute(consulta, (self.get_fecha(),))
         datos = cursor.fetchall()
         self.cantidad = cursor.rowcount
@@ -223,7 +251,8 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         Obtiene los registros activos para listar.
 
         Obtiene los registros activos de la tabla para listar en la vista
-        según el rango y tipo de fechas seleccionado, ordenados por cupon.
+        según el rango y tipo de fechas seleccionado, ordenados por cupon y
+        fecha.
         @param fecha_d: fecha desde donde comienza la consulta.
         @param fecha_h: fecha máxima de la consulta.
         @param tipo: si es la fecha de operación o presentación.
@@ -300,21 +329,22 @@ class TarjCuponModelo(TarjCuponActiveRecord):
         ccnx.close()
         return datos
 
-    def update_comentario(self):
+    def update_editar(self):
         """
-        Modifica los datos del registro.
+        Modifica los datos del registro por editar.
 
-        Persiste sobre la tabla modificando el comentario de un registro.
-        @param TarjCuponVO: id, comentario.
+        Persiste sobre la tabla modificando el error y/o comentario de un
+        un registro editado.
+        @param TarjCuponVO: id, error, comentario.
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
         cursor.execute("SET NAMES utf8;")
         cursor.execute("SET CHARACTER SET utf8;")
-        query = ("UPDATE tarj_cupones SET comentario = %s, "
+        query = ("UPDATE tarj_cupones SET error = %s, comentario = %s, "
                 "id_usuario_act = %s, fecha_act = %s WHERE id = %s")
-        valor = (self.get_comentario(), self.get_id_usuario_act(),
-                 self.get_fecha_act(), self.get_id())
+        valor = (self.get_error(), self.get_comentario(),
+                 self.get_id_usuario_act(), self.get_fecha_act(), self.get_id())
         cursor.execute(query, valor)
         ccnx.commit()
         self.cantidad = cursor.rowcount

@@ -195,7 +195,7 @@ class CargaDSControl():
             arch = txtfile.readlines()
             # Busca la primer fecha del TXT y consulta MySQL:
             if self.prov_recibido.get_cantidad() > 0:
-                fecha_menor = "2000-01-01"
+                fecha_menor = "2100-01-01"
                 for dato in arch:
                     linea = dato.split()
                     fecha_txt = self.fecha_db(linea[14])

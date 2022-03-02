@@ -21,6 +21,7 @@ from includes.control.motorVista import MotorVista
 from modulos.tarjeta.modelo.tarjProductoModelo import TarjProductoModelo
 from modulos.tarjCupon.modelo.tarjCuponModelo import TarjCuponModelo
 from modulos.tarjCupon.includes.tarjCuponTabla import TarjCuponTabla
+from modulos.tarjCupon.includes.tarjCuponInvTabla import TarjCuponInvTabla
 from modulos.tarjCupon.includes.tarjCorrCuponTabla import TarjCorrCuponTabla
 from modulos.tarjLiquidacion.modelo.tarjLiqModelo import TarjLiqModelo
 from includes.includes.select import Select
@@ -330,22 +331,27 @@ class TarjCuponControl():
             self.botones_ev = ["botonDescargarPDF",]
             # Encuentra los datos de la tabla para listar:
             cupones_inv = []
-
+            #print(cupones_inv)
             # 1) BUSCAR LAS LIQUIDACIONES PENDIENTES
             self.tarj_liq.set_fecha_pago(fecha)
             liq_pendi = self.tarj_liq.find_all_pendientes()
             # 2) BUSCAR LOS CUPONES DE LAS LIQUIDACIONES PENDIENTES
             for reng in liq_pendi:
+                self.tarj_cupon.set_fecha(fecha)
                 self.tarj_cupon.set_liquidacion(reng[1])
                 self.tarj_cupon.set_id_producto(reng[2])
-                cupones = self.tarj_cupon.find_all_liquidacion_producto()
+                cupones = self.tarj_cupon.find_all_inventario()
                 # 3) UNIENDO LOS DATOS CON lista_cupones.extend(lista_consulta)
-                cupones_inv.extend(cupones)
+                if int(len(cupones)) > 0:
+                    cupones_inv.extend(cupones)
+
             # 4) BUSCAR CUPONES SIN LIQUIDAR
             self.tarj_cupon.set_fecha(fecha)
             cupones_sin_liq = self.tarj_cupon.find_all_sin_liq()
             # 5) UNIENDO LOS DATOS CON lista_cupones.extend(lista_consulta)
-            cupones_inv.extend(cupones_sin_liq)
+            if int(len(cupones_sin_liq)) > 0:
+                cupones_inv.extend(cupones_sin_liq)
+
             # Arma datos para la vista
             self.datos_pg["cantidad"] = len(cupones_inv)
             if int(len(cupones_inv)) == 0:
@@ -354,7 +360,6 @@ class TarjCuponControl():
                     "la fecha seleccionada. <b>VOLVER A INTENTAR"
                     " !!!</b>.")
             # 6) ARMAR TABLA INVENTARIO
-            # 7) TOTALIZAR Y PONER SUBTITULOS POR LIQUIDADOS Y SIN LIQUIDAR
             # Arma la tabla para listar:
             datos = cupones_inv
             tabla = TarjCuponInvTabla()
