@@ -15,29 +15,48 @@ from datetime import date
 
 print("Content-Type: text/html")
 print("""
-    <TITLE>DS txt</TITLE>
+    <TITLE>BERSA - eCheques</TITLE>
     """)
 
-with open("DSObrasSociales.txt", "r") as archivo:
+with open("eCheques.txt", "r") as archivo:
     contenido = archivo.readlines()
 
 for linea in contenido:
     print("..........> línea con {} caracteres.<br>".format(len(linea)))
     print(linea, "<br>")
-    
 
-    fecha_op = date(int(linea[95:99]), int(linea[92:94]), int(linea[89:91]))
-    fecha = date.strftime(fecha_op, '%Y-%m-%d')
-    print("Fecha: {} - Tipo: {} - Comprobante: {}-{}-{} - Concepto: {}".format(
-                                                                 fecha,
-                                                                 linea[86:88],
-                                                                 linea[228],
-                                                                 linea[224:228],
-                                                                 linea[229:237],
-                                                                 linea[141:162]))
+
+    fecha_op = date(int(linea[365:369]), int(linea[362:364]), int(linea[359:361]))
+    fecha_emi = date.strftime(fecha_op, '%Y-%m-%d')
+
+    #fecha_emi = linea[359:369]
+
+    fecha_op = date(int(linea[315:319]), int(linea[312:314]), int(linea[309:311]))
+    fecha_pago = date.strftime(fecha_op, '%Y-%m-%d')
+
+    #fecha_pago = linea[309:319]
+
+    numero = int(linea[15:27])
+
+    nombre = linea[89:280]
+    nombre = nombre.strip()
+
+    importe = linea[280:298]
+    importe = float(importe.replace(",", "."))
+
+    id = linea[0:15]
+
+    print("Fecha Emi.: {} - Fecha Pago: {} - Número: {} - ".format(
+                                                            fecha_emi,
+                                                            fecha_pago,
+                                                            numero))
+
+    print("Orden de: {} - Importe $ {} - ID: {}".format(
+                                    nombre,
+                                    importe,
+                                    id))
+
     print("<br>")
     renglon = linea.split()
     print("---------> renglón con {} elementos.<br>".format(len(renglon)))
     print(renglon, "<br>")
-
-    print(renglon[8], " $ ", renglon[9], "<br>")

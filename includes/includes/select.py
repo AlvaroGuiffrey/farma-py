@@ -1,5 +1,5 @@
 #!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
-# -*- coding: utf-8 -*-
+# -*- coding: latin-1 -*-
 #
 # select.py
 #
@@ -8,7 +8,7 @@
 # Última modificación:
 #
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 class Select(object):
     """

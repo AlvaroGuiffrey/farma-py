@@ -4,7 +4,9 @@
 #
 # Creado: 02/09/2021
 # Versión: 001
-# Última modificación:
+# Modificaciones a la versión:
+# Date: 10/03/2022
+# Modificaciones para tomar débitos de terceros (QR - Debin PCT)
 #
 # Copyright 2021 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
 #
@@ -81,6 +83,9 @@ class TarjLiqControl():
         self.cant_conciliados = int(0)
         self.cant_sin_conciliar = int(0)
         self.cant_con_diferencias = int(0)
+        self.retencion_iva = float(0)
+        self.retencion_imp_gan = float(0)
+        self.retencion_ing_brutos = float(0)
         self.linea = []
         # Consulta tablas que se utilizan en el módulo:
         self.tarj_productos = self.tarj_producto.find_all()
@@ -192,7 +197,7 @@ class TarjLiqControl():
             self.botones_ev = ["botonConfCargar",]
             # Carga cantidad de archivos txt de liquidaciones:
             cant_archivos = len(self.archivos_txt)
-            # Verifica si existe el CSV:
+            # Verifica si existe el txt:
             if cant_archivos > 0:
                 self.contenidos.append("cargarDatos")
                 self.datos_pg["cantArchivos"] = cant_archivos
@@ -205,7 +210,7 @@ class TarjLiqControl():
                 self.datos_pg["cantActualizados"] = 0
                 self.datos_pg["cantFaltantes"] = 0
             else:
-                # ---- CSV vacio ---- :
+                # ---- txt vacio ---- :
                 # Agrega las alertas:
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("No hay archivos de  "
@@ -239,6 +244,7 @@ class TarjLiqControl():
                     if int(dato[0]) == 1:
                         fecha_proceso = self.fecha_db(str(dato[24:32]))
                         flag = "" # Pone en blanco la bandera al inicio del TXT
+                        #print("Fecha: "+str(fecha_proceso)+"<br>")
                     # Carga datos si es renglón 2 del archivo TXT
                     if int(dato[0]) == 2:
                         self.tarj_liq.set_marca_cupones(int(0))
@@ -278,17 +284,24 @@ class TarjLiqControl():
                             self.tarj_liq.set_opera_banco(int(0))
                             self.tarj_liq.set_otros_deb(0)
                             self.tarj_liq.set_iva_otros_deb(0)
+                            self.retencion_iva = float(0)
+                            self.retencion_imp_gan = float(0)
+                            self.retencion_ing_brutos = float(0)
                     # Carga datos del archivo TXT si es renglón 3 y flag "S"
                     # liquidación no repetida
                     if int(dato[0]) == 3:
                         codigo = int(dato[69:72])
-                        #print("-> "+str(codigo)+"<br>")
+                        #print("Flag -> "+str(flag)+"<br>")
+                        #print("Fecha -> "+str(fecha_proceso)+"<br>")
+                        #print("Codigo -> "+str(codigo)+"<br>")
+
                     # Cupón por ventas o cobranza
                     if int(dato[0]) == 3 and int(codigo) == 861:
                         self.cant_cupones += 1
                     if int(dato[0]) == 3 and int(codigo) == 861 and flag == "S":
                         flag_cupon = ""
                         # Busca el cupón para verificar y completar datos
+                        #print("cupon -> "+str(dato[94:99])+"<br>")
                         self.tarj_cupon.set_cupon(int(dato[94:99]))
                         self.tarj_cupon.set_fecha(self.fecha_db(
                                                             str(dato[61:69])))
@@ -335,20 +348,49 @@ class TarjLiqControl():
                             self.texto_alerta_cupon = ("Falta/n cupón/es de "
                                                     " la/s liquidación/es.")
                             self.cant_faltantes += 1
-                    # Si es Otro Débito
+
+                    # Cargos - Código de movimiento: 892
                     if int(dato[0]) == 3 and int(codigo) == 892 and flag == "S":
                         flag_cupon = ""
                         tipo_op = str(dato[193:195])
-                        if tipo_op == "CC" or tipo_op =="LE":
+                        codigo_cargo = int(dato[196:199])
+                        #print("Cod.Cargo--> "+str(codigo_cargo)+"<br>")
+                        # Si es Otro Débito
+                        # Cargo Cuotas: tipo_op = "CC" y codigo_cargo = 80
+                        # Iva Cargo Cuotas: tipo_op = "IC" y codigo_cargo = 81
+                        # Cargo Liq.Elect. tipo_op = "LE" y codigo_cargo = 96
+                        # Iva Cargo Liq.Elect. tipo_op = "IE" y codigo_cargo = 97
+                        if int(codigo_cargo) == 80 or int(codigo_cargo) == 96:
                             self.cant_debitos += 1
                             self.tarj_liq.set_otros_deb(
-                                            self.importe_db(dato[103:116]))
-                        else:
+                                            self.importe_db(dato[103:116])
+                                            )
+                        elif int(codigo_cargo) == 81 or int(codigo_cargo) == 97:
                             self.tarj_liq.set_iva_otros_deb(
-                                            self.importe_db(dato[103:116]))
+                                            self.importe_db(dato[103:116])
+                                            )
+                        # Si es Débito por QR - PCT
+                        # Retención IVA: codigo_cargo = 454
+                        # Retención I.Gan.: codigo_cargo = 455
+                        # Nota: códigos sin verificar
+                        elif int(codigo_cargo) == 454:
+                            self.cant_debitos += 1
+                            self.retencion_iva = float(self.retencion_iva) +\
+                                        float(self.importe_db(dato[103:116]))
+
+                        elif int(codigo_cargo) == 455:
+                            self.cant_debitos += 1
+                            self.retencion_imp_gan = \
+                                    float(self.retencion_imp_gan) +\
+                                    float(self.importe_db(dato[103:116]))
+
+                        else:
+                            pass
+
                     # Carga datos del archivo TXT si es renglón 7 y flag "S"
                     # liquidación no repetida
                     if int(dato[0]) == 7 and flag == "S":
+                        #print("LLEGUE AL 7")
                         self.tarj_liq.set_importe_bruto(
                                             self.importe_db(dato[61:74]))
                         gastos = float(self.importe_db(dato[103:116]))
@@ -356,9 +398,15 @@ class TarjLiqControl():
                         debitos = float(self.importe_db(dato[131:144]))
                         descuento = gastos + impuestos + debitos
                         self.tarj_liq.set_importe_desc(descuento)
-                        self.tarj_liq.set_importe_neto(
+                        #print("SIGNO "+str(dato[172]))
+                        if int(dato[172]) == 1:
+                            self.tarj_liq.set_importe_neto(
                                             self.importe_db(dato[159:172]))
+                        else:
+                            self.tarj_liq.set_importe_neto(
+                                            self.importe_db_n(dato[159:172]))
                         self.tarj_liq.set_cupones(self.cant_cupones_liq)
+                        #print("PASE RENGLON 7")
                     # Carga datos del archivo TXT si es renglón 8 y flag "S"
                     # liquidación no repetida
                     if int(dato[0]) == 8 and flag == "S":
@@ -374,12 +422,22 @@ class TarjLiqControl():
                                             self.importe_db(dato[77:90]))
                         self.tarj_liq.set_impuesto_interes(
                                             self.importe_db(dato[190:199]))
-                        self.tarj_liq.set_retencion_iva(
-                                            self.importe_db(dato[105:118]))
-                        self.tarj_liq.set_retencion_imp_gan(
-                                            self.importe_db(dato[133:146]))
+                        # RETENCIONES
+                        # Suma por si agregó valores en renglones 3
+                        self.retencion_iva =\
+                                float(self.retencion_iva) +\
+                                float(self.importe_db(dato[105:118]))
+                        self.tarj_liq.set_retencion_iva(self.retencion_iva)
+                        self.retencion_imp_gan =\
+                                float(self.retencion_imp_gan) +\
+                                float(self.importe_db(dato[133:146]))
+                        self.tarj_liq.set_retencion_imp_gan(self.retencion_imp_gan)
+                        self.retencion_ing_brutos =\
+                                float(self.retencion_ing_brutos) +\
+                                float(self.importe_db(dato[147:160]))
                         self.tarj_liq.set_retencion_ing_brutos(
-                                            self.importe_db(dato[147:160]))
+                                            self.retencion_ing_brutos)
+                        # PERCEPCIONES
                         self.tarj_liq.set_percepcion_iva(
                                             self.importe_db(dato[119:132]))
                         self.tarj_liq.set_percepcion_ing_brutos(
@@ -758,6 +816,16 @@ class TarjLiqControl():
         """
         #print("{0:.2f}".format(float(importe_txt)/100))
         return "{0:.2f}".format(float(importe_txt)/100)
+
+    def importe_db_n(self, importe_txt):
+        """
+        Convierte los importes negativos para la tabla de la DB.
+
+        Convierte los importes negativos de archivo txt FIVSER al formato
+        necesario para persistir en la tabla de la DB.
+        """
+        return "{0:.2f}".format(float(importe_txt) / 100 * -1)
+        #return "{0:.2f}".format(float(importe_txt)/100)
 
     def actualiza_cupon(self):
         id_usuario = 1 # Va el id del USUARIO logueado

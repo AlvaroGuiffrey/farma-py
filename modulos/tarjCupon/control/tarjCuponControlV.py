@@ -112,7 +112,7 @@ class TarjCuponControlV():
             self.accion = self.form.getvalue('bt_editar')
         elif "bt_conf_editar" in self.form:
             self.accion = self.form.getvalue('bt_conf_editar')
-        elif "bt_volver" in self.form:
+        elif "bt_volver" in self.form: 
             self.accion = "Ver"
         # else: self.accion = "Ver" #Anule para que pase agregar
 

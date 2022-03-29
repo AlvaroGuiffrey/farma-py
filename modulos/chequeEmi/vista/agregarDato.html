@@ -1,0 +1,177 @@
+<!-- Agregar Dato de un registro de la tabla -->
+<div>
+	<table class="table table-borderless table-sm">
+		<tbody>
+            <h6>Datos para agregar</h6>
+        	<hr/>
+        	<!-- Primer Renglón -->
+        	<div class="row">
+                <!--  Cheque -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese datos del cheque"><b>Cheque:</b></div>
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese el número del cheque">Nro.</div>
+	    					<input type="number" id="numero" name="numero" min="0"
+        						max="999999999999" maxlength="12" size="12" value=0 required>
+							<div class="input-group-text" data-toggle="tooltip"
+	        					title="Ingrese el importe del cheque">Importe</div>
+                            <input type="number" id="importe" name="importe" step="0.01"
+                                value="0.00" size="19" maxlength="19" required>
+						</div>
+                        <div class="input-group-append">
+                            <div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Segundo Renglón -->
+        	<div class="row">
+                <!--  Fechas del cheque -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Seleccione las fechas del cheque"><b>Fechas:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Fecha de emisión del cheque">Emisión</div>
+        				    <input type="date" id="fecha_emi" name="fecha_emi"
+        					    placeholder="seleccione una fecha" autocomplete="off" required>
+                            <div class="input-group-text" data-toggle="tooltip"
+                                title="Fecha de pago del cheque">Pago</div>
+                            <input type="date" id="fecha_pago" name="fecha_pago"
+            				    placeholder="seleccione una fecha" autocomplete="off" required>
+                        </div>
+        				<div class="input-group-append">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <hr/>
+            <!-- tercer Renglón -->
+        	<div class="row">
+                <!--  Otros datos del cheque -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese otros datos del cheque"><b>Otros datos:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="Seleccione caracter del cheque">Caracter</div>
+                                <select name="caracter" id="caracter">
+                  					<option value="No a la orden" selected>No a la orden</option>
+                  					<option value="A la orden">A la orden</option>
+                  				</select>
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Seleccione estado del cheque">Estado</div>
+                                <select name="estado_cheque" id="estado_cheque">
+                                    <option value="ACTIVO" selected>Activo</option>
+                                    <option value="ACTIVO-PENDIENTE">Activo pendiente</option>
+                                    <option value="ANULADO">Anulado</option>
+                                    <option value="CADUCADO">Caducado</option>
+                                    <option value="DEPOSITADO">Depositado</option>
+                                    <option value="DEVOLUCION-PENDIENTE">Devolución pendiente</option>
+                                    <option value="EMITIDO-PENDIENTE">Emitido pendiente</option>
+                                    <option value="PAGADO">Pagado</option>
+                                    <option value="PRESENTADO">Presentado</option>
+                                    <option value="RECHAZADO">Rechazado</option>
+                                    <option value="REPUDIADO">Repudiado</option>
+                                </select>
+                        </div>
+        				<div class="input-group-append">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- cuarto Renglón -->
+        	<div class="row">
+                <!--  Beneficiario del cheque -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese datos del beneficiario"><b>Beneficiario:</b></div>
+                            <div class="input-group-text" data-toggle="tooltip"
+            					title="CUIT del beneficiario del cheque">CUIT</div>
+        				    <input type="number" id="cuit_emi" name="cuit_emi"
+                                value="0" size="11" maxlength="11" required>
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Nombre del beneficiario del cheque">Nombre</div>
+            				<input type="text" id="nombre_emi" name="nombre_emi"
+                                value="" size="30" maxlength="30" required>
+						</div>
+                        <div class="input-group-append">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Quinto Renglón -->
+        	<div class="row">
+                <!--  Concepto del cheque -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Seleccione el concepto del cheque"><b>Concepto:</b></div>
+                                <select name="concepto" id="concepto">
+                                    <option value="FAC" selected>Factura</option>
+                                    <option value="CUO">Cuota</option>
+                                    <option value="ANULADO">Anulado</option>
+                                    <option value="HON">Honorario</option>
+                                    <option value="PRE">Préstamo</option>
+                                    <option value="SEG">Seguro</option>
+                                    <option value="VAR">Vario</option>
+                                </select>
+                        </div>
+                        <div class="input-group-append">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Dato obligatorio">
+        						<b style="color: blue">*</b>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+            <!-- Sexto Renglón -->
+        	<div class="row">
+                <!--  Referencia del cheque -->
+        		<div class="col-md-auto">
+        			<div class="input-group input-group-sm mb-1">
+        				<div class="input-group-prepend">
+        					<div class="input-group-text" data-toggle="tooltip"
+        						title="Ingrese la referencia del cheque"><b>Referencia :</b></div>
+                            <input type="text" id="referencia" name="referencia"
+                                value="" size="30" maxlength="30">
+                            <div class="input-group-text" data-toggle="tooltip"
+                				title="Valor de la referencia del cheque">Valor</div>
+                            <input type="text" id="valor_ref" name="valor_ref"
+                                value="" size="15" maxlength="15">
+                        </div>
+        				<div class="input-group-append">
+                            <div class='input-group-text'></div>
+        				</div>
+        			</div>
+        		</div>
+            </div>
+        </tbody>
+	</table>
+</div>
+<!-- Datos que envía -->
+<input type='hidden' name='aa' value='1'>

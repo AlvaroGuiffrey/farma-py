@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# 
+#
 # afipRecibidoControl.py
 #
 # Creado: 27/08/2019
 # Versión: 001
-# Última modificación: 
-# 
+# Última modificación:
+#
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 # Módulos de la librería estandar:
 import socket
@@ -18,10 +18,10 @@ from datetime import datetime
 from builtins import int
 
 # Módulos de la aplicación:
-from includes.control.motorVista import MotorVista 
+from includes.control.motorVista import MotorVista
 from modulos.afipRecibido.modelo.afipRecibidoModelo import AfipRecibidoModelo
 from modulos.afipRecibido.includes.afipRecibidoTabla import AfipRecibidoTabla
-from modulos.afipRecibido.includes.afipRecibidoPDF import AfipRecibidoPDF 
+from modulos.afipRecibido.includes.afipRecibidoPDF import AfipRecibidoPDF
 from modulos.afip.modelo.afipDocumentoModelo import AfipDocumentoModelo
 from modulos.afip.modelo.afipComprobanteModelo import AfipComprobanteModelo
 from modulos.provRecibido.modelo.provRecibidoModelo import ProvRecibidoModelo
@@ -31,12 +31,12 @@ from includes.includes.select import Select
 class AfipRecibidoControl():
     """
     Clase control del módulo afipRecibido.
-    
-    Realiza operaciones con -Mis Comprobantes Recibidos (AFIP)- por 
-    compras realizadas, utilizando el patron MVC.  
+
+    Realiza operaciones con -Mis Comprobantes Recibidos (AFIP)- por
+    compras realizadas, utilizando el patron MVC.
     """
 
-    
+
     # Atributos de la instancia:
     def __init__(self):
         """
@@ -79,31 +79,31 @@ class AfipRecibidoControl():
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
         self.documentos_dicc = {reng[1]: (reng[0], reng[1]) for reng in
                                self.documentos}
-        self.comprobantes_dicc = {reng[0]: reng[2] for reng in 
+        self.comprobantes_dicc = {reng[0]: reng[2] for reng in
                                   self.comprobantes}
         self.proveedores_dicc = {reng[0]: reng[1] for reng in
                                  self.proveedores}
     # Métodos:
     def inicio(self, accion):
-        """ 
+        """
         Inicio de la clase control.
-        
+
         Verifica el login del usuario y nos envía al método que ejecuta las
         acciones del módulo.
         """
         self.accion = accion
         self.accion_control()
-        
+
     def accion_control(self):
         """
-        Ejecuta las acciones del módulo. 
-        
+        Ejecuta las acciones del módulo.
+
         Ejecuta las acciones de acuerdo a las opciones seleccionadas con los
         botones de la vista.
         """
         # Recibe los datos enviados del formulario por metodo POST:
         self.form = cgi.FieldStorage()
-        # Vacía diccionario y listas que escriben datos en la vista: 
+        # Vacía diccionario y listas que escriben datos en la vista:
         self.datos_pg.clear()
         self.alertas.clear()
         self.opciones.clear()
@@ -122,11 +122,11 @@ class AfipRecibidoControl():
         self.afip_recibido.count()
         self.datos_pg['cantidad'] = self.afip_recibido.get_cantidad()
         # Agrega los botones de la aplicación:
-        self.botones_ac = ["botonBadge", "botonCargar", "botonListar", 
+        self.botones_ac = ["botonBadge", "botonCargar", "botonListar",
                           "botonBuscar"]
         # Selecciona las acciones:
         if "bt_cargar" in self.form: self.accion = "Cargar"
-        elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar" 
+        elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar"
         elif "bt_listar" in self.form: self.accion = "Listar"
         elif "bt_conf_listar" in self.form: self.accion = "ConfListar"
         elif "bt_buscar" in self.form: self.accion = "Buscar"
@@ -137,13 +137,13 @@ class AfipRecibidoControl():
         else: self.accion = "Iniciar"
         # Pone en 0 los acumuladores:
         self.cant_agregados = self.cant_repetidos = 0
-       
+
         # Acción para iniciar:
         if self.accion == "Iniciar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Tabla de Comprobantes Recibidos"
                                             " AFIP")
-            self.datos_pg['info'] = ("Permite realizar acciones en la tabla" 
+            self.datos_pg['info'] = ("Permite realizar acciones en la tabla"
                         " seleccionando con los botones.")
             # Agrega las alertas:
             self.alertas.append("alertaInfo")
@@ -170,7 +170,7 @@ class AfipRecibidoControl():
             self.botones_ev = ["botonConfCargar",]
             # Carga el CSV:
             csvfile = open(self.archivo, newline="")
-            arch = csv.reader(csvfile, delimiter=",") 
+            arch = csv.reader(csvfile, delimiter=",")
             next(arch)
             cant_csv = sum(1 for dato in arch)
             csvfile.close()
@@ -186,9 +186,9 @@ class AfipRecibidoControl():
                 # Agrega las alertas:
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("El archivo CSV esta "
-                    "vacio. <b>VERIFICAR !!!</b>.")    
+                    "vacio. <b>VERIFICAR !!!</b>.")
             # Muestra la vista:
-            self.muestra_vista()            
+            self.muestra_vista()
         # Acción para confirmar cargar:
         if self.accion == "ConfCargar":
             # Recibe datos por POST:
@@ -210,7 +210,7 @@ class AfipRecibidoControl():
             for dato in arch:
                 fecha_csv = self.fecha_db(dato[0])
                 if fecha_csv < fecha_menor: fecha_menor = fecha_csv
-                                            
+
             self.afip_recibido.set_fecha(fecha_menor)
             recibidos = self.afip_recibido.find_all_fecha_dic()
             # Posiciona en primer registro de datos el CSV:
@@ -243,13 +243,13 @@ class AfipRecibidoControl():
                         self.carga_datos(dato)
                         self.afip_recibido.insert()
                         self.cant_cargados += self.afip_recibido.get_cantidad()
-             
+
             # Agrega las alertas:
             if self.cant_cargados > 0:
                 self.alertas.append("alertaSuceso")
                 self.datos_pg["alertaSuceso"] = ("Se cargaron registros a la "
                     "tabla con <b>EXITO !!!</b>.")
-            
+
             if self.cant_repetidos > 0:
                 self.alertas.append("alertaAdvertencia")
                 self.datos_pg["alertaAdvertencia"] = ("El archivo CSV contiene "
@@ -259,16 +259,16 @@ class AfipRecibidoControl():
             self.datos_pg["cantCsv"] = cant_csv
             self.datos_pg["cantCargados"] = self.cant_cargados
             self.datos_pg["cantRepetidos"] = self.cant_repetidos
-            # Cierra el archivo CSV:  
+            # Cierra el archivo CSV:
             csvfile.close()
             # Muestra la vista:
-            self.muestra_vista() 
-        # Acción para listar:    
+            self.muestra_vista()
+        # Acción para listar:
         if self.accion == "Listar":
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Listado de Comprobantes Recibidos"
                                             " AFIP")
-            self.datos_pg['info'] = ("Realiza un listado con datos de la " 
+            self.datos_pg['info'] = ("Realiza un listado con datos de la "
                         "tabla.<br>Seleccione en <b>Opciones del listado</b> "
                          "un rango de fechas.")
             # Agrega los botones para la acción:
@@ -303,7 +303,7 @@ class AfipRecibidoControl():
             comentarios_prov = self.prov_recibido.find_all_comentario(opciones)
             # Arma la tabla para listar:
             tabla = AfipRecibidoTabla()
-            tabla.arma_tabla(datos, opciones, comentarios_prov, 
+            tabla.arma_tabla(datos, opciones, comentarios_prov,
                              self.comprobantes_dicc)
             self.tablas = ["tabla",]
             # Muestra la vista:
@@ -313,7 +313,7 @@ class AfipRecibidoControl():
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Buscar Comprobantes Recibidos"
                                             " AFIP")
-            self.datos_pg['info'] = ("Realiza una busqueda de Comprobantes " 
+            self.datos_pg['info'] = ("Realiza una busqueda de Comprobantes "
                         "Recibidos de AFIP.<br>Seleccione en <b>Opciones del "
                         "listado</b> los parámetros para la acción.")
             # Agrega los botones para la acción:
@@ -336,7 +336,7 @@ class AfipRecibidoControl():
             select_tipo.arma_select(datos, cantidad, nombre)
             self.componentes += ["select_prov",]
             # Muestra la vista:
-            self.muestra_vista() 
+            self.muestra_vista()
         # Acción para confirmar buscar:
         if self.accion == "ConfBuscar":
             # Recibe datos por POST:
@@ -370,14 +370,14 @@ class AfipRecibidoControl():
             comentarios_prov = self.prov_recibido.find_all_comentario(opciones)
             # Arma la tabla para listar:
             tabla = AfipRecibidoTabla()
-            tabla.arma_tabla(datos, opciones, comentarios_prov, 
+            tabla.arma_tabla(datos, opciones, comentarios_prov,
                              self.comprobantes_dicc)
-            
+
             self.tablas = ["tabla",]
             # Muestra la vista:
             self.muestra_vista()
-            
-        # Acción para buscar:
+
+        # Acción para descargar PDF:
         if self.accion == "DescargarPDF":
             # Recibe datos por POST:
             # Arma las opciones de búsqueda y el detalle PDF:
@@ -397,7 +397,7 @@ class AfipRecibidoControl():
                     numero = opciones['numero']
                     numero = numero.zfill(8)
                     detalle_pdf += ("- Nro: "+str(numero)+" ")
-            if self.form.getvalue("prov"):            
+            if self.form.getvalue("prov"):
                 opciones['prov'] = self.form.getvalue("prov")
                 if int(opciones['prov']) > 0:
                     opciones['nombre_prov'] = self.proveedores_dicc[
@@ -409,7 +409,7 @@ class AfipRecibidoControl():
             # Escribe y guarda el archivo PDF:
             pdf = AfipRecibidoPDF()
             pdf.escribir_pdf(datos, detalle_pdf, self.comprobantes_dicc)
-            
+
             # Agrega titulo e información al panel:
             self.datos_pg['tituloPanel'] = ("Descarga Listado en PDF")
             self.datos_pg['info'] = ("Realiza la descarga del listado de"
@@ -429,8 +429,8 @@ class AfipRecibidoControl():
     def carga_datos(self, dato):
         """
         Carga datos al Value Object de la tabla.
-        
-        Con los datos del archivo AfipMovRec.csv carga los atributos de 
+
+        Con los datos del archivo AfipMovRec.csv carga los atributos de
         AfipRecibidosVO para persistir en el modelo.
         """
         # Carga el VO con los datos del CSV:
@@ -467,52 +467,51 @@ class AfipRecibidoControl():
         self.afip_recibido.set_id_usuario_act(id_usuario)
         ahora = datetime.now()
         fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
-        self.afip_recibido.set_fecha_act(fecha_act) 
-        
+        self.afip_recibido.set_fecha_act(fecha_act)
+
     def fecha_db(self, fecha_afip):
         """
         Convierte la fecha para la tabla de la DB.
-        
+
         Convierte la fecha de Mis Comprobantes AFIP al formato necesario para
         persistir en la tabla de la DB.
         """
         fecha = fecha_afip.split("/")
         fecha_op = date(int(fecha[2]), int(fecha[1]), int(fecha[0]))
         return date.strftime(fecha_op, '%Y-%m-%d')
-                       
+
     def tipo_db(self, tipo):
         """
         Convierte el tipo de comprobante para la tabla de la DB.
-        
-        Convierte el tipo de Mis Comprobantes AFIP al formato necesario 
+
+        Convierte el tipo de Mis Comprobantes AFIP al formato necesario
         para persistir en la tabla de la DB.
         """
         tipo_db = tipo.split("-")
         return int(tipo_db[0])
-    
+
     def tipo_doc_db(self, tipo_doc):
         """
         Convierte el tipo de documento para la tabla de la DB.
-        
-        Convierte el tipo de documento de Mis Comprobantes AFIP al 
+
+        Convierte el tipo de documento de Mis Comprobantes AFIP al
         formato necesario para persistir en la tabla de la DB.
         """
         if tipo_doc in self.documentos_dicc:
             return self.documentos_dicc[tipo_doc][0]
         else:
             return int(99)
-       
+
     def muestra_vista(self):
         """
         Muestra la vista de la aplicación.
-        
+
         Muestra pagina.html luego de renderizar los datos.
         """
         # Instancia la clase MotorVista y escribe el html:
-        print(MotorVista().arma_vista(self.tipo, self.botones_ac,  
-                                      self.botones_ev, self.botones_aux,  
-                                      self.alertas, self.opciones,  
-                                      self.contenidos, self.tablas,  
-                                      self.componentes, self.datos_pg, 
+        print(MotorVista().arma_vista(self.tipo, self.botones_ac,
+                                      self.botones_ev, self.botones_aux,
+                                      self.alertas, self.opciones,
+                                      self.contenidos, self.tablas,
+                                      self.componentes, self.datos_pg,
                                       self.modulo))
-        
