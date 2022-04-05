@@ -213,7 +213,7 @@ class TarjCuponControl():
                     if fecha_csv < fecha_menor: fecha_menor = fecha_csv
                 self.tarj_cupon.set_fecha(fecha_menor)
                 cupones = self.tarj_cupon.find_all_fecha_dic()
-                # Posiciona en primer registro de datos el CSV:
+            # Posiciona en primer registro de datos el CSV:
             csvfile.seek(0)
             arch = csv.reader(csvfile, delimiter=";")
             next(arch)

@@ -13,7 +13,6 @@
 import os
 import socket
 import cgi
-import csv
 from datetime import date
 from datetime import datetime
 from builtins import int

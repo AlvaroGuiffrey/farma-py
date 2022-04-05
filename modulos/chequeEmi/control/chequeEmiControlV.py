@@ -128,13 +128,13 @@ class ChequeEmiControlV():
             self.arma_vista()
             # Muestra la vista:
             self.muestra_vista()
-        """
+
         # Acción para editar
         if self.accion == "Editar":
             # Recibe datos por POST:
             self.id = self.form.getvalue("id")
             # Agrega titulo e información al panel:
-            self.datos_pg['tituloPanel'] = ("Cupón de Tarjeta - Editar")
+            self.datos_pg['tituloPanel'] = ("Cheque Emitido - Editar")
             self.datos_pg['info'] = ("Permite editar los datos de un renglón"
                         " del listado.")
             # Agrega los botones de la aplicación:
@@ -143,10 +143,10 @@ class ChequeEmiControlV():
             self.botones_ev = ["botonConfEditar", "botonVolver"]
             #Arma los datos para la vista:
             self.contenidos = ["editarDato",]
-            self.tarj_cupon.set_id(self.id)
-            self.tarj_cupon.find()
-            self.datos_pg['cantidad'] = self.tarj_cupon.get_cantidad()
-            self.datos_pg['id'] = self.tarj_cupon.get_id()
+            self.cheque_emi.set_id(self.id)
+            self.cheque_emi.find()
+            self.datos_pg['cantidad'] = self.cheque_emi.get_cantidad()
+            self.datos_pg['id'] = self.cheque_emi.get_id()
             self.arma_vista()
             # Muestra la vista:
             self.muestra_vista()
@@ -154,27 +154,27 @@ class ChequeEmiControlV():
         if self.accion == "ConfEditar":
             # Recibe datos por POST:
             self.id = self.form.getvalue("id")
-            comentario = self.form.getvalue("comentario")
-            self.error = int(self.form.getvalue("error"))
+            referencia = self.form.getvalue("referencia")
+            valor_ref = self.form.getvalue("valor_ref")
             # Agrega titulo e información al panel:
-            self.datos_pg['tituloPanel'] = ("Cupón de Tarjeta - Ver Edición")
+            self.datos_pg['tituloPanel'] = ("Cheque Emitido - Ver Edición")
             self.datos_pg['info'] = ("Permite ver los datos editados de "
                         "un renglón del listado.")
             # Agrega los botones de la aplicación:
             self.botones_ac.append('botonEditar')
             #Actualiza los datos en la tabla:
-            self.tarj_cupon.set_id(self.id)
-            self.tarj_cupon.set_error(self.error)
-            self.tarj_cupon.set_comentario(comentario)
+            self.cheque_emi.set_id(self.id)
+            self.cheque_emi.set_referencia(referencia)
+            self.cheque_emi.set_valor_ref(valor_ref)
             id_usuario = 1 # Va el id del USUARIO
-            self.tarj_cupon.set_id_usuario_act(id_usuario)
+            self.cheque_emi.set_id_usuario_act(id_usuario)
             ahora = datetime.now()
             fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
-            self.tarj_cupon.set_fecha_act(fecha_act)
-            self.tarj_cupon.update_editar()
-            self.datos_pg['cantidad'] = self.tarj_cupon.get_cantidad()
+            self.cheque_emi.set_fecha_act(fecha_act)
+            self.cheque_emi.update_editar()
+            self.datos_pg['cantidad'] = self.cheque_emi.get_cantidad()
             # Agrega las alertas:
-            if int(self.tarj_cupon.get_cantidad()) > 0:
+            if int(self.cheque_emi.get_cantidad()) > 0:
                 self.alertas.append("alertaSuceso")
                 self.datos_pg["alertaSuceso"] = ("Actualizó el registro "
                     "con <b>EXITO !!!</b>.")
@@ -185,11 +185,11 @@ class ChequeEmiControlV():
             #Arma los datos para la vista:
             self.contenidos = ["verDato",]
             self.datos_pg['id'] = self.id
-            self.tarj_cupon.find()
+            self.cheque_emi.find()
             self.arma_vista()
             # Muestra la vista:
             self.muestra_vista()
-        """
+
     def arma_vista(self):
         self.datos_pg['id'] = self.cheque_emi.get_id()
         self.datos_pg['numero'] = self.cheque_emi.get_numero()

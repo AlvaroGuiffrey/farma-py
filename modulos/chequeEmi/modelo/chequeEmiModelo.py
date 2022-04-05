@@ -312,3 +312,22 @@ class ChequeEmiModelo(ChequeEmiActiveRecord):
         cursor.close()
         ccnx.close()
         return datos
+
+    def update_editar(self):
+        """
+        Modifica los datos del registro según edición.
+
+        @param chequeEmiVO: datos varios.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        query = ("UPDATE cheques_emi SET referencia=%s, valor_ref=%s, "
+                "id_usuario_act=%s, fecha_act=%s WHERE id=%s")
+        valor = (self.get_referencia(), self.get_valor_ref(),
+                self.get_id_usuario_act(), self.get_fecha_act(), self.get_id())
+        cursor.execute(query, valor)
+        self.ultimo_id = cursor.lastrowid
+        ccnx.commit()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()

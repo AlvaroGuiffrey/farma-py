@@ -1,0 +1,779 @@
+                                                                                   Movimientos Conformados                                                                                    
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+Fecha consulta:               04/04/2022                                                                                                                                                      
+                                                                                                                                                                                              
+Hora consulta:                18:37                                                                                                                                                           
+                                                                                                                                                                                              
+Usuario:                      MARIA DELFA BOCHATON                                                                                                                                            
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+Par?metros de b?squeda:       Cuenta: 03 - CC $ 035006613369 | Fecha desde 02/03/2022 hasta 31/03/2022 | Movimiento: D?bitos y Cr?ditos | Monto: Todos los montos                             
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+Fecha Mvto                    Fecha Valor                                            MontoReferencia                    Concepto                                                         Saldo
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+02/03/2022                    25/02/2022                                             -0,530002130070621                 FV IMP DEBITO LEY 25413                                               
+                                                                                                                                                                                              
+02/03/2022                    25/02/2022                                             -3,690002130070621                 FV IMP DEBITO LEY 25413                                               
+                                                                                                                                                                                              
+02/03/2022                    25/02/2022                                            -17,580002130070621                 FV IMP DEBITO LEY 25413                                               
+                                                                                                                                                                                              
+02/03/2022                    25/02/2022                                            -87,910002130070621                 I.V.A. PERCEPCION RG 3337                                             
+                                                                                                                                                                                              
+02/03/2022                    25/02/2022                                           -615,400002130070621                 I.V.A.                                                                
+                                                                                                                                                                                              
+02/03/2022                    25/02/2022                                         -2.930,460002130070621                 COMISION MANT CUENTA                                                  
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                            885,650000023021182                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                          1.759,210000023020841                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                          6.686,150000000622530                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+02/03/2022                    02/03/2022                                          7.000,000000203170914                 TRANSF. REC 27390345882  CAJIGAS/RENEE P                              
+                                                                                                                                                                                              
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                         35.808,720000023021183                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                             -0,600000000622530                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                             -5,310000023021182                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                             -6,370005210116375                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                            -10,560000023020841                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                            -40,120000000622530                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                           -100,290000000622530                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                           -214,850000023021183                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+02/03/2022                    02/03/2022                                         -1.061,000005210116375                 RIO URUGUAY CSL                                             314.956,45
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                          2.519,800000059034296                 CREDITO TARJETA CABAL                                                 
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                          3.949,080000023031676                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                          9.441,350000000645978                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                         70.593,030000023031677                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                             -0,230000059034296                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                             -0,360000023031676                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                             -0,850000000645978                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                             -6,350000023031677                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                            -15,120000059034296                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                            -23,690000023031676                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                            -37,800000059034296                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                            -56,650000000645978                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                            -59,240000023031676                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                           -141,620000000645978                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                           -423,560000023031677                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+03/03/2022                    03/03/2022                                         -1.058,900000023031677                 REGIMEN RECAUD. SIRCREB                                     399.635,34
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                          2.434,020000023041399                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                          5.701,980000023041274                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                          7.222,710000403685268                 CR TRANSF DEBIN                                                       
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                         63.007,200000023041275                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                             -0,220000023041399                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                             -0,510000023041274                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                             -0,650000403685268                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                             -5,670000023041275                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                            -14,600000023041399                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                            -34,210000023041274                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                            -36,510000023041399                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                            -43,340000403685268                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                            -85,530000023041274                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                           -108,340000403685268                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                           -378,040000023041275                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                           -945,110000023041275                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+04/03/2022                    04/03/2022                                        -31.926,320000403946113                 DB TRANSF BANCA EMPRESA                                     444.422,20
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                            195,080000023071220                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                         56.517,060000023071221                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                      2.060.963,840000039215899                 PAGO CERTIF. CRE CTA CTE                                              
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                             -0,020000023071220                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                             -1,170000023071220                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                             -2,930000023071220                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                             -5,090000023071221                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                           -339,100000023071221                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+07/03/2022                    07/03/2022                                           -847,760000023071221                 REGIMEN RECAUD. SIRCREB                                   2.560.902,11
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                          1.155,350000023080719                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                          7.166,980000023081667                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                        170.834,090000023081668                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                             -0,100000023080719                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                             -0,130000803993997                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                             -0,600000803993997                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                             -0,650000023081667                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                             -6,930000023080719                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                            -15,380000023081668                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                            -17,330000023080719                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                            -21,000000803993997                 I.V.A.                                                                
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                            -43,000000023081667                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                           -100,000000803993997                 COM TRANSF C ELECTRONICO                                              
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                           -107,500000023081667                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                         -1.025,000000023081668                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                         -1.060,950000803988725                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                         -1.454,170000803935352                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                         -2.454,530000803993997                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                         -2.562,510000023081668                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                       -176.825,370000803988725                 DB TRANSF BANCA EMPRESA                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                       -242.361,600000803935352                 PAGOS LINK BANCA EMPRESA                                              
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                       -409.087,990000803993997                 DB TRANSF BANCA EMPRESA                                               
+                                                                                                                                                                                              
+08/03/2022                    08/03/2022                                     -1.700.000,000000803560442                 DB PLAZO FIJO ATM                                           202.913,79
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                            675,060000023091354                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                          1.263,040000023091136                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                         37.010,200000000641858                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+09/03/2022                    09/03/2022                                         52.680,550000000637161                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                         77.160,450000023091355                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -0,060000023091354                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -0,110000023091136                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -0,430000023091137                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -3,330000000641858                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -4,050000023091354                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -4,740000000637161                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -6,940000023091355                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                             -7,580000023091136                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                            -10,130000023091354                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                            -18,950000023091136                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                            -72,220000023091137                 DB COMERCIO MASTER                                                    
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                           -222,060000000641858                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                           -316,080000000637161                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                           -462,960000023091355                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                           -555,150000000641858                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                           -790,200000000637161                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+09/03/2022                    09/03/2022                                         -1.157,410000023091355                 REGIMEN RECAUD. SIRCREB                                     368.070,69
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             10,000001003725072                 CR TRANSF DEBIN                                                       
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                          1.993,780000023100775                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                          3.375,450001003106971                 CR TRANSF HOME BANKING                                                
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                          8.571,390000023101207                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                         64.172,030000000658648                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                         75.295,070000023101208                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             -0,060001003725072                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             -0,150001003725072                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             -0,180000023100775                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             -0,770000023101207                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             -5,780000000658648                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                             -6,780000023101208                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                            -11,960000023100775                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                            -29,910000023100775                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                            -34,140006370100724                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                            -51,430000023101207                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                           -128,570000023101207                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                           -385,030000000658648                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                           -451,770000023101208                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                           -962,580000000658648                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                         -1.129,430000023101208                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+10/03/2022                    10/03/2022                                         -5.690,000006370100724                 GALBOP SRL                                                  512.599,87
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                          6.092,970000023110730                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                         49.682,090000023111152                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                         72.784,050000000678031                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+11/03/2022                    11/03/2022                                      1.132.448,490000039221204                 PAGO CERTIF. CRE CTA CTE                                              
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                             -0,550000023110730                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                             -4,470000023111152                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                             -6,550000000678031                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                            -36,560000023110730                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                            -91,390000023110730                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                           -298,090000023111152                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                           -436,700000000678031                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                           -745,230000023111152                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                         -1.091,760000000678031                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+11/03/2022                    11/03/2022                                     -1.600.000,000001103628818                 DB PLAZO FIJO ATM                                           170.896,17
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                          1.732,050000023141310                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                          5.967,870000000694053                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                         83.419,910000023141311                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                             -0,160000023141310                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                             -0,540000000694053                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                             -7,510000023141311                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                            -10,390000023141310                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                            -25,980000023141310                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                            -35,810000000694053                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                            -89,510000000694053                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                           -500,520000023141311                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+14/03/2022                    14/03/2022                                         -1.251,300000023141311                 REGIMEN RECAUD. SIRCREB                                     260.094,28
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                          1.727,440000023151579                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                         12.832,710000023151580                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                         65.251,160000023151581                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                             -0,100000023150759                 DB COMERCIO MASTER                                                    
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                             -0,160000023151579                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                             -1,150000023151580                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                             -5,870000023151581                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                            -10,360000023151579                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                            -14,810005190202838                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                            -25,910000023151579                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                            -77,000000023151580                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                           -192,490000023151580                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                           -391,510000023151581                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                           -978,770000023151581                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                         -2.467,600005190202838                 POSNET S.A.                                                           
+                                                                                                                                                                                              
+15/03/2022                    15/03/2022                                        -31.391,680001503096365                 DB TRANSF BANCA EMPRESA                                     304.348,18
+                                                                                                                                                                                              
+16/03/2022                    15/03/2022                                           -188,350001503096365                 FV IMP DEBITO LEY 25413                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                          1.955,320000023161298                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                          3.051,710000023161299                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                         10.192,880000023161300                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                         62.811,220000023161246                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                         91.248,300000000629849                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                        151.101,690000000626528                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+16/03/2022                    16/03/2022                                             -0,180000023161298                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                             -0,270000023161299                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                             -0,920000023161300                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                             -5,650000023161246                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                             -8,210000000629849                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                            -11,730000023161298                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                            -13,600000000626528                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                            -18,310000023161299                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                            -29,330000023161298                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                            -45,780000023161299                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                            -61,160000023161300                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                           -152,890000023161300                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                           -376,870000023161246                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                           -547,490000000629849                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                           -906,610000000626528                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                           -942,170000023161246                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                         -1.368,720000000629849                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+16/03/2022                    16/03/2022                                         -2.266,520000000626528                 REGIMEN RECAUD. SIRCREB                                     617.764,54
+                                                                                                                                                                                              
+17/03/2022                    17/03/2022                                         23.234,630000023171214                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+17/03/2022                    17/03/2022                                             -2,090000023171214                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+17/03/2022                    17/03/2022                                           -139,410000023171214                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+17/03/2022                    17/03/2022                                           -348,520000023171214                 REGIMEN RECAUD. SIRCREB                                     640.509,15
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                          4.731,290000023181178                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                         17.839,070000023181179                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                      2.419.321,780000039229245                 PAGO CERTIF. CRE CTA CTE                                              
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                             -0,430000023181178                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                             -1,610000023181179                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                            -28,390000023181178                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                            -70,970000023181178                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                           -107,030000023181179                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                           -169,130001803675364                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                           -267,590000023181179                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                           -440,730001803675368                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                        -28.187,710001803675364                 PAGOS LINK BANCA EMPRESA                                              
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                        -73.455,770001803675368                 PAGOS LINK BANCA EMPRESA                                              
+                                                                                                                                                                                              
+18/03/2022                    18/03/2022                                     -2.500.000,000001803857746                 DB PLAZO FIJO ATM                                           479.671,93
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                          1.392,360000023210855                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                          4.457,570000023211137                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                          8.451,080000023211138                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                             -0,130000023210855                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                             -0,400000023211137                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                             -0,760000023211138                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                             -8,350000023210855                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                            -20,890000023210855                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                            -26,750000023211137                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                            -50,710000023211138                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                            -66,860000023211137                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+21/03/2022                    21/03/2022                                           -126,770000023211138                 REGIMEN RECAUD. SIRCREB                                     493.671,32
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                            254,700000023221584                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                          1.037,300000023220693                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                          3.134,890000023221585                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                          3.853,220000023220692                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                         39.823,390000023221586                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -0,020000023221584                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -0,090000023220693                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -0,280000023221585                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -0,350000023220692                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -1,530000023221584                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -3,580000023221586                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -3,820000023221584                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                             -6,220000023220693                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                            -15,560000023220693                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                            -18,810000023221585                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                            -23,120000023220692                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                            -47,020000023221585                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                            -57,800000023220692                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                           -238,940000023221586                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                           -240,000000030249646                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                           -597,350000023221586                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+22/03/2022                    22/03/2022                                        -40.000,000000030249646                 CHEQUE CLEARING                                             500.520,33
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             48,780000023231150                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                            604,770000023231149                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                         17.216,740000023231151                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                         67.067,420000000607666                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -0,050000023231149                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -0,290000023231150                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -0,730000023231150                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -1,550000023231151                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -3,630000023231149                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -6,040000000607666                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                             -9,070000023231149                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                            -56,210000030249644                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                           -103,300000023231151                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                           -221,640000030249642                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                           -258,250000023231151                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                           -402,400000000607666                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                         -1.006,010000000607666                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                         -9.367,500000030249644                 CHEQUE CLEARING                                                       
+                                                                                                                                                                                              
+23/03/2022                    23/03/2022                                        -36.940,000000030249642                 CHEQUE CLEARING                                             537.081,37
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                              9,630000023250844                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                            955,260000000620567                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                          2.154,530000023250843                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                         25.772,680000023251182                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                        101.064,680000000619132                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+25/03/2022                    25/03/2022                                      2.475.580,270000039236231                 PAGO CERTIF. CRE CTA CTE                                              
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -0,060000023250844                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -0,090000000620567                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -0,140000023250844                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -0,190000023250843                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -2,320000023251182                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -5,730000000620567                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                             -9,100000000619132                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                            -12,930000023250843                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                            -14,320000000620567                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                            -32,320000023250843                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                           -154,640000023251182                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                           -178,880000030249648                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                           -386,590000023251182                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                           -602,950000030249645                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                           -606,390000000619132                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                         -1.515,970000000619132                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                        -12.378,300002503215737                 DB TRANSF BANCA EMPRESA                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                        -29.812,950000030249648                 CHEQUE CLEARING                                                       
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                        -97.912,980002503212522                 DB TRANSF BANCA EMPRESA                                               
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                       -100.491,830000030249645                 CHEQUE CLEARING                                                       
+                                                                                                                                                                                              
+25/03/2022                    25/03/2022                                       -133.383,550002503215720                 DB TRANSF BANCA EMPRESA                                   2.765.116,19
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                          1.027,880000023280753                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                         51.942,620000023281277                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                             -0,090000023280753                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                             -4,670000023281277                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                             -6,170000023280753                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                            -15,420000023280753                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                           -311,660000023281277                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+28/03/2022                    28/03/2022                                           -779,140000023281277                 REGIMEN RECAUD. SIRCREB                                   2.816.969,54
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                          1.463,800000023291030                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                          3.074,410000023291029                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                          3.500,120000023291468                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                         42.352,270000023291469                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,130000023291030                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,130002903231900                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,130002903232382                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,130002903245747                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,280000023291029                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,320000023291468                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,600002903231900                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,600002903232382                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -0,600002903245747                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -3,810000023291469                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -6,370005210101208                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                             -8,780000023291030                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -18,450000023291029                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -21,000000023291468                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -21,000002903231900                 I.V.A.                                                                
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -21,000002903232382                 I.V.A.                                                                
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -21,000002903245747                 I.V.A.                                                                
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -21,960000023291030                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -46,120000023291029                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                            -52,500000023291468                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -100,000002903231900                 COM TRANSF C ELECTRONICO                                              
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -100,000002903232382                 COM TRANSF C ELECTRONICO                                              
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -100,000002903245747                 COM TRANSF C ELECTRONICO                                              
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -112,170002903232382                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -254,110000023291469                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -339,800002903245747                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                           -635,280000023291469                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                         -1.061,000005210101208                 RIO URUGUAY CSL                                                       
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                         -1.759,920002903231900                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                        -18.695,140002903232382                 DB TRANSF BANCA EMPRESA                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                        -56.633,910002903245747                 DB TRANSF BANCA EMPRESA                                               
+                                                                                                                                                                                              
+29/03/2022                    29/03/2022                                       -293.320,020002903231900                 DB TRANSF BANCA EMPRESA                                   2.494.003,88
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                          1.295,930000023301118                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                          4.950,990000000668035                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                         32.826,910000023301119                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                             -0,120000023301118                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                             -0,450000000668035                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                             -2,950000023301119                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                             -7,780000023301118                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                            -19,440000023301118                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                            -29,710000000668035                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                            -74,260000000668035                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                           -196,960000023301119                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                           -340,360000030249649                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                           -492,400000023301119                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+30/03/2022                    30/03/2022                                        -56.727,280000030249649                 CHEQUE CLEARING                                           2.475.186,00
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             48,780000023311026                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                         18.284,550000023311028                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                         28.172,320000023311027                 CREDITO TARJ MASTERCARD                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                         31.566,020000000695519                 TR. PAGO PR 30573143090  COLEGIO DE                                   
+                                                                                                                        FARMACEUTICOS                                                         
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                         32.941,520003103486814                 CR TRANSF HOME BANKING                                                
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             -0,290000023311026                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             -0,730000023311026                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             -1,650000023311028                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             -2,540000023311027                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             -2,840000000695519                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                             -2,960003103486814                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -109,710000023311028                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -144,000000050029551                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -144,830000050029552                 IMPUESTO DEBITO LEY 25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -169,030000023311027                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -189,400000000695519                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -197,650003103486814                 IMPUESTO CREDITO LEY25413                                             
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -274,270000023311028                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -422,580000023311027                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -473,490000000695519                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                           -494,120003103486814                 REGIMEN RECAUD. SIRCREB                                               
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                        -24.000,000000050029551                 CHEQUE CLEARING                                                       
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                        -24.138,800000050029552                 CHEQUE CLEARING                                                       
+                                                                                                                                                                                              
+31/03/2022                    31/03/2022                                     -1.900.000,000003103873882                 DB PLAZO FIJO ATM                                           635.430,30
+                                                                                                                                                                                              
+

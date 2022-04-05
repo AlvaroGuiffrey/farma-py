@@ -1,0 +1,42 @@
+<!-- Opción de fechas (desde - hasta) -->
+<div class="jumbotron jumbotron-fluit p-2 mb-1">
+	<h6>Opciones de fechas</h6>
+	<hr />
+
+	<div class="row">
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+							title="Seleccione el rango de fechas">Fechas:</div>
+				</div>
+				<input type="text" id="date_range" name="fechas">
+				<div class="input-group-append">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Dato obligatorio">
+						<b style="color: blue">*</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+							title="Seleccione el tipo de fechas">de:</div>
+				</div>
+				<select class='custom-select'  id='tipo' name='tipo'>
+    				<option value='1' selected>Movimiento</option>
+    				<option value='2'>Valor</option>
+    			</select>
+				<div class="input-group-append">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Dato obligatorio">
+						<b style="color: blue">*</b>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type='hidden' name='numero' value='0'>
