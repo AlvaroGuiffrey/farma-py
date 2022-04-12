@@ -137,17 +137,6 @@ class TarjLiqActiveRecord(TarjLiqVO):
         """
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
-        query = ("UPDATE tarj_liquidaciones SET liquidacion=%s, id_producto=%s, "
-                "id_operador=%s, fecha_pago=%s, banco_suc=%s, moneda=%s, "
-                "importe_bruto=%s, importe_desc=%s, importe_neto=%s, cupones=%s, "
-                "marca_cupones=%s, fecha_proceso=%s, marca_banco=%s, "
-                "fecha_banco=%s, opera_banco=%s, arancel=%s, "
-                "costo_financiero=%s, otros_deb=%s, iva_arancel=%s, "
-                "iva_costo_financiero=%s, iva_otros_deb=%s, "
-                "impuesto_debcred=%s, impuesto_interes=%s, retencion_iva=%s, "
-                "retencion_imp_gan=%s, retencion_ing_brutos=%s, "
-                "percepcion_iva=%s, percepcion_ing_brutos=%s, "
-                "estado=%s, id_usuario_act=%s, fecha_act=%s WHERE id=%s")
         valor = (self.get_liquidacion(), self.get_id_producto(), self.get_id_operador(),
                 self.get_fecha_pago(), self.get_banco_suc(), self.get_moneda(),
                 self.get_importe_bruto(), self.get_importe_desc(),
@@ -163,6 +152,17 @@ class TarjLiqActiveRecord(TarjLiqVO):
                 self.get_percepcion_iva(), self.get_percepcion_ing_brutos(),
                 self.get_estado(), self.get_id_usuario_act(),
                 self.get_fecha_act(), self.get_id())
+        query = ("UPDATE tarj_liquidaciones SET liquidacion=%s, id_producto=%s, "
+                "id_operador=%s, fecha_pago=%s, banco_suc=%s, moneda=%s, "
+                "importe_bruto=%s, importe_desc=%s, importe_neto=%s, "
+                "cupones=%s, marca_cupones=%s, fecha_proceso=%s, "
+                "marca_banco=%s, fecha_banco=%s, opera_banco=%s, arancel=%s, "
+                "costo_financiero=%s, otros_deb=%s, iva_arancel=%s, "
+                "iva_costo_financiero=%s, iva_otros_deb=%s, "
+                "impuesto_debcred=%s, impuesto_interes=%s, retencion_iva=%s, "
+                "retencion_imp_gan=%s, retencion_ing_brutos=%s, "
+                "percepcion_iva=%s, percepcion_ing_brutos=%s, "
+                "estado=%s, id_usuario_act=%s, fecha_act=%s WHERE id=%s")
         cursor.execute(query, valor)
         self.ultimo_id = cursor.lastrowid
         ccnx.commit()

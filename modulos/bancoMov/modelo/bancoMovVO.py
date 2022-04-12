@@ -27,6 +27,7 @@ class BancoMovVO:
         self.importe = float(-0.00)
         self.numero = int(0)
         self.concepto = str('')
+        self.id_grupo = int(0)
         self.marca = int(0)
         self.comentario = str('')
         self.estado = int(0)
@@ -55,6 +56,9 @@ class BancoMovVO:
 
     def get_concepto(self):
         return self.concepto
+
+    def get_id_grupo(self):
+        return self.id_grupo
 
     def get_marca(self):
         return self.marca
@@ -92,6 +96,9 @@ class BancoMovVO:
 
     def set_concepto(self, concepto):
         self.concepto = concepto
+
+    def set_id_grupo(self, id_grupo):
+        self.id_grupo = id_grupo
 
     def set_marca(self, marca):
         self.marca = marca

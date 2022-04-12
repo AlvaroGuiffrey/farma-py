@@ -57,11 +57,12 @@ class BancoMovActiveRecord(BancoMovVO):
             self.set_importe(dato[3])
             self.set_numero(dato[4])
             self.set_concepto(dato[5])
-            self.set_marca(dato[6])
-            self.set_comentario(dato[7])
-            self.set_estado(dato[8])
-            self.set_id_usuario_act(dato[9])
-            self.set_fecha_act(dato[10])
+            self.set_id_grupo(dato[6])
+            self.set_marca(dato[7])
+            self.set_comentario(dato[8])
+            self.set_estado(dato[9])
+            self.set_id_usuario_act(dato[10])
+            self.set_fecha_act(dato[11])
             return dato
         else:
             return None
@@ -76,13 +77,13 @@ class BancoMovActiveRecord(BancoMovVO):
         cursor = ccnx.cursor()
         valor = (self.get_fecha_mov(), self.get_fecha_valor(),
                 self.get_importe(), self.get_numero(), self.get_concepto(),
-                self.get_marca(), self.get_comentario(),
+                self.get_id_grupo(), self.get_marca(), self.get_comentario(),
                 self.get_estado(), self.get_id_usuario_act(),
                 self.get_fecha_act())
         query = ("INSERT INTO banco_mov (fecha_mov, fecha_valor, importe, "
-                "numero, concepto, marca, comentario, "
+                "numero, concepto, id_grupo, marca, comentario, "
                 "estado, id_usuario_act, fecha_act)"
-                " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+                " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
         cursor.execute(query, valor)
         self.ultimo_id = cursor.lastrowid
         ccnx.commit()
@@ -99,14 +100,14 @@ class BancoMovActiveRecord(BancoMovVO):
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
         query = ("UPDATE banco_mov SET fecha_mov=%s, fecha_valor=%s, "
-                "importe=%s, numero=%s, concepto=%s, marca=%s, "
+                "importe=%s, numero=%s, concepto=%s, id_grupo=%s, marca=%s, "
                 "comentario=%s, estado=%s, id_usuario_act=%s, "
                 "fecha_act=%s WHERE id=%s")
         valor = (self.get_fecha_mov(), self.get_fecha_valor(),
                 self.get_importe(), self.get_numero(),
-                self.get_concepto(), self.marca(), self.comentario(),
-                self.get_estado(), self.get_id_usuario_act(),
-                self.get_fecha_act(), self.get_id())
+                self.get_concepto(), self.get_id_grupo(), self.get_marca(),
+                self.get_comentario(), self.get_estado(),
+                self.get_id_usuario_act(), self.get_fecha_act(), self.get_id())
         cursor.execute(query, valor)
         self.ultimo_id = cursor.lastrowid
         ccnx.commit()

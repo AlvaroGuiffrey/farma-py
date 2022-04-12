@@ -19,7 +19,11 @@ from builtins import int
 # Módulos de la aplicación:
 from includes.control.motorVista import MotorVista
 from modulos.bancoMov.modelo.bancoMovModelo import BancoMovModelo
+from modulos.bancoMov.modelo.bancoMovConcModelo import BancoMovConcModelo
+from modulos.bancoMov.modelo.bancoMovGrupoModelo import BancoMovGrupoModelo
 from modulos.bancoMov.includes.bancoMovTabla import BancoMovTabla
+from modulos.chequeEmi.modelo.chequeEmiModelo import ChequeEmiModelo
+from modulos.tarjLiquidacion.modelo.tarjLiqModelo import TarjLiqModelo
 #from modulos.bancoMov.includes.bancoMovPDF import BancoMovPDF
 from includes.includes.select import Select
 
@@ -36,6 +40,10 @@ class BancoMovControl():
         """
         # Instancia las clases del modelo:
         self.banco_mov = BancoMovModelo()
+        self.banco_conc = BancoMovConcModelo()
+        self.banco_grupo = BancoMovGrupoModelo()
+        self.cheque_emi = ChequeEmiModelo()
+        self.tarj_liq = TarjLiqModelo()
         # Busca el ip para el menú:
         self.nombre_equipo = socket.gethostname()
         self.ip = socket.gethostbyname(self.nombre_equipo)
@@ -54,16 +62,36 @@ class BancoMovControl():
         self.botones_ev = []
         self.botones_aux = []
         self.accion = ''
+        self.cant_grupos = int(0)
         self.cant_agregados = int(0)
         self.cant_actualizados = int(0)
         self.cant_cargados = int(0)
         self.cant_existentes = int(0)
         self.cant_repetidos = int(0)
+        self.cant_sin_grupo = int(0)
+        self.cant_conc_cargados = int(0)
+        self.cant_cheques_conciliados = int(0)
+        self.cant_liq_tarj_conciliados = int(0)
         self.linea = []
         # Consulta tablas que se utilizan en el módulo:
-
+        self.banco_conceptos = self.banco_conc.find_all()
+        self.banco_grupos = self.banco_grupo.find_all()
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
-
+        if int(self.banco_conc.get_cantidad()) > 0:
+            self.banco_conceptos_dicc = {reng[1]: (reng[0], reng[3])
+                                for reng in self.banco_conceptos}
+        else:
+            self.banco_conceptos_dicc = {}
+        if int(self.banco_grupo.get_cantidad()) > 0:
+            self.cant_grupos = self.banco_grupo.get_cantidad()
+            self.banco_grupos_dicc = {reng[0]: (reng[1], reng[2])
+                                for reng in self.banco_grupos}
+            self.banco_grupos_buscar_dicc = {reng[0]: reng[1] for reng in
+                                     self.banco_grupos}
+        else:
+            self.cant_grupos = 0
+            self.banco_grupos_dicc = {}
+            self.banco_grupos_buscar_dicc = {}
     # Métodos:
     def inicio(self, accion):
         """
@@ -103,8 +131,9 @@ class BancoMovControl():
         self.banco_mov.count()
         self.datos_pg['cantidad'] = self.banco_mov.get_cantidad()
         # Agrega los botones de la aplicación:
-        self.botones_ac = ["botonBadge", "botonCargar", 
-                          "botonListar", "botonBuscar"]
+        self.botones_ac = ["botonBadge", "botonCargar",
+                          "botonListar", "botonBuscar", "botonActConcGrupo",
+                          "botonConciliar", "botonHacerAsiento"]
         # Selecciona las acciones:
         if "bt_agregar" in self.form: self.accion = "Agregar"
         elif "bt_conf_agregar" in self.form: self.accion = "ConfAgregar"
@@ -112,13 +141,16 @@ class BancoMovControl():
         elif "bt_conf_cargar" in self.form: self.accion = "ConfCargar"
         elif "bt_listar" in self.form: self.accion = "Listar"
         elif "bt_conf_listar" in self.form: self.accion = "ConfListar"
-        elif "bt_listar_inv" in self.form: self.accion = "ListarInv"
-        elif "bt_conf_listar_inv" in self.form: self.accion = "ConfListarInv"
         elif "bt_buscar" in self.form: self.accion = "Buscar"
         elif "bt_conf_buscar" in self.form: self.accion = "ConfBuscar"
         elif "bt_descargar_pdf" in self.form: self.accion = "DescargarPDF"
         elif "bt_editar" in self.form: self.accion = "Editar"
-        elif "bt_descartar" in self.form: self.accion = "Descartar"
+        elif "bt_actualizar" in self.form: self.accion = "Actualizar"
+        elif "bt_conf_actualizar" in self.form: self.accion = "ConfActualizar"
+        elif "bt_conciliar" in self.form: self.accion = "Conciliar"
+        elif "bt_conf_conciliar" in self.form: self.accion = "ConfConciliar"
+        elif "bt_hacer_asiento" in self.form: self.accion = "HacerAsiento"
+        elif "bt_conf_hacer_asiento" in self.form: self.accion = "ConfHacerAsiento"
         else: self.accion = "Iniciar"
         # Pone en 0 los acumuladores:
         self.cant_agregados = self.cant_cargados = self.cant_repetidos = 0
@@ -188,6 +220,7 @@ class BancoMovControl():
             self.datos_pg["cantCargados"] = self.datos_pg["cantRepetidos"] = 0
             self.datos_pg["cantActualizados"] = 0
             self.datos_pg["cantAgregados"] = self.datos_pg["cantExistentes"] = 0
+            self.datos_pg["cantSinGrupo"] = self.datos_pg["cantConcCargados"] = 0
             # Muestra la vista:
             self.muestra_vista()
         # Acción para confirmar cargar:
@@ -205,6 +238,7 @@ class BancoMovControl():
             # Pone en 0 los totalizadores
             self.cant_repetidos = self.cant_faltantes = self.cant_cargados = 0
             self.cant_actualizados = self.cant_existentes = 0
+            self.cant_sin_grupo = self.cant_conc_cargados = 0
             # Buscar la fecha de movimiento menor del archivo txt:
             # Lee el archivo txt
             txtfile = open(self.archivo, "r")
@@ -262,10 +296,13 @@ class BancoMovControl():
                         else:
                             # Agrega los datos a tabla DB:
                             self.agrega_datos(dato)
+                            #self.cant_cargados += 1
             # Carga datos de la vista
             self.contenidos.append("cargarDatos")
             self.datos_pg["cantTxt"] = cant_txt
             self.datos_pg["cantCargados"] = self.cant_cargados
+            self.datos_pg["cantSinGrupo"] = self.cant_sin_grupo
+            self.datos_pg["cantConcCargados"] = self.cant_conc_cargados
             self.datos_pg["cantExistentes"] = self.cant_existentes
             self.datos_pg["cantActualizados"] = self.cant_actualizados
             self.datos_pg["cantRepetidos"] = self.cant_repetidos
@@ -322,8 +359,258 @@ class BancoMovControl():
                     " !!!</b>.")
             # Arma la tabla para listar:
             tabla = BancoMovTabla()
-            tabla.arma_tabla(datos, opciones)
+            #tabla.arma_tabla(datos, opciones)
+            tabla.arma_tabla(datos, opciones, self.banco_grupos_dicc)
             self.tablas = ["tabla",]
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para buscar
+        if self.accion == "Buscar":
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Buscar Movimientos - Banco")
+            self.datos_pg['info'] = ("Realiza una busqueda de movimientos. "
+                        "<br>Seleccione en <b>Opciones del listado</b>"
+                        " los parámetros para la acción.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonBorrar", "botonConfBuscar"]
+            # Arma los datos para la vista:
+            self.opciones.append("buscarOpcion")
+            # Carga los select para las opciones:
+            # Select del grupo:
+            datos = self.banco_grupos_buscar_dicc
+            cantidad = self.cant_grupos
+            nombre = 'grupo'
+            select_tipo = Select()
+            select_tipo.arma_select(datos, cantidad, nombre)
+            self.componentes += ["select_grupo",]
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar buscar
+        if self.accion == "ConfBuscar":
+            # Recibe datos por POST:
+            fechas = self.form.getvalue("fechas")
+            fechas = fechas.split(" - ")
+            # Arma las opciones de búsqueda:
+            opciones = {}
+            opciones['fecha_d'] = fechas[0]
+            opciones['fecha_h'] = fechas[1]
+            opciones['tipo'] = int(self.form.getvalue("tipo"))
+            opciones['grupo'] = int(self.form.getvalue("grupo"))
+            opciones['numero'] = int(self.form.getvalue("numero"))
+            opciones['marca'] = int(self.form.getvalue("marca"))
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Buscar Movimientos - Banco")
+            self.datos_pg['info'] = ("Movimientos bancarios encontrados segun "
+                                     "las opciones de busqueda seleccionadas.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonDescargarPDF",]
+            # Encuentra los datos de la busqueda para listar:
+            datos = self.banco_mov.find_all_buscar(opciones)
+            self.datos_pg["cantidad"] = self.banco_mov.get_cantidad()
+            if self.banco_mov.get_cantidad() == 0:
+                self.alertas.append("alertaAdvertencia")
+                self.datos_pg["alertaAdvertencia"] = ("No hay movimientos para "
+                    "las fechas y opciones seleccionadas. <b>VOLVER A INTENTAR"
+                    " !!!</b>.")
+            # Arma la tabla para listar:
+            tabla = BancoMovTabla()
+            tabla.arma_tabla(datos, opciones, self.banco_grupos_dicc)
+            self.tablas = ["tabla",]
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para Actualizar:
+        if self.accion == "Actualizar":
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Actualiza Movimientos - Banco")
+            self.datos_pg['info'] = ("Realiza una actualización de conceptos y "
+                    "grupos en las tablas. <br>Seleccione en <b>Opciones de "
+                    "Fechas</b> un rango y tipo de fechas.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonConfActualizar",]
+            # Arma los datos para la vista:
+            self.opciones.append("fechasOpcion")
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar la actualización:
+        if self.accion == "ConfActualizar":
+            # Recibe datos por POST:
+            fechas = self.form.getvalue("fechas")
+            fechas = fechas.split(" - ")
+            # Arma las opciones de listar:
+            opciones = {}
+            opciones['fecha_d'] = fechas[0]
+            opciones['fecha_h'] = fechas[1]
+            opciones['tipo'] = int(self.form.getvalue("tipo"))
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Actualiza Movimientos - Banco")
+            self.datos_pg['info'] = ("Actualiza conceptos y grupos en las "
+                                     "tablas, dentro del rango y tipo de fechas"
+                                     " seleccionadas.")
+            # Pone en 0 los contadores
+            cant_tabla = self.cant_actualizados = 0
+            self.cant_conc_cargados = self.cant_sin_grupo = 0
+            # Encuentra los datos de la tabla para actualizar:
+            datos = self.banco_mov.find_all_listar(opciones)
+            cant_tabla = self.datos_pg["cantidad"] = self.banco_mov.get_cantidad()
+            if self.banco_mov.get_cantidad() > 0:
+                # Actualiza grupo y carga conceptos faltantes:
+                for dato in datos:
+                    conc = dato[5]
+                    if int(dato[6]) == 0:
+                        if conc in self.banco_conceptos_dicc:
+                            self.banco_mov.set_id(int(dato[0]))
+                            self.banco_mov.find()
+                            id_grupo = self.banco_conceptos_dicc[conc][1]
+                            self.banco_mov.set_id_grupo(int(id_grupo))
+                            self.banco_mov.update()
+                            self.cant_actualizados += self.banco_mov.get_cantidad()
+                        else:
+                            self.banco_conc.set_concepto(conc)
+                            self.banco_conc.find_concepto()
+                            if int(self.banco_conc.get_cantidad()) < 1:
+                                self.banco_conc.set_concepto(conc)
+                                self.banco_conc.set_comentario("")
+                                self.banco_conc.set_id_grupo(0)
+                                self.banco_conc.set_estado(int(1))
+                                id_usuario = 1 # Va el id del USUARIO logueado
+                                self.banco_conc.set_id_usuario_act(id_usuario)
+                                ahora = datetime.now()
+                                fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                                self.banco_conc.set_fecha_act(fecha_act)
+                                self.banco_conc.insert()
+                                self.cant_conc_cargados += self.banco_conc.get_cantidad()
+            else:
+                self.alertas.append("alertaAdvertencia")
+                self.datos_pg["alertaAdvertencia"] = ("No hay movimientos en "
+                    "las fechas seleccionadas. <b>VOLVER A INTENTAR"
+                    " !!!</b>.")
+            # Carga datos de la vista
+            self.contenidos.append("actualizarDatos")
+            self.datos_pg["cantTabla"] = cant_tabla
+            self.datos_pg["cantActualizados"] = self.cant_actualizados
+            self.datos_pg["cantConcCargados"] = self.cant_conc_cargados
+            self.datos_pg["cantSinGrupo"] = self.cant_sin_grupo
+            # Carga mensajes de la vista
+            if self.cant_actualizados > 0:
+                self.alertas.append("alertaSuceso")
+                self.datos_pg["alertaSuceso"] = ("Se actualizaron registros en "
+                    "la tabla con <b>EXITO !!!</b>.")
+            if self.cant_sin_grupo > 0:
+                self.alertas.append("alertaPeligro")
+                self.datos_pg["alertaPeligro"] = ("El archivo contiene "
+                    " registros sin grupos. "
+                    "<b>VERIFICAR !!!</b>.")
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para conciliar:
+        if self.accion == "Conciliar":
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Conciliar Movimientos - Banco")
+            self.datos_pg['info'] = ("Realiza conciliación de movimientos con "
+                    "cheques emitidos y liquidación de tarjetas."
+                    "<br>Seleccione en <b>Opciones de Fechas</b> "
+                    "un rango y tipo de fechas.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonConfConciliar",]
+            # Arma los datos para la vista:
+            self.opciones.append("fechasOpcion")
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar la conciliación:
+        if self.accion == "ConfConciliar":
+            # Recibe datos por POST:
+            fechas = self.form.getvalue("fechas")
+            fechas = fechas.split(" - ")
+            # Arma las opciones de conciliar:
+            opciones = {}
+            opciones['fecha_d'] = fechas[0]
+            opciones['fecha_h'] = fechas[1]
+            opciones['tipo'] = int(self.form.getvalue("tipo"))
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Conciliación de Movimientos - Banco")
+            self.datos_pg['info'] = ("Concilia datos de la tabla con cheques "
+                                     "emitidos y liquidación de tarjetas, "
+                                     "dentro del rango y tipo de fechas "
+                                     "seleccionadas.")
+            # Agrega los botones para la acción:
+
+            # Encuentra los datos de la tabla para conciliar:
+            datos = self.banco_mov.find_all_conciliar(opciones)
+            self.datos_pg["cantidad"] = self.banco_mov.get_cantidad()
+            cant_tabla = self.banco_mov.get_cantidad()
+            if self.banco_mov.get_cantidad() == 0:
+                self.alertas.append("alertaAdvertencia")
+                self.datos_pg["alertaAdvertencia"] = ("No hay movimientos en "
+                    "las fechas seleccionadas. <b>VOLVER A INTENTAR"
+                    " !!!</b>.")
+            # Pone en 0 los contadores:
+            self.cant_cheques_conciliados = self.cant_liq_tarj_conciliados = 0
+            self.cant_actualizados = 0
+            # Recorre los datos para conciliar:
+            for dato in datos:
+                if dato[5] == "CHEQUE CLEARING":
+                    numero = int(dato[4])
+                    self.cheque_emi.set_numero(numero)
+                    self.cheque_emi.find_numero()
+                    if int(self.cheque_emi.get_cantidad()) == 1:
+                        # Carga datos a tabla cheque_emi:
+                        self.cheque_emi.set_estado_cheque("PAGADO")
+                        self.cheque_emi.set_id_mov_banco(int(dato[0]))
+                        self.cheque_emi.set_fecha_banco(dato[2])
+                        id_usuario = 1 # Va el id del USUARIO logueado
+                        self.cheque_emi.set_id_usuario_act(id_usuario)
+                        ahora = datetime.now()
+                        fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                        self.cheque_emi.set_fecha_act(fecha_act)
+                        self.cheque_emi.update()
+                        self.cant_cheques_conciliados += \
+                                self.cheque_emi.get_cantidad()
+                        # Carga datos a tabla:
+                        self.banco_mov.set_id(int(dato[0]))
+                        self.banco_mov.find()
+                        self.banco_mov.set_marca(int(1))
+                        id_usuario = 1 # Va el id del USUARIO logueado
+                        self.banco_mov.set_id_usuario_act(id_usuario)
+                        ahora = datetime.now()
+                        fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                        self.banco_mov.set_fecha_act(fecha_act)
+                        self.banco_mov.update()
+                        self.cant_actualizados += self.banco_mov.get_cantidad()
+                elif (dato[5] == "CREDITO TARJ MASTERCARD" or \
+                        dato[5] == "CREDITO TARJETA CABAL") or \
+                        dato[5] == "DB COMERCIO MASTER":
+                    self.tarj_liq.set_fecha_pago(dato[2])
+                    self.tarj_liq.set_importe_neto(float(dato[3]))
+                    self.tarj_liq.find_importe_fecha()
+                    if int(self.tarj_liq.get_cantidad()) == 1:
+                        # Carga datos a tabla tarj_liquidaciones:
+                        self.tarj_liq.set_opera_banco(int(dato[0]))
+                        self.tarj_liq.set_fecha_banco(dato[2])
+                        self.tarj_liq.set_marca_banco(int(1))
+                        id_usuario = 1 # Va el id del USUARIO logueado
+                        self.tarj_liq.set_id_usuario_act(id_usuario)
+                        ahora = datetime.now()
+                        fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                        self.tarj_liq.set_fecha_act(fecha_act)
+                        self.tarj_liq.update_banco()
+                        self.cant_liq_tarj_conciliados += self.tarj_liq.get_cantidad()
+                        # Carga datos a tabla:
+                        self.banco_mov.set_id(int(dato[0]))
+                        self.banco_mov.find()
+                        self.banco_mov.set_marca(int(1))
+                        id_usuario = 1 # Va el id del USUARIO logueado
+                        self.banco_mov.set_id_usuario_act(id_usuario)
+                        ahora = datetime.now()
+                        fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                        self.banco_mov.set_fecha_act(fecha_act)
+                        self.banco_mov.update()
+                        self.cant_actualizados += self.banco_mov.get_cantidad()
+            # Carga datos de la vista
+            self.contenidos.append("conciliarDatos")
+            self.datos_pg["cantTabla"] = cant_tabla
+            self.datos_pg["cantActualizados"] = self.cant_actualizados
+            self.datos_pg["cantChequesConciliados"] = self.cant_cheques_conciliados
+            self.datos_pg["cantLiqTarjConciliados"] = self.cant_liq_tarj_conciliados
             # Muestra la vista:
             self.muestra_vista()
 
@@ -376,6 +663,33 @@ class BancoMovControl():
         self.banco_mov.set_numero(str(dato[90:103]))
         concepto = str(dato[120:170]) # solo 50 caracteres
         self.banco_mov.set_concepto(concepto.strip())
+        conc = str(self.banco_mov.get_concepto())
+        # Verifica si el concepto está cargado en el diccionario:
+        if conc in self.banco_conceptos_dicc:
+            id_grupo = self.banco_conceptos_dicc[conc][1]
+        # Si no esta lo agrega a la tabla:
+        else:
+            id_grupo = int(0)
+            # Agrega el concepto
+            self.banco_conc.set_concepto(conc)
+            self.banco_conc.find_concepto()
+            if int(self.banco_conc.get_cantidad()) < 1:
+                self.banco_conc.set_concepto(conc)
+                self.banco_conc.set_comentario("")
+                self.banco_conc.set_id_grupo(int(id_grupo))
+                self.banco_conc.set_estado(int(1))
+                id_usuario = 1 # Va el id del USUARIO logueado
+                self.banco_conc.set_id_usuario_act(id_usuario)
+                ahora = datetime.now()
+                fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
+                self.banco_conc.set_fecha_act(fecha_act)
+                self.banco_conc.insert()
+                self.cant_conc_cargados += self.banco_conc.get_cantidad()
+                #self.cant_conc_cargados +=1
+                id_grupo = self.banco_conc.get_id_grupo()
+
+        if int(id_grupo) == 0: self.cant_sin_grupo +=1
+        self.banco_mov.set_id_grupo(int(id_grupo))
         self.banco_mov.set_marca(int(0))
         self.banco_mov.set_comentario(str(""))
         self.banco_mov.set_estado(int(1))
@@ -384,6 +698,7 @@ class BancoMovControl():
         ahora = datetime.now()
         fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
         self.banco_mov.set_fecha_act(fecha_act)
+
 
     def datos_txt(self, dato):
         """

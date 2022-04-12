@@ -30,12 +30,14 @@ class BancoMovTabla():
         # Instancia el seteo a local:
         locale.setlocale(locale.LC_ALL, 'es_AR')
 
-    def arma_tabla(self, datos, opciones):
+
+    def arma_tabla(self, datos, opciones, grupos_dicc):
         """
         Método que arma la tabla html para la vista.
 
         @param datos:
         @param opciones:
+        @param grupos_dicc:
         @return: tabla.html
         """
         # Crea el archivo para la tabla:
@@ -62,7 +64,8 @@ class BancoMovTabla():
             "<th scope='col' title='Importe del movimiento'>Importe</th>"
             "<th scope='col' title='Número del movimiento'>Número</th>"
             "<th scope='col' title='Concepto del movimiento'>Concepto</th>"
-            "<th scope='col' title='Marca y comentario del movimiento'>Marca/Com.</th>"
+            "<th scope='col' title='Grupo, marca y comentario del movimiento'>"
+                "Grupo/Marca/Com.</th>"
             "<th scope='col' title='Acciones para el movimiento'>Acciones</th>"
             "</tr></thead><tbody>"
             "<!-- Datos de los renglones -->")
@@ -81,23 +84,25 @@ class BancoMovTabla():
             # Importe:
             importe = dato[3]
             # Suma a totales:
-            # Suma por fecha operación
-            # >>>>>>>>>> ver totales
-            """
-            if dato[2] in totales:
-                totales[dato[2]][0] += 1
-                totales[dato[2]][1] += importe
+            # Suma por orden del grupo
+
+            if int(dato[6]) == 0:
+                if importe < 0:
+                    nombre = "<b>DB SIN GRUPO</b>"
+                    orden = "D99"
+                else:
+                    nombre = "<b>CR SIN GRUPO</b>"
+                    orden = "C99"
             else:
-                totales[dato[2]] = [1, importe]
-            # Suma por Lote
-            if dato[9] in totales_lote:
-                totales_lote[dato[9]][0] += 1
-                totales_lote[dato[9]][1] += importe
-                totales_lote[dato[9]][2] = dato[8]
+                nombre = grupos_dicc[int(dato[6])][0]
+                orden = grupos_dicc[int(dato[6])][1]
+
+            if orden in totales:
+                totales[orden][0] += 1
+                totales[orden][1] += importe
             else:
-                totales_lote[dato[9]] = [1, importe, dato[8]]
-            """
-            #  >>>>>>>>> Fin ver totales
+                totales[orden] = [1, importe, nombre]
+
             # Suma totales del listado
             total += importe
             if importe < 0:
@@ -110,24 +115,34 @@ class BancoMovTabla():
             importe = locale.format("%.2f", (importe), True)
             #importe = ({:,.2f}'.format(importe).replace(",", "@")
             #    .replace(".", ",").replace("@", "."))
+            # Grupo del movimiento:
+            if int(dato[6]) == 0:
+                grupo = ("<i class='fa fa-object-group'"
+                          "style='color:red' "
+                          "title='Sin grupo'></i>")
+            else:
+                nombre = grupos_dicc[int(dato[6])][0]
+                grupo = ("<i class='fa fa-object-group'"
+                          "style='color:blue' "
+                          "title='"+nombre+"'></i>")
             # Marcas del movimiento:
-            if dato[6] == 0:
+            if dato[7] == 0:
                 marca = ("<i class='fas fa-exclamation-triangle'"
                           "style='color:yellow' "
                           "title='Sin conciliar -Consultar-'></i>")
-            elif dato[6] == 1:
+            elif dato[7] == 1:
                 marca = ("<i class='fas fa-check' style='color:green' "
                           "title='Mov. conciliado'></i>")
-            elif dato[6] == 2:
+            elif dato[7] == 2:
                 marca = ("<i class='fas fa-ban' style='color:red'"
                           "title='Conciliado c/diferencia'></i>")
             else:
                 marca = ("<i class='fas fa-times' style='color:yellow' "
                           "title='Marca no definida -Consultar-'></i>")
             # Comentario del movimiento:
-            if dato[7] != "":
+            if dato[8] != "":
                 comentario = ("<i class='far fa-comment-alt' "
-                          "style='color:blue' title='"+dato[7]+"'></i>")
+                          "style='color:blue' title='"+dato[8]+"'></i>")
             else:
                 comentario = ""
             # Escribe el renglón:
@@ -138,7 +153,8 @@ class BancoMovTabla():
                 "<td style='text-align:right;'>"+str(importe)+"</td>"
                 "<td>"+str(dato[4])+"</td>"
                 "<td>"+str(dato[5])+"</td>"
-                "<td>"+str(marca)+"    "+str(comentario)+"</td>"
+                "<td>"+str(grupo)+"  /   "+str(marca)+""
+                "  /  "+str(comentario)+"</td>"
                 "<td><button type='button' class='btn btn-light btn-sm "
                 "float-sm-right rounded-circle' style='font-size: 0.6em' "
                 "title='Botón para ver datos' data-toggle='tooltip' "
@@ -163,30 +179,15 @@ class BancoMovTabla():
             "Débitos: "+str(cont_deb)+" movimiento/s por $ "+str(total_deb)+"<br>"
             "Créditos: "+str(cont_cred)+" movimiento/s por $ "+str(total_cred)+"<br>"
             )
-        """
         if cont > 0:
-            # Totales por
-            pie_html += ("<b>Totales por Fechas de Operación: </b><br>")
-            for item in totales:
-                fecha = date.strftime(item, '%d/%m/%Y')
-                importe = locale.format("%.2f", totales[item][1], True)
+            # Totales por orden de grupo
+            pie_html += ("<b>Totales por Grupo del movimiento: </b><br>")
+            for key in sorted(totales.keys()) :
+                importe = locale.format("%.2f", totales[key][1], True)
                 pie_html += (
-                    "# "+str(totales[item][0])+" cupon/es del "+str(fecha)+
-                    " por $ "+str(importe)+"<br>"
+                    "# "+str(totales[key][2])+": "+str(totales[key][0])+
+                    " mov. por $ "+str(importe)+"<br>"
                     )
-            # Totales por
-            pie_html += ("<b>Totales por Lote de Presentación: </b><br>")
-            for item in totales_lote:
-                fecha = date.strftime(totales_lote[item][2], '%d/%m/%Y')
-                #fecha = totales_lote[item][2]
-                importe = locale.format("%.2f", totales_lote[item][1], True)
-                #importe = totales_lote[item][1]
-                pie_html += (
-                    "# "+str(totales_lote[item][0])+" cupon/es del Lote:"
-                    +str(item)+" ("+str(fecha)+") por $ "
-                    +str(importe)+"<br>"
-                    )
-        """
         pie_html += ("</caption></tbody></table></div>")
         tabla.write(pie_html)
         # Cierra el archivo

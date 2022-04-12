@@ -48,11 +48,12 @@ class BancoMovModelo(BancoMovActiveRecord):
             self.set_importe(dato[3])
             self.set_numero(dato[4])
             self.set_concepto(dato[5])
-            self.set_marca(dato[6])
-            self.set_comentario(dato[7])
-            self.set_estado(dato[8])
-            self.set_id_usuario_act(dato[9])
-            self.set_fecha_act(dato[10])
+            self.set_id_grupo(dato[6])
+            self.set_marca(dato[7])
+            self.set_comentario(dato[8])
+            self.set_estado(dato[9])
+            self.set_id_usuario_act(dato[10])
+            self.set_fecha_act(dato[11])
             return dato
         else:
             return None
@@ -146,7 +147,7 @@ class BancoMovModelo(BancoMovActiveRecord):
         ccnx = ConexionMySQL().conectar()
         cursor = ccnx.cursor()
         consulta = ("SELECT id, fecha_mov, fecha_valor, importe, numero, "
-                    "concepto, marca, comentario "
+                    "concepto, id_grupo, marca, comentario "
                     "FROM banco_mov WHERE ")
         if int(opciones['tipo'])==1:
             consulta += ("fecha_mov >= %s AND fecha_mov <= %s "
@@ -154,6 +155,87 @@ class BancoMovModelo(BancoMovActiveRecord):
         if int(opciones['tipo'])==2:
             consulta += ("fecha_valor >= %s AND fecha_valor <= %s "
                         "AND estado=1 ORDER BY fecha_valor, numero")
+        valor = (opciones['fecha_d'], opciones['fecha_h'])
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+    def find_all_buscar(self, opciones):
+        """
+        Obtiene los registros de la busqueda para listar.
+
+        Obtiene los registros buscados de la tabla para listar en la vista
+        según el rango y tipo de fechas seleccionado (obligatorios) y otros (no
+        obligatorios), ordenados por numero y fecha.
+        @param fecha_d: fecha desde donde comienza la consulta (oblig.).
+        @param fecha_h: fecha máxima de la consulta (oblig.).
+        @param tipo: tipo de fecha (movimiento o valor) (oblig.).
+        @param numero: número de referencia que se busca, valor 0 = todos.
+        @param id_grupo: id de grupo que se busca, valor 0 = todos.
+        @param marca: marca de conciliación que se busca, valor 9 = todos.
+        @return: datos
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        valores = []
+        valores.append(opciones['fecha_d'])
+        valores.append(opciones['fecha_h'])
+        consulta = ("SELECT id, fecha_mov, fecha_valor, importe, numero, "
+                    "concepto, id_grupo, marca, comentario "
+                    "FROM banco_mov WHERE ")
+        if int(opciones['tipo'])==1:
+            consulta += ("fecha_mov >= %s AND fecha_mov <= %s ")
+        if int(opciones['tipo'])==2:
+            consulta += ("fecha_valor >= %s AND fecha_valor <= %s ")
+        if int(opciones['numero']) > 0:
+            numero = str(opciones['numero'])
+            consulta += (" AND numero = %s")
+            valores.append(numero.zfill(13))
+        if int(opciones['grupo']) > 0:
+            consulta += (" AND id_grupo = %s")
+            valores.append(opciones['grupo'])
+        if int(opciones['marca']) != 9:
+            consulta += (" AND marca = %s")
+            valores.append(opciones['marca'])
+        if int(opciones['tipo'])==1:
+            consulta += (" AND estado=1 ORDER BY fecha_mov, numero")
+        if int(opciones['tipo'])==2:
+            consulta += (" AND estado=1 ORDER BY fecha_valor, numero")
+        valor = tuple(valores)
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
+    def find_all_conciliar(self, opciones):
+        """
+        Obtiene los registros activos para conciliar.
+
+        Obtiene los registros activos de la tabla para conciliar
+        según el rango y tipo de fechas seleccionado.
+        @param fecha_d: fecha desde donde comienza la consulta.
+        @param fecha_h: fecha máxima de la consulta.
+        @param tipo: si es la fecha de movimiento o valor.
+        @param marca: 0
+        @param estado: 1
+        @return: datos
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT id, fecha_mov, fecha_valor, importe, numero, "
+                    "concepto "
+                    "FROM banco_mov WHERE ")
+        if int(opciones['tipo'])==1:
+            consulta += ("fecha_mov >= %s AND fecha_mov <= %s "
+                        "AND marca=0 AND estado=1")
+        if int(opciones['tipo'])==2:
+            consulta += ("fecha_valor >= %s AND fecha_valor <= %s "
+                        "AND marca=0 AND estado=1")
         valor = (opciones['fecha_d'], opciones['fecha_h'])
         cursor.execute(consulta, valor)
         datos = cursor.fetchall()

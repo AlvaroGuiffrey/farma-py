@@ -24,6 +24,26 @@ class TarjLiqModelo(TarjLiqActiveRecord):
     TarjLiqVO.
     '''
 
+    def update_banco(self):
+        """
+        Modifica los datos del registro.
+
+        @param TarjLiqVO: opera_banco, marca_banco, fecha_banco.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        valor = (self.get_marca_banco(), self.get_fecha_banco(),
+                self.get_opera_banco(), self.get_id_usuario_act(),
+                self.get_fecha_act(), self.get_id())
+        query = ("UPDATE tarj_liquidaciones SET marca_banco=%s, fecha_banco=%s, "
+                "opera_banco=%s, id_usuario_act=%s, fecha_act=%s WHERE id=%s")
+        cursor.execute(query, valor)
+        self.ultimo_id = cursor.lastrowid
+        ccnx.commit()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+
     def find_liquidacion(self):
         """
         Obtiene un registro activo por el número de liquidación e id del
@@ -94,6 +114,62 @@ class TarjLiqModelo(TarjLiqActiveRecord):
         consulta = ("SELECT * FROM tarj_liquidaciones WHERE liquidacion = %s "
                     "AND fecha_pago = %s AND estado = 1")
         valor = (self.get_liquidacion(), self.get_fecha_pago(),)
+        cursor.execute(consulta, valor)
+        dato = cursor.fetchone()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        if self.cantidad == 1:
+            self.set_id(dato[0])
+            self.set_liquidacion(dato[1])
+            self.set_id_producto(dato[2])
+            self.set_id_operador(dato[3])
+            self.set_fecha_pago(dato[4])
+            self.set_banco_suc(dato[5])
+            self.set_moneda(dato[6])
+            self.set_importe_bruto(dato[7])
+            self.set_importe_desc(dato[8])
+            self.set_importe_neto(dato[9])
+            self.set_cupones(dato[10])
+            self.set_cupones(dato[11])
+            self.set_fecha_proceso(dato[12])
+            self.set_marca_banco(dato[13])
+            self.set_fecha_banco(dato[14])
+            self.set_opera_banco(dato[15])
+            self.set_arancel(dato[16])
+            self.set_costo_financiero(dato[17])
+            self.set_otros_deb(dato[18])
+            self.set_iva_arancel(dato[19])
+            self.set_iva_costo_financiero(dato[20])
+            self.set_iva_otros_deb(dato[21])
+            self.set_impuesto_debcred(dato[22])
+            self.set_impuesto_interes(dato[23])
+            self.set_retencion_iva(dato[24])
+            self.set_retencion_imp_gan(dato[25])
+            self.set_retencion_ing_brutos(dato[26])
+            self.set_percepcion_iva(dato[27])
+            self.set_percepcion_ing_brutos(dato[28])
+            self.set_estado(dato[29])
+            self.set_id_usuario_act(dato[30])
+            self.set_fecha_act(dato[31])
+            return dato
+        else:
+            return None
+
+    def find_importe_fecha(self):
+        """
+        Obtiene un registro activo por el importe neto y fecha de pago.
+
+        @param importe_neto: TarjLiqVO.
+        @param fecha_pago: TarjLiqVO
+        @param estado: 1 - activo.
+        @return: TarjLiqVO y datos.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT * FROM tarj_liquidaciones WHERE importe_neto = %s "
+                    "AND fecha_pago = %s AND estado = 1")
+        valor = (self.get_importe_neto(), self.get_fecha_pago(),)
         cursor.execute(consulta, valor)
         dato = cursor.fetchone()
         self.cantidad = cursor.rowcount

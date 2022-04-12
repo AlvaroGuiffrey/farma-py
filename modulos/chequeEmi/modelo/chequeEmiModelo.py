@@ -214,7 +214,7 @@ class ChequeEmiModelo(ChequeEmiActiveRecord):
                     "importe, nombre_emi, estado_cheque, fecha_banco "
                     "FROM cheques_emi WHERE fecha_emi <= %s AND "
                     "estado = 1 AND "
-                    "fecha_banco = '0000-00-00' OR fecha_banco >= %s "
+                    "fecha_banco = '0000-00-00' OR fecha_banco > %s "
                     "ORDER BY numero")
         valor = (opciones['fecha'], opciones['fecha'])
         cursor.execute(consulta, valor)

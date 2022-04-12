@@ -1,0 +1,86 @@
+<!-- Opciones para buscar -->
+<div class="jumbotron jumbotron-fluit p-2 mb-1">
+	<h6>Opciones para buscar</h6>
+	<hr/>
+	<!-- Primer Renglón -->
+	<div class="row">
+		<!--  Rango de fechas -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Seleccione el rango de fechas">Fechas:</div>
+				</div>
+				<input type="text" id="date_range" name="fechas"
+					placeholder="seleccione rango" autocomplete="off" required>
+				<div class="input-group-append">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Dato obligatorio">
+						<b style="color: blue">*</b>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  Tipo de fechas -->
+        <div class="col-md-auto">
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" data-toggle="tooltip"
+                            title="Seleccione el tipo de fechas">de:</div>
+                </div>
+                <select class='custom-select'  id='tipo' name='tipo'>
+    				<option value='1' selected>Movimiento</option>
+    				<option value='2'>Valor</option>
+    			</select>
+                <div class="input-group-append">
+                    <div class="input-group-text" data-toggle="tooltip"
+                        title="Dato obligatorio">
+                        <b style="color: blue">*</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<!-- Segundo Renglón -->
+	<div class="row">
+		<!--  Número de cupón -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class="input-group-prepend">
+					<div class="input-group-text" data-toggle="tooltip"
+						title="Ingrese el número del movimiento">Número:</div>
+				</div>
+				<input type="number" id="numero" name="numero" min="0"
+					max="9999999999999" maxlength="13" size="13"
+					value=0 autocomplete="off">
+				<div class="input-group-append">
+					<div class="input-group-text"></div>
+				</div>
+			</div>
+		</div>
+        <!-- Grupo -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">$select_grupo</div>
+		</div>
+		<!-- Selección de Marca -->
+		<div class="col-md-auto">
+			<div class="input-group input-group-sm mb-1">
+				<div class='input-group-prepend'>
+	            <div class='input-group-text' data-toggle='tooltip'
+	            	title='Seleccione opción de marcas'>Marcas:</div>
+				</div>
+					<div class='input-group-text' data-toggle='tooltip' title='Cantidad de opciones'>
+	            	<span class='badge badge-pill badge-secondary'>3</span>
+				</div>
+				<select class='custom-select' id='marca' name='marca' >
+					<option value='9' selected> Todas ...</option>
+					<option value='0'>Sin conciliar</option>
+					<option value='1'>Conciliado</option>
+				</select>
+				<div class='input-group-append'>
+				<div class='input-group-text'></div></div>
+			</div>
+		</div>
+	</div>
+<!-- Fin del jumbotron de opciones -->
+</div>
