@@ -27,7 +27,7 @@ from modulos.tarjeta.modelo.tarjProductoModelo import TarjProductoModelo
 from modulos.tarjLiquidacion.modelo.tarjLiqModelo import TarjLiqModelo
 from modulos.tarjCupon.modelo.tarjCuponModelo import TarjCuponModelo
 from modulos.tarjLiquidacion.includes.tarjLiqTabla import TarjLiqTabla
-from modulos.tarjLiquidacion.includes.tarjLiqAsientosTabla import TarjLiqAsientosTabla
+#from modulos.tarjLiquidacion.includes.tarjLiqAsientosTabla import TarjLiqAsientosTabla
 from modulos.contab.modelo.contabPCtaModelo import ContabPCtaModelo
 from includes.includes.select import Select
 
@@ -47,7 +47,7 @@ class TarjLiqControl():
         self.tarj_liq = TarjLiqModelo()
         self.tarj_cupon = TarjCuponModelo()
         self.tarj_producto = TarjProductoModelo()
-        self.contab_p_ctas = ContabPCtaModelo()
+        #self.contab_p_ctas = ContabPCtaModelo()
         # Busca el ip para el menú:
         self.nombre_equipo = socket.gethostname()
         self.ip = socket.gethostbyname(self.nombre_equipo)
@@ -94,7 +94,7 @@ class TarjLiqControl():
         # Consulta tablas que se utilizan en el módulo:
         self.tarj_productos = self.tarj_producto.find_all()
         self.cant_productos = self.tarj_producto.get_cantidad()
-        self.p_ctas = self.contab_p_ctas.find_all()
+        #self.p_ctas = self.contab_p_ctas.find_all()
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
         self.tarj_productos_dicc = {reng[1]: reng[0] for reng in
                                self.tarj_productos}
@@ -106,7 +106,9 @@ class TarjLiqControl():
                             for reng in self.tarj_productos}
         self.tarj_productos_buscar_dicc = {reng[0]: reng[1] for reng in
                                  self.tarj_productos}
-        self.p_ctas_dicc = {reng[0]: reng[2] for reng in self.p_ctas}
+
+        #self.p_ctas_dicc = {reng[0]: reng[2] for reng in self.p_ctas}
+
     # Métodos:
     def inicio(self, accion):
         """
@@ -802,6 +804,7 @@ class TarjLiqControl():
             self.datos_pg["cantSinConciliar"] = self.cant_sin_conciliar
             # Muestra la vista:
             self.muestra_vista()
+        """
         # Acción para armar asiento:
         if self.accion == "ArmarAsiento":
             # Agrega titulo e información al panel:
@@ -817,6 +820,8 @@ class TarjLiqControl():
             self.opciones.append("periodoOpcion")
             # Muestra la vista:
             self.muestra_vista()
+        """
+        """
         # Acción para confirmar armar asiento:
         if self.accion == "ConfArmarAsiento":
             # Recibe datos por POST:
@@ -837,6 +842,8 @@ class TarjLiqControl():
             self.datos_pg['info'] = ("Listado asientos contables armados con "
                                      "datos de la tabla, para el período "
                                      "seleccionado.")
+        """
+            """
             # Encuentra los datos de la tabla para armar asientos:
             datos = self.tarj_liq.find_all_listar(opciones)
             self.datos_pg["cantidad"] = self.tarj_liq.get_cantidad()
@@ -850,34 +857,35 @@ class TarjLiqControl():
                 self.botones_ev = ["botonDescargarPDF",]
                 # Arma diccionario de asientos:
                 asientos_dicc = {}
-                cont = int(0)
-                importe = float(0)
+                cont = 0
                 cantidad = int(0)
                 for dato in datos:
                     cantidad += 1
-                    importe += float(dato[7])
-
+                    #importe += dato[7]
+                """
+                """
                 cont += 1
                 asientos_dicc[cont] = ("000000", "TARJETAS - LIQUIDACIONES", 0, 0)
                 cont += 1
-
-                asientos_dicc[cont] = ("112005", self.p_ctas_dicc["112005"],
-                                        importe, 0)
-
+                asientos_dicc[cont] = ("112005", p_ctas_dicc["112005"][1],
+                                        Decimal(importe), 0)
                 cont += 1
-                asientos_dicc[cont] = ("a 112002", self.p_ctas_dicc["112002"],
-                                        0, importe)
-
+                asientos_dicc[cont] = ("a 112002", p_ctas_dicc["112002"][1],
+                                        0, Decimal(importe))
                 cont += 1
                 asientos_dicc[cont] = ("999999",
-                                        "POR "+str(cantidad)+" LIQUIDACION/ES "
-                                        "DEL MES.", 0, 0)
+                                        "POR "+cantidad+" DEPOSITO/S DEL MES.",
+                                        Decimal(importe), Decimal(importe))
                 # Arma la tabla para listar Asientos Contables:
                 tabla = TarjLiqAsientosTabla()
                 tabla.arma_tabla(asientos_dicc, opciones)
                 self.tablas = ["tabla",]
+
+                """
+            """
             # Muestra la vista:
             self.muestra_vista()
+            """
 
     def fecha_db(self, fecha_txt):
         """

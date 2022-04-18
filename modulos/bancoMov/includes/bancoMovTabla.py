@@ -85,7 +85,6 @@ class BancoMovTabla():
             importe = dato[3]
             # Suma a totales:
             # Suma por orden del grupo
-
             if int(dato[6]) == 0:
                 if importe < 0:
                     nombre = "<b>DB SIN GRUPO</b>"

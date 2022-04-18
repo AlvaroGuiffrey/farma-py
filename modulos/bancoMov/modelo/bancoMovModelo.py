@@ -243,3 +243,36 @@ class BancoMovModelo(BancoMovActiveRecord):
         cursor.close()
         ccnx.close()
         return datos
+
+    def find_all_sin_agrupar(self, opciones):
+        """
+        Obtiene los registros activos sin agrupar.
+
+        Obtiene los registros activos de la tabla sin grupo asignado
+        según el rango y tipo de fechas seleccionado, ordenado por numero.
+        @param fecha_d: fecha desde donde comienza la consulta.
+        @param fecha_h: fecha máxima de la consulta.
+        @param tipo: si es la fecha de movimiento o valor.
+        @param id_grupo: 0 sin grupo.
+        @return: datos.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT id, fecha_mov, fecha_valor, importe, numero, "
+                    "concepto, id_grupo, marca, comentario "
+                    "FROM banco_mov WHERE ")
+        if int(opciones['tipo'])==1:
+            consulta += ("fecha_mov >= %s AND fecha_mov <= %s "
+                        "AND id_grupo=0 AND estado=1 "
+                        "ORDER BY fecha_mov, numero")
+        if int(opciones['tipo'])==2:
+            consulta += ("fecha_valor >= %s AND fecha_valor <= %s "
+                        "AND id_grupo=0 AND estado=1 "
+                        "ORDER BY fecha_valor, numero")
+        valor = (opciones['fecha_d'], opciones['fecha_h'])
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos

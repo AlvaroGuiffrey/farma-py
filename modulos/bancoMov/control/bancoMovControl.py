@@ -13,6 +13,7 @@
 import os
 import socket
 import cgi
+import calendar
 from datetime import date
 from datetime import datetime
 from builtins import int
@@ -22,8 +23,11 @@ from modulos.bancoMov.modelo.bancoMovModelo import BancoMovModelo
 from modulos.bancoMov.modelo.bancoMovConcModelo import BancoMovConcModelo
 from modulos.bancoMov.modelo.bancoMovGrupoModelo import BancoMovGrupoModelo
 from modulos.bancoMov.includes.bancoMovTabla import BancoMovTabla
+from modulos.bancoMov.includes.bancoMovAsientos import BancoMovAsientos
+from modulos.bancoMov.includes.bancoMovAsientosTabla import BancoMovAsientosTabla
 from modulos.chequeEmi.modelo.chequeEmiModelo import ChequeEmiModelo
 from modulos.tarjLiquidacion.modelo.tarjLiqModelo import TarjLiqModelo
+from modulos.contab.modelo.contabPCtaModelo import ContabPCtaModelo
 #from modulos.bancoMov.includes.bancoMovPDF import BancoMovPDF
 from includes.includes.select import Select
 
@@ -44,6 +48,7 @@ class BancoMovControl():
         self.banco_grupo = BancoMovGrupoModelo()
         self.cheque_emi = ChequeEmiModelo()
         self.tarj_liq = TarjLiqModelo()
+        self.contab_p_ctas = ContabPCtaModelo()
         # Busca el ip para el menú:
         self.nombre_equipo = socket.gethostname()
         self.ip = socket.gethostbyname(self.nombre_equipo)
@@ -62,6 +67,7 @@ class BancoMovControl():
         self.botones_ev = []
         self.botones_aux = []
         self.accion = ''
+        self.periodo = int(0)
         self.cant_grupos = int(0)
         self.cant_agregados = int(0)
         self.cant_actualizados = int(0)
@@ -76,6 +82,7 @@ class BancoMovControl():
         # Consulta tablas que se utilizan en el módulo:
         self.banco_conceptos = self.banco_conc.find_all()
         self.banco_grupos = self.banco_grupo.find_all()
+        self.p_ctas = self.contab_p_ctas.find_all()
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
         if int(self.banco_conc.get_cantidad()) > 0:
             self.banco_conceptos_dicc = {reng[1]: (reng[0], reng[3])
@@ -92,6 +99,13 @@ class BancoMovControl():
             self.cant_grupos = 0
             self.banco_grupos_dicc = {}
             self.banco_grupos_buscar_dicc = {}
+        if int(self.contab_p_ctas.get_cantidad()) > 0:
+            self.cant_p_ctas = self.contab_p_ctas.get_cantidad()
+            self.p_ctas_dicc = {reng[0]: reng[2] for reng in self.p_ctas}
+        else:
+            self.cant_p_ctas = 0
+            self.p_ctas_dicc = {}
+
     # Métodos:
     def inicio(self, accion):
         """
@@ -133,7 +147,7 @@ class BancoMovControl():
         # Agrega los botones de la aplicación:
         self.botones_ac = ["botonBadge", "botonCargar",
                           "botonListar", "botonBuscar", "botonActConcGrupo",
-                          "botonConciliar", "botonHacerAsiento"]
+                          "botonConciliar", "botonArmarAsiento"]
         # Selecciona las acciones:
         if "bt_agregar" in self.form: self.accion = "Agregar"
         elif "bt_conf_agregar" in self.form: self.accion = "ConfAgregar"
@@ -149,8 +163,8 @@ class BancoMovControl():
         elif "bt_conf_actualizar" in self.form: self.accion = "ConfActualizar"
         elif "bt_conciliar" in self.form: self.accion = "Conciliar"
         elif "bt_conf_conciliar" in self.form: self.accion = "ConfConciliar"
-        elif "bt_hacer_asiento" in self.form: self.accion = "HacerAsiento"
-        elif "bt_conf_hacer_asiento" in self.form: self.accion = "ConfHacerAsiento"
+        elif "bt_armar_asiento" in self.form: self.accion = "ArmarAsiento"
+        elif "bt_conf_armar_asiento" in self.form: self.accion = "ConfArmarAsiento"
         else: self.accion = "Iniciar"
         # Pone en 0 los acumuladores:
         self.cant_agregados = self.cant_cargados = self.cant_repetidos = 0
@@ -347,8 +361,6 @@ class BancoMovControl():
             self.datos_pg['info'] = ("Listado de datos de la tabla, dentro "
                                      "del rango y tipo de fechas"
                                      " seleccionadas.")
-            # Agrega los botones para la acción:
-            self.botones_ev = ["botonDescargarPDF",]
             # Encuentra los datos de la tabla para listar:
             datos = self.banco_mov.find_all_listar(opciones)
             self.datos_pg["cantidad"] = self.banco_mov.get_cantidad()
@@ -357,9 +369,10 @@ class BancoMovControl():
                 self.datos_pg["alertaAdvertencia"] = ("No hay movimientos en "
                     "las fechas seleccionadas. <b>VOLVER A INTENTAR"
                     " !!!</b>.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonDescargarPDF",]
             # Arma la tabla para listar:
             tabla = BancoMovTabla()
-            #tabla.arma_tabla(datos, opciones)
             tabla.arma_tabla(datos, opciones, self.banco_grupos_dicc)
             self.tablas = ["tabla",]
             # Muestra la vista:
@@ -613,6 +626,74 @@ class BancoMovControl():
             self.datos_pg["cantLiqTarjConciliados"] = self.cant_liq_tarj_conciliados
             # Muestra la vista:
             self.muestra_vista()
+        # Acción para armar asiento:
+        if self.accion == "ArmarAsiento":
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Asientos Contables de Movimientos"
+                                            " - Banco")
+            self.datos_pg['info'] = ("Realiza un listado con los asientos "
+                    "contables armados con datos de la tabla. "
+                    "<br>Seleccione en <b>Opciones de Período</b> "
+                    " el mes y año.")
+            # Agrega los botones para la acción:
+            self.botones_ev = ["botonConfArmarAsiento",]
+            # Arma los datos para la vista:
+            self.opciones.append("periodoOpcion")
+            # Muestra la vista:
+            self.muestra_vista()
+        # Acción para confirmar armar asiento:
+        if self.accion == "ConfArmarAsiento":
+            # Recibe datos por POST:
+            self.periodo = self.form.getvalue("periodo")
+            # Arma las opciones de listar:
+            opciones = {}
+            periodo_str = str(self.periodo)
+            mes = int(periodo_str[4:])
+            anio = int(periodo_str[:4])
+            rango_mes = calendar.monthrange(anio, mes)
+            dia_h = rango_mes[1]
+            opciones['fecha_d'] = date(anio, mes, 1)
+            opciones['fecha_h'] = date(anio, mes, dia_h)
+            opciones ['tipo'] = 2 # fecha valor
+            # Agrega titulo e información al panel:
+            self.datos_pg['tituloPanel'] = ("Asientos Contables de Movimientos"
+                                            " - Banco")
+            self.datos_pg['info'] = ("Listado asientos contables armados con "
+                                     "datos de la tabla, para el período "
+                                     "seleccionado.")
+
+            # Verifica si hay movimientos sin agrupar:
+            self.banco_mov.find_all_sin_agrupar(opciones)
+            if self.banco_mov.get_cantidad() > 0:
+                self.alertas.append("alertaPeligro")
+                self.datos_pg["alertaPeligro"] = ("Hay "+
+                    str(self.banco_mov.get_cantidad())+" movimiento/s sin "
+                    "agrupar en el período. <b>REVISAR DATOS TABLA"
+                    " !!!</b>.")
+            else:
+                # Encuentra los datos de la tabla para armar asientos:
+                datos = self.banco_mov.find_all_listar(opciones)
+                self.datos_pg["cantidad"] = self.banco_mov.get_cantidad()
+                if self.banco_mov.get_cantidad() == 0:
+                    self.alertas.append("alertaAdvertencia")
+                    self.datos_pg["alertaAdvertencia"] = ("No hay movimientos en "
+                        "las fechas seleccionadas. <b>VOLVER A INTENTAR"
+                        " !!!</b>.")
+                else:
+                    # Agrega los botones para la acción:
+                    self.botones_ev = ["botonDescargarPDF",]
+                    # Arma diccionario de asientos:
+                    mov_asientos = BancoMovAsientos()
+                    #print(str(self.p_ctas_dicc['111001']))
+                    asientos_dicc = mov_asientos.arma_dicc(datos,
+                            self.banco_grupos_dicc, self.p_ctas_dicc)
+                    #print(str(asientos_dicc[4]))
+                    # Arma la tabla para listar Asientos Contables:
+                    tabla = BancoMovAsientosTabla()
+                    tabla.arma_tabla(asientos_dicc, opciones)
+                    self.tablas = ["tabla",]
+            # Muestra la vista:
+            self.muestra_vista()
 
     def fecha_db(self, fecha_txt):
         """
@@ -698,7 +779,6 @@ class BancoMovControl():
         ahora = datetime.now()
         fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
         self.banco_mov.set_fecha_act(fecha_act)
-
 
     def datos_txt(self, dato):
         """
