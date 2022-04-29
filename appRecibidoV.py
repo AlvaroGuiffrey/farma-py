@@ -1,14 +1,14 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
+#!C:\Users\AlvaroG\AppData\Local\Programs\Python\Python310\python.exe
 # -*- coding: utf-8 -*-
-# 
+#
 # appRecibidoV.py
 #
 # Creado: 21/09/2019
 # Versión: 001
-# Última modificación: 
-# 
+# Última modificación:
+#
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 # Módulos de la librería estandar:
 import cgi
@@ -20,7 +20,7 @@ print("Content-Type: text/html")
 
 
 if __name__ == '__main__':
-    
+
     # Recibe los datos enviados:
     form = cgi.FieldStorage()
     accion = form.getvalue("accion")

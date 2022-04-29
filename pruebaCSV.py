@@ -1,4 +1,4 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
+#!C:\Users\AlvaroG\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: utf-8 -*-
 #
 # pruebaCSV.py

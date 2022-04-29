@@ -1,4 +1,4 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
+#!C:\Users\AlvaroG\AppData\Local\Programs\Python\Python310\python.exe
 # -*- coding: latin-1 -*-
 
 # chequeEmiControlV.py

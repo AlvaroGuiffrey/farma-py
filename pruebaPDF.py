@@ -1,14 +1,14 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
+#!C:\Users\AlvaroG\AppData\Local\Programs\Python\Python310\python.exe
 # -*- coding: utf-8 -*-
-# 
+#
 # pruebaPDF.py
 #
 # Creado: 10/09/2019
 # Versión: 001
-# Ultima modificación: 
-# 
+# Ultima modificación:
+#
 # Copyright 2019 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
-# 
+#
 
 # Modulos que se importan de la librería estandar
 
@@ -48,12 +48,12 @@ class PDF(FPDF):
         self.cell(25, 9, '----- TOTAL -----', 0, 0, 'C')
         self.ln(5)
         self.line(20, 29, 285, 29)
-        
+
     def footer(self):
         self.set_y(-15)
         self.set_font('Arial', 'I', 6)
         self.cell(0, 10, 'Pagina '+str(self.page_no())+'/{nb}', 0, 0, 'C')
-        
+
 pdf = PDF()
 ahora = datetime.now()
 fecha = datetime.strftime(ahora, '%d/%m/%Y %H:%M')
@@ -64,7 +64,7 @@ detalle = (
     )
 
 pdf.alias_nb_pages()
-pdf.set_title("Listado Compr. Rec. AFIP") 
+pdf.set_title("Listado Compr. Rec. AFIP")
 pdf.set_left_margin(20)
 pdf.set_auto_page_break(True , 10.0)
 pdf.add_page('L')

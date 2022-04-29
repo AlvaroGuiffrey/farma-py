@@ -1,4 +1,3 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: latin-1 -*-
 #
 # select.py
