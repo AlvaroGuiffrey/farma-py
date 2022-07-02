@@ -181,6 +181,7 @@ class BancoMovControl():
                         " <b>BOTONES</b>.")
             # Muestra la vista:
             self.muestra_vista()
+
         # Acción para cargar:
         if self.accion == "Cargar":
             # Agrega titulo e información al panel:
@@ -687,9 +688,10 @@ class BancoMovControl():
                     #print(str(self.p_ctas_dicc['111001']))
                     asientos_dicc = mov_asientos.arma_dicc(datos,
                             self.banco_grupos_dicc, self.p_ctas_dicc)
-                    #print(str(asientos_dicc[4]))
+                    #print(str(asientos_dicc[2][2]))
                     # Arma la tabla para listar Asientos Contables:
                     tabla = BancoMovAsientosTabla()
+                    #asientos_dicc = {}
                     tabla.arma_tabla(asientos_dicc, opciones)
                     self.tablas = ["tabla",]
             # Muestra la vista:

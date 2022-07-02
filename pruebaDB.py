@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!C:\Users\AlvaroG\AppData\Local\Programs\Python\Python310\python.exe
+=======
+#!E:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
+>>>>>>> e13ef765a798fa679fc4724924d74dfed1650ac8
 # -*- coding: utf-8 -*-
 #
 # pruebaDB.py

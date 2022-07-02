@@ -2,8 +2,8 @@
 #
 # bancoMovAsientosTabla.py
 #
-# Creado: 23/06/2022
-# Versión: 002
+# Creado: 15/04/2022
+# Versión: 001
 # Última modificación:
 #
 # Copyright 2022 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
@@ -30,6 +30,7 @@ class BancoMovAsientosTabla():
         locale.setlocale(locale.LC_ALL, 'es_AR')
 
 
+
     def arma_tabla(self, asientos_dicc, opciones):
         """
         Método que arma la tabla html para la vista.
@@ -51,7 +52,7 @@ class BancoMovAsientosTabla():
             "<!-- Datos de la cabecera de la tabla -->"
             "<div class='table-responsive-sm'>"
             "<h6> Listado de Asientos Contables:</h6>"
-            "<p>Con movimientos de fecha "+tipo_fecha+" desde: "
+            "<p>Con movimientos de fecha "+str(tipo_fecha)+" desde: "
             +str(opciones['fecha_d'])+" - hasta: "+str(opciones['fecha_h'])+
             "</p><hr>"
             )
@@ -65,6 +66,7 @@ class BancoMovAsientosTabla():
         for reng in asientos_dicc.values():
 
             if str(reng[0]) == "000000":
+                #print(reng[1])
                 cont += 1
                 total_deb_asiento = total_cred_asiento = 0
                 titulo_html = ("Asiento de:<b> "+str(reng[1]+"</b>"))
@@ -78,7 +80,6 @@ class BancoMovAsientosTabla():
                     "</tr></thead><tbody>")
                 tabla.write(enca_html)
 
-
             elif str(reng[0]) == "999999":
                 total_d = locale.format("%.2f", total_deb_asiento, True)
                 total_c = locale.format("%.2f", total_cred_asiento, True)
@@ -87,17 +88,9 @@ class BancoMovAsientosTabla():
                     "<td style='text-align:right;'>"+str(total_c)+"</td></tr>"
                     "</tbody></table><hr>")
                 tabla.write(renglon_html)
-
-
             else:
-                #print(type(reng[1]))
-                nombre = str(reng[1])
-                #renglon_html = ("<tr><td>"+str(reng[0])+"</td>"
-                #                "<td>"+str(reng[1])+"</td>")
                 renglon_html = ("<tr><td>"+str(reng[0])+"</td>"
                                 "<td>"+str(reng[1])+"</td>")
-                #tabla.write(renglon_html)
-
                 if int(reng[2]) == 0:
                     if int(reng[3]) < 0:
                         cred = reng[3] * (-1)
@@ -119,10 +112,7 @@ class BancoMovAsientosTabla():
                     total_deb_asiento += deb
                     total_deb += deb
 
-                #print(str(reng[1]))
-                #renglon_html = ("Renglones"+str(reng[0])+nombre+"<br>")
-                #tabla.write(renglon_html)
-                #tabla.write(renglon_html)
+                renglon_html = reng[0]
                 tabla.write(renglon_html)
 
         fin_html =("</div>")

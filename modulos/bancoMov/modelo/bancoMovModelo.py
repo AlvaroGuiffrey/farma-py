@@ -276,3 +276,25 @@ class BancoMovModelo(BancoMovActiveRecord):
         cursor.close()
         ccnx.close()
         return datos
+
+    def update_editar(self):
+        """
+        Modifica los datos del registro por editar.
+
+        Persiste sobre la tabla modificando el comentario de un
+        un registro editado.
+        @param bancoMovVO: id, comentario.
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        cursor.execute("SET NAMES utf8;")
+        cursor.execute("SET CHARACTER SET utf8;")
+        query = ("UPDATE banco_mov SET comentario = %s, "
+                "id_usuario_act = %s, fecha_act = %s WHERE id = %s")
+        valor = (self.get_comentario(), self.get_id_usuario_act(),
+                self.get_fecha_act(), self.get_id())
+        cursor.execute(query, valor)
+        ccnx.commit()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()

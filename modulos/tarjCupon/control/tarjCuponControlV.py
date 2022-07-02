@@ -1,4 +1,3 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: latin-1 -*-
 
 # tarjCuponControlV.py
@@ -57,6 +56,7 @@ class TarjCuponControlV():
         self.accion = ''
         self.id = 0
         self.error = 0
+        self.error_carga = 0
         self.cupon = 0
         # Consulta tablas que se utilizan en el módulo:
         self.tarj_productos = self.tarj_producto.find_all()
@@ -112,7 +112,7 @@ class TarjCuponControlV():
             self.accion = self.form.getvalue('bt_editar')
         elif "bt_conf_editar" in self.form:
             self.accion = self.form.getvalue('bt_conf_editar')
-        elif "bt_volver" in self.form: 
+        elif "bt_volver" in self.form:
             self.accion = "Ver"
         # else: self.accion = "Ver" #Anule para que pase agregar
 
@@ -167,13 +167,17 @@ class TarjCuponControlV():
             # Agrega los botones de la aplicación:
             self.botones_ac.append('botonEditar')
             # Arma los datos para la vista
+            self.error_carga = 0
             self.contenidos = ["verDato",]
             self.tarj_cupon.set_cupon(self.form.getvalue("cupon"))
+            if self.form.getvalue("fecha") == None: self.error_carga = 1
             self.tarj_cupon.set_fecha(self.form.getvalue("fecha"))
             self.tarj_cupon.set_numero(self.form.getvalue("numero"))
+            if self.form.getvalue("producto") == None: self.error_carga = 1
             self.tarj_cupon.set_id_producto(self.form.getvalue("producto"))
             self.tarj_cupon.set_moneda("ARS")
             self.tarj_cupon.set_importe(float(self.form.getvalue("importe")))
+            #print("Importe", str(self.tarj_cupon.get_importe()))
             self.tarj_cupon.set_descuento(float(self.form.getvalue("descuento")))
             self.tarj_cupon.set_neto(float(self.form.getvalue("neto")))
             self.tarj_cupon.set_cuota(self.form.getvalue("cuota"))
@@ -182,18 +186,24 @@ class TarjCuponControlV():
             comentario = self.form.getvalue("comentario")
             if comentario == None: comentario = ""
             self.tarj_cupon.set_comentario(comentario)
+            if self.form.getvalue("fecha_pre") == None: self.error_carga = 1
             self.tarj_cupon.set_fecha_presentacion(self.form.getvalue("fecha_pre"))
             self.tarj_cupon.set_lote(self.form.getvalue("lote"))
             self.tarj_cupon.set_liquidacion(self.form.getvalue("liquidacion"))
             self.tarj_cupon.set_estado(int(1))
             id_usuario = 1 # Va el id del USUARIO
-            self.tarj_cupon.set_id_usuario_act(id_usuario)
+            self.tarj_cupon.set_id_usuario_act(int(id_usuario))
             ahora = datetime.now()
             fecha_act = datetime.strftime(ahora, '%Y-%m-%d %H:%M:%S')
             self.tarj_cupon.set_fecha_act(fecha_act)
-            self.tarj_cupon.insert()
-            self.datos_pg['cantidad'] = self.tarj_cupon.get_cantidad()
+            if self.error_carga == 0:
+                self.tarj_cupon.insert()
+                self.datos_pg['cantidad'] = self.tarj_cupon.get_cantidad()
             # Agrega las alertas:
+            else:
+                self.alertas.append("alertaPeligro")
+                self.datos_pg["alertaPeligro"] = ("Se intentó cargar datos "
+                    "vacios. <b>REINTENTAR !!!</b>.")
             if int(self.tarj_cupon.get_cantidad()) > 0:
                 self.alertas.append("alertaSuceso")
                 self.datos_pg["alertaSuceso"] = ("Actualizó el registro "

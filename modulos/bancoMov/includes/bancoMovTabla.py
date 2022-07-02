@@ -1,4 +1,3 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: latin-1 -*-
 #
 # bancoMovTabla.py
@@ -38,6 +37,7 @@ class BancoMovTabla():
         @param datos:
         @param opciones:
         @param grupos_dicc:
+        @param conc_dicc:
         @return: tabla.html
         """
         # Crea el archivo para la tabla:

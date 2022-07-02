@@ -59,14 +59,15 @@ class BancoMovAsientos():
 
         # Arma los renglones de los asientos contables:
         # 1 - DEPOSITOS
+
         if "C01" in totales:
             cont += 1
             asientos_dicc[cont] = ("000000", "BANCO - DEPOSITOS", 0, 0)
             cont += 1
-            asientos_dicc[cont] = ("111002", p_ctas_dicc["111002"][1],
+            asientos_dicc[cont] = ("111002", p_ctas_dicc["111002"],
                                     totales["C01"][1], 0)
             cont += 1
-            asientos_dicc[cont] = ("a 111001", p_ctas_dicc["111001"][1],
+            asientos_dicc[cont] = ("a 111001", p_ctas_dicc["111001"],
                                     0, totales["C01"][1])
             cont += 1
             asientos_dicc[cont] = ("999999",
@@ -269,6 +270,6 @@ class BancoMovAsientos():
             asientos_dicc[cont] = ("999999",
                         "POR "+str(cantidad)+" DEBITOS DE "+\
                         "IMPUESTOS VS. DEL MES.", 0, 0)
-
+        
         # Retorna el resultado del armado de los asientos contables:
         return asientos_dicc

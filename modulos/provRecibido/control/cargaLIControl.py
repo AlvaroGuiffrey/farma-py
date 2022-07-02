@@ -1,5 +1,4 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 #
 # cargaLIControl.py
 #
@@ -313,7 +312,8 @@ class CargaLIControl():
         persistir en la tabla de la DB.
         """
         fecha = fecha_csv.split("/")
-        ano = int(fecha[2]) + 2000
+        #ano = int(fecha[2]) + 2000
+        ano = int(fecha[2])
         fecha_op = date(int(ano), int(fecha[1]), int(fecha[0]))
         return date.strftime(fecha_op, '%Y-%m-%d')
 

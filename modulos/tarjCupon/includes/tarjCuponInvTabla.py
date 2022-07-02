@@ -1,4 +1,3 @@
-#!C:\Users\alvar\AppData\Local\Programs\Python\Python37\python.exe
 # -*- coding: utf-8 -*-
 #
 # tarjCuponInvTabla.py
@@ -74,7 +73,8 @@ class TarjCuponInvTabla():
             # Da formato a los datos del renglón:
             # Cambia formato a la fecha:
             fecha_ope = date.strftime(dato[2], '%d/%m/%Y')
-            fecha_pre = date.strftime(dato[13], '%d/%m/%Y')
+            fecha_pre = dato[13]
+            #fecha_pre = date.strftime(dato[13], '%d/%m/%Y')
             # Reemplaza datos del producto:
             nombre_producto = "VISA"
             inicial_producto = "VS-CR"
