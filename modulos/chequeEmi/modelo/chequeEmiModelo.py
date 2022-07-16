@@ -224,6 +224,30 @@ class ChequeEmiModelo(ChequeEmiActiveRecord):
         ccnx.close()
         return datos
 
+    def find_all_asientos(self, opciones):
+        """
+        Obtiene los registros activos para armar asientos.
+
+        Obtiene los registros activos de la tabla para listar en la vista
+        según el rango y tipo de fechas seleccionado.
+        @param fecha_d: fecha desde donde comienza la consulta.
+        @param fecha_h: fecha máxima de la consulta.
+        @param tipo: solo por fecha de emisión.
+        @return: datos
+        """
+        ccnx = ConexionMySQL().conectar()
+        cursor = ccnx.cursor()
+        consulta = ("SELECT id, importe, cuit_emi "
+                    "FROM cheques_emi WHERE fecha_emi >= %s "
+                    "AND fecha_emi <= %s AND estado=1")
+        valor = (opciones['fecha_d'], opciones['fecha_h'])
+        cursor.execute(consulta, valor)
+        datos = cursor.fetchall()
+        self.cantidad = cursor.rowcount
+        cursor.close()
+        ccnx.close()
+        return datos
+
     def find_all_buscar(self, opciones):
         """
         Obtiene los registros de la busqueda para listar.

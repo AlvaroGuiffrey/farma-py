@@ -3,20 +3,16 @@
 # chequeEmiControl.py
 #
 # Creado: 19/03/2022
-# Versión: 002
-# Última modificación: 14/07/2022
+# Versión: 001
+# Última modificación:
 #
 # Copyright 2022 Alvaro Alejandro Guiffrey <alvaroguiffrey@gmail.com>
 #
-# V02: Se agrega el asiento de diario para contabilidad
-#
-
 
 # Módulos de la librería estandar:
 import os
 import socket
 import cgi
-import calendar
 from datetime import date
 from datetime import datetime
 from builtins import int
@@ -24,9 +20,7 @@ from builtins import int
 from includes.control.motorVista import MotorVista
 from modulos.chequeEmi.modelo.chequeEmiModelo import ChequeEmiModelo
 from modulos.chequeEmi.includes.chequeEmiTabla import ChequeEmiTabla
-from modulos.chequeEmi.includes.chequeEmiAsientosTabla import ChequeEmiAsientosTabla
 from modulos.chequeEmi.includes.chequeEmiPDF import ChequeEmiPDF
-from modulos.contab.modelo.contabPCtaModelo import ContabPCtaModelo
 from includes.includes.select import Select
 
 class ChequeEmiControl():
@@ -42,7 +36,6 @@ class ChequeEmiControl():
         """
         # Instancia las clases del modelo:
         self.cheque_emi = ChequeEmiModelo()
-        self.contab_p_ctas = ContabPCtaModelo()
         # Busca el ip para el menú:
         self.nombre_equipo = socket.gethostname()
         self.ip = socket.gethostbyname(self.nombre_equipo)
@@ -68,9 +61,8 @@ class ChequeEmiControl():
         self.cant_repetidos = int(0)
         self.linea = []
         # Consulta tablas que se utilizan en el módulo:
-        self.p_ctas = self.contab_p_ctas.find_all()
+
         # Arma diccionarios que se utilizan en el módulo con datos de tablas:
-        self.p_ctas_dicc = {reng[0]: reng[2] for reng in self.p_ctas}
 
     # Métodos:
     def inicio(self, accion):
@@ -112,8 +104,7 @@ class ChequeEmiControl():
         self.datos_pg['cantidad'] = self.cheque_emi.get_cantidad()
         # Agrega los botones de la aplicación:
         self.botones_ac = ["botonBadge", "botonCargar", "botonAgregar",
-                          "botonListar", "botonListarInv", "botonBuscar",
-                          "botonArmarAsiento"]
+                          "botonListar", "botonListarInv", "botonBuscar"]
         # Selecciona las acciones:
         if "bt_agregar" in self.form: self.accion = "Agregar"
         elif "bt_conf_agregar" in self.form: self.accion = "ConfAgregar"
@@ -125,9 +116,6 @@ class ChequeEmiControl():
         elif "bt_conf_listar_inv" in self.form: self.accion = "ConfListarInv"
         elif "bt_buscar" in self.form: self.accion = "Buscar"
         elif "bt_conf_buscar" in self.form: self.accion = "ConfBuscar"
-        elif "bt_armar_asiento" in self.form: self.accion = "ArmarAsiento"
-        elif "bt_conf_armar_asiento" in self.form:
-                                        self.accion = "ConfArmarAsiento"
         elif "bt_descargar_pdf" in self.form: self.accion = "DescargarPDF"
         elif "bt_editar" in self.form: self.accion = "Editar"
         elif "bt_descartar" in self.form: self.accion = "Descartar"
@@ -568,114 +556,6 @@ class ChequeEmiControl():
             self.botones_ev = ["botonAbrirChequeEmiPDF",]
             # Muestra la vista:
             self.muestra_vista()
-        # Acción para armar asiento:
-        if self.accion == "ArmarAsiento":
-            # Agrega titulo e información al panel:
-            self.datos_pg['tituloPanel'] = ("Asientos Contables de "
-                                            " Cheques Emitidos")
-            self.datos_pg['info'] = ("Realiza un listado con los asientos "
-                    "contables armados con datos de la tabla. "
-                    "<br>Seleccione en <b>Opciones de Período</b> "
-                    " el mes y año.")
-            # Agrega los botones para la acción:
-            self.botones_ev = ["botonConfArmarAsiento",]
-            # Arma los datos para la vista:
-            self.opciones.append("periodoOpcion")
-            # Muestra la vista:
-            self.muestra_vista()
-
-        # Acción para confirmar armar asiento:
-        if self.accion == "ConfArmarAsiento":
-            # Recibe datos por POST:
-            self.periodo = self.form.getvalue("periodo")
-
-            # Arma las opciones de listar:
-            opciones = {}
-            periodo_str = str(self.periodo)
-            mes = int(periodo_str[4:])
-            anio = int(periodo_str[:4])
-            rango_mes = calendar.monthrange(anio, mes)
-            dia_h = rango_mes[1]
-            opciones['fecha_d'] = date(anio, mes, 1)
-            opciones['fecha_h'] = date(anio, mes, dia_h)
-            opciones ['tipo'] = 1 # por fecha emisión del cheque
-            # Agrega titulo e información al panel:
-            self.datos_pg['tituloPanel'] = ("Asientos Contables de "
-                                            " Cheques Emitidos")
-            self.datos_pg['info'] = ("Listado asientos contables armados con "
-                                     "datos de la tabla, para el período "
-                                     "seleccionado.")
-
-            # Encuentra los datos de la tabla para armar asientos:
-
-            datos = self.cheque_emi.find_all_asientos(opciones)
-            self.datos_pg["cantidad"] = self.cheque_emi.get_cantidad()
-
-            if self.cheque_emi.get_cantidad() == 0:
-                self.alertas.append("alertaAdvertencia")
-                self.datos_pg["alertaAdvertencia"] = ("No hay movimientos en "
-                    "las fechas seleccionadas. <b>VOLVER A INTENTAR"
-                    " !!!</b>.")
-            else:
-                # Agrega los botones para la acción:
-                self.botones_ev = ["botonDescargarPDF",]
-                # Arma diccionario de asientos:
-                asientos_dicc = {}
-                cont = int(0)
-                importe = float(0)
-                importe_ds = float(0)
-                importe_ke = float(0)
-                importe_li = float(0)
-                importe_pv = float(0) # proveedores varios
-                cantidad = int(0)
-
-                for dato in datos:
-                    cantidad += 1
-                    importe += float(dato[1])
-                    # Drog. Del Sud SA
-                    if dato[2] == "30538880627":
-                        importe_ds += float(dato[1])
-                    # Drog. Kellerhorf SA
-                    elif dato[2] == "30539756490":
-                        importe_ke += float(dato[1])
-                    # CoFarLit
-                    elif dato[2] == "30541519218":
-                        importe_li += float(dato[1])
-                    # Proveedores Varios
-                    else:
-                        importe_pv += float(dato[1])
-
-                cont += 1
-                asientos_dicc[cont] = ("000000", "TARJETAS - LIQUIDACIONES", 0, 0)
-                cont += 1
-                asientos_dicc[cont] = ("211001", self.p_ctas_dicc["211001"],
-                                        importe_li, 0)
-                cont += 1
-                asientos_dicc[cont] = ("211002", self.p_ctas_dicc["211002"],
-                                        importe_ke, 0)
-                cont += 1
-                asientos_dicc[cont] = ("211003", self.p_ctas_dicc["211003"],
-                                        importe_ds, 0)
-                cont += 1
-                asientos_dicc[cont] = ("211004", self.p_ctas_dicc["211004"],
-                                        importe_pv, 0)
-                cont += 1
-                asientos_dicc[cont] = ("a 211006", self.p_ctas_dicc["211006"],
-                                        0, importe)
-
-                cont += 1
-                asientos_dicc[cont] = ("999999",
-                                        "POR "+str(cantidad)+" CHEQUES EMITIDOS "
-                                        "DEL MES.", 0, 0)
-
-                # Arma la tabla para listar Asientos Contables:
-                tabla = ChequeEmiAsientosTabla()
-                tabla.arma_tabla(asientos_dicc, opciones)
-                self.tablas = ["tabla",]
-            
-            # Muestra la vista:
-            self.muestra_vista()
-
 
 
     def fecha_db(self, fecha_txt):
